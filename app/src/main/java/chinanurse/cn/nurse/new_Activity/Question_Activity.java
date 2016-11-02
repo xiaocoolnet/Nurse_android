@@ -793,7 +793,7 @@ public class Question_Activity extends Activity implements View.OnClickListener 
             isDaily = true;
             submitAnswer = "1";
         } else if ("11".equals(type)) {
-            top_title.setText("在线考试");
+            top_title.setText("模拟考场");
             isDaily = false;
             cpid.setVisibility(View.GONE);
             submitAnswer = "2";

@@ -74,16 +74,17 @@
                 <TextView
                     android:id="@+id/stu_paper_num"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_20"
                     android:background="@drawable/question_sheet_dot_violet"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/go"
                     android:layout_marginRight="@dimen/activity_size_20"
                     android:text="0"
                     android:visibility="gone"
-                    android:paddingLeft="@dimen/activity_size_10"
-                    android:paddingRight="@dimen/activity_size_10"
+                    android:paddingLeft="@dimen/activity_size_5"
+                    android:paddingRight="@dimen/activity_size_5"
                     android:gravity="center"
+                    android:textSize="10sp"
                     android:textColor="@color/white"
                     />
             </RelativeLayout>
@@ -135,12 +136,15 @@
                     style="@style/study_image_left"
                     android:src="@mipmap/zaixiankaishi" />
 
+                <ImageView style="@style/study_image_right" />
+
                 <TextView
                     style="@style/study_textview"
-                    android:layout_toRightOf="@id/study_image3"
-                    android:text="@string/stu_online_test_text" />
-
-                <ImageView style="@style/study_image_right" />
+                    android:text="@string/stu_online_test_text"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/textView5" />
             </RelativeLayout>
 
             <RelativeLayout

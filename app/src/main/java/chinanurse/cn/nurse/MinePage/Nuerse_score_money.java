@@ -238,7 +238,8 @@ public class Nuerse_score_money extends AppCompatActivity implements View.OnClic
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("是否点击查看")
+            builder.setTitle("新通知")
+                    .setMessage(newstypebean.getPost_title())
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -255,6 +256,7 @@ public class Nuerse_score_money extends AppCompatActivity implements View.OnClic
                             dialog.cancel();
                         }
                     }).create().show();
+            context.unregisterReceiver(this);
 //            AlertDialog alert = builder.create();
 //            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //            alert.show();

@@ -14,7 +14,8 @@
 
         <RelativeLayout
             android:id="@+id/ril_daily_iamgetitle"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
+            android:layout_marginLeft="@dimen/activity_size_7"
             android:layout_height="match_parent"
             >
 
@@ -27,7 +28,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="110dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_size_15"
             >
@@ -94,7 +95,7 @@
                 android:paddingRight="@dimen/activity_size_7"
                 android:paddingTop="@dimen/activity_size_3"
                 android:paddingBottom="@dimen/activity_size_3"
-                android:text="开始考试"
+                android:text="开始练习"
                 android:textColor="@color/purple"
                 android:textSize="12sp"
                 />
@@ -109,7 +110,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_size_1"
+        android:layout_height="0.5dp"
         android:background="@color/gray2"
         />
 </LinearLayout>

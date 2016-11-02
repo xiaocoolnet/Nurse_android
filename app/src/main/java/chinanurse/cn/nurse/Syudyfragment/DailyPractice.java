@@ -143,7 +143,7 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
         }else if ("11".equals(type)){
             top_title.setText(R.string.stu_online_test_text);
         }
-        main_list = (ExpandableListView) findViewById(R.id.main_list);//
+        main_list = (ExpandableListView) findViewById(R.id.main_list);
         main_list.setGroupIndicator(null);
         main_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -244,7 +244,8 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("是否点击查看")
+            builder.setTitle("新通知")
+                    .setMessage(newstypebean.getPost_title())
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {

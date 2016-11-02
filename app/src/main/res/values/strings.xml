@@ -3,8 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <integer name="versioncode">25</integer>
-    <string name="versionname">5.1.5</string>
+    <integer name="versioncode">26</integer>
+    <string name="versionname">5.1.6</string>
     <string name="nurse_text1">社区</string>
     <string name="nurse_text2">招聘</string>
     <string name="abroad_btn0">在线翻译</string>

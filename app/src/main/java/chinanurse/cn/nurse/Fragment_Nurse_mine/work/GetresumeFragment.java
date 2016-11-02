@@ -96,7 +96,7 @@ public class GetresumeFragment extends Fragment {
                                     NurseEmployTalentBean.DataBean mine_recruit = new NurseEmployTalentBean.DataBean();
                                     mine_recruit.setName(itemObject.getString("name"));
                                     mine_recruit.setSex(itemObject.getString("sex"));
-                                    mine_recruit.setAvatar(NetBaseConstant.NET_PIC_PREFIX + itemObject.getString("avatar"));
+                                    mine_recruit.setAvatar(itemObject.getString("avatar"));
                                     mine_recruit.setBirthday(itemObject.getString("birthday"));
                                     mine_recruit.setExperience(itemObject.getString("experience"));
                                     mine_recruit.setEducation(itemObject.getString("education"));
