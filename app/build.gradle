@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'config'
+            keyPassword '320306'
+//            E:/MyWork/nurse_android_2016/20161031Night/nurse_android0817All/debug.jks
+            storeFile file('C:/Users/Administrator.RL-20160728ECVY/Desktop/nurse_android0817All/debug.jks')
+            storePassword '320306'
+        }
+    }
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    defaultConfig {
+        applicationId "chinanurse.cn.nurse"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 25
+        versionName "5.1.5"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':ViewPagerIndicator')
+    //    compile files('libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('libs/org.apache.http.legacy.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile files('libs/libammsdk.jar')
+    compile files('libs/httpmime-4.1.2.jar')
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile files('libs/universal-image-loader-1.9.3.jar')
+    compile project(':banner')
+    compile files('libs/open_sdk_r5756_lite.jar')
+    compile files('libs/okhttp-3.2.0.jar')
+    compile files('libs/alicloud-android-push-sdk-2.3.2.jar')
+    compile files('libs/huawei-xiaomi-push-support-2.3.0.jar')
+}
+tasks.withType(org.gradle.api.tasks.compile.JavaCompile){
+    options.encoding="UTF-8"
+}
+

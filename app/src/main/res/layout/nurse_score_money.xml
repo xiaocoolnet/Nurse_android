@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/title_top"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/cup"
+            />
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/activity_size_50"
+            android:layout_marginTop="@dimen/activity_size_95"
+            >
+        <LinearLayout
+            android:id="@+id/layout_linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginLeft="@dimen/activity_size_10"
+            android:layout_marginRight="@dimen/activity_size_10"
+            android:layout_marginBottom="@dimen/activity_size_80"
+            >
+            <chinanurse.cn.nurse.pnlllist.PullToRefreshListView
+                android:id="@+id/lv_comprehensive"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/title_color"
+                android:drawSelectorOnTop="false"
+                android:scrollbars="none"
+                />
+        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:layout_marginBottom="@dimen/activity_size_20"
+                android:text="\t\t排行榜是一个对进行综合评比和展示的栏目。以日为单位，主要依据会员买卖通指数、登录次数、受关注程度、信息丰富程度等来进行评比。"
+                android:textColor="@color/white"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/shared_score"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_40"
+            android:layout_alignParentBottom="true"
+            android:background="@color/yellow"
+            android:layout_margin="@dimen/activity_size_10"
+            android:text="邀请朋友赚积分"
+            android:textSize="@dimen/text_size_16"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:id="@+id/textview"
+        />
+
+</LinearLayout>

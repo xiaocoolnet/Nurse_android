@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/news_fourth_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whilte"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_10"
+            android:background="@color/whilte"
+            />
+        <ImageView
+            android:id="@+id/news_fourth_lv_title_image"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/activity_size_10"
+            android:layout_marginRight="@dimen/activity_size_10"
+            android:layout_height="@dimen/activity_size_160"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/news_fourth_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_size_10"
+            android:layout_marginRight="@dimen/activity_size_10"
+            android:layout_marginTop="@dimen/activity_size_10"
+            android:text="中国护士网领导小组"
+            android:textColor="@color/black1"
+            android:textSize="@dimen/activity_size_14" />
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_size_10"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_15"
+                    android:layout_height="@dimen/activity_size_10"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"
+                    android:background="@mipmap/abroad_icon_eye" />
+
+                <TextView
+                    android:id="@+id/new_fourth_attention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_size_2"
+                    android:text="3322"
+                    android:visibility="gone"
+                    android:textColor="@color/gray5" />
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_12"
+                    android:layout_height="@dimen/activity_size_12"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/abroad_icon_date" />
+
+                <TextView
+                    android:id="@+id/new_fourth_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="2016/3/22"
+                    android:textSize="@dimen/activity_size_16"
+                    android:textColor="@color/gray5" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:layout_marginTop="@dimen/activity_size_10">
+
+                <ImageView
+                    android:id="@+id/four_image_collect"
+                    android:layout_width="@dimen/activity_size_16"
+                    android:layout_height="@dimen/activity_size_16"
+                    android:layout_gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/news_fourth_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:layout_marginRight="@dimen/activity_size_10"
+                    android:text="123"
+                    android:textSize="@dimen/activity_size_16"
+                    android:textColor="@color/gray5" />
+                <ImageView
+                    android:id="@+id/four_image_like"
+                    android:layout_width="@dimen/activity_size_16"
+                    android:layout_height="@dimen/activity_size_16"
+                    android:layout_gravity="center_vertical"
+                     />
+
+                <TextView
+                    android:id="@+id/news_fourth_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/gray5" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+</LinearLayout>

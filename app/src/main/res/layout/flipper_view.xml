@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/activity_size_20"
+        android:layout_marginLeft="@dimen/activity_size_20"
+        android:layout_marginRight="@dimen/activity_size_20"
+        >
+        <TextView
+            android:id="@+id/question_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1111"
+            android:textSize="@dimen/text_size_18"
+            />
+        <chinanurse.cn.nurse.question_viewpager.Lv_question_answer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_answer_list"
+            >
+        </chinanurse.cn.nurse.question_viewpager.Lv_question_answer>
+    </LinearLayout>
+
+</ScrollView>

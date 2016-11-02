@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <RelativeLayout
+        android:id="@+id/rela_nr"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/image_1"
+            android:layout_width="@dimen/activity_size_30"
+            android:layout_height="@dimen/activity_size_40"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_wirte" />
+
+        <LinearLayout
+            android:id="@+id/linear_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/activity_size_10"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/image_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_topic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_0"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:text="2016护士资格考试儿科护理学考前必备模拟题"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/activity_size_16" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_0"
+                android:layout_marginTop="@dimen/activity_size_5"
+                android:layout_weight="1.0">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/image_2"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/ic_eye_purple" />
+                    <TextView
+                        android:id="@+id/tv_eye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_size_10"
+                        android:text="1346"
+                        android:textSize="@dimen/activity_size_12" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_linear_like"
+                        >
+                        <ImageView
+                            android:id="@+id/image_3"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                             />
+                        <TextView
+                            android:id="@+id/tv_collect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_10"
+                            android:text="13"
+                            android:textSize="@dimen/activity_size_12" />
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_linear_collect"
+                    >
+                    <ImageView
+                        android:id="@+id/image_collect"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="@dimen/activity_size_30"
+                        />
+                    <TextView
+                        android:id="@+id/tv_tv_collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_size_10"
+                        android:text="13"
+                        android:textSize="@dimen/activity_size_12" />
+                </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+</LinearLayout>

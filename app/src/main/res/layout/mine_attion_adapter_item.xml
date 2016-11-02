@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="70dp"
+    android:id="@+id/ril_fans"
+    android:background="#FFFFFF">
+    <chinanurse.cn.nurse.picture.RoudImage
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/img_head_nor"
+        android:id="@+id/img_head"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:textSize="15dp"
+        android:textColor="#010101"
+        android:layout_toRightOf="@+id/img_head"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/name"/>
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textColor="#90006B"
+        android:background="@mipmap/ic_shield_purple"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/name"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        />
+    <ImageView
+        style="@style/study_image_right" />
+</RelativeLayout>

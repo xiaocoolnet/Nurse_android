@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--头布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_first_topline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="头条"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/news_first_topline_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/purple" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_second_nursing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="护理界"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/news_second_nursing_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_third_health"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="健康"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/news_third_health_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_four_meeting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="学术会议"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/news_four_meeting_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/gray2"
+        />
+        <LinearLayout
+            android:id="@+id/news_replace_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+</LinearLayout>

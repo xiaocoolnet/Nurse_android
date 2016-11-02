@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--<com.viewpagerindicator.TabPageIndicator-->
+        <!--android:id="@+id/news_indicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:background="#ffffff"/>-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/activity_size_1"-->
+        <!--android:background="@color/purple" />-->
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/news_viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/line_rn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_rn"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:gravity="center"
+
+                android:text="@string/gobroad_adapter_title"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_15" />
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/purple" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/line_nation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nation"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="护士培训"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_15" />
+
+
+            <View
+                android:id="@+id/view_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_competency"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_conpetency"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="成功案例"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_15" />
+
+
+            <View
+                android:id="@+id/view_3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rela_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_weight="1.0">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray2" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/ic_arrow_down" />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/purple"
+        />
+    <RelativeLayout
+        android:id="@+id/rela_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+</LinearLayout>

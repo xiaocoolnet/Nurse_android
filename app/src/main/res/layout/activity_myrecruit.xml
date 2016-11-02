@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".Fragment_Nurse_mine.Myrecruit">
+    <RelativeLayout
+        style="@style/back_title_RelativeLayout">
+        <!-- 返回按钮，扩大点击面，所以用一个布局包裹住-->
+        <LinearLayout
+            style="@style/back_layout"
+            android:id="@+id/myrecruit_back">
+            <ImageView
+                style="@style/back_img"/>
+            <TextView
+                style="@style/back_text" />
+        </LinearLayout>
+        <!-- 标题-->
+        <TextView
+            style="@style/back_title_text"
+            android:text="我的招聘"/>
+        <!-- 底部紫线-->
+        <TextView
+            style="@style/back_title_pupleline"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <!-- 左边-->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/myrecruit_left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="收到的简历"
+                android:textSize="16dp"
+                android:textColor="#8F006A"
+                android:id="@+id/text_left"/>
+            <!-- 底部紫线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#8F006A"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/line_left"></View>
+        </RelativeLayout>
+        <!-- 中间-->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/myrecruit_center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="招聘列表"
+                android:textSize="16dp"
+                android:textColor="#808080"
+                android:id="@+id/text_center"/>
+            <!-- 底部紫线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/line_center"></View>
+        </RelativeLayout>
+        <!-- 右边-->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/myrecruit_right">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="企业认证"
+                android:textSize="16dp"
+                android:textColor="#808080"
+                android:id="@+id/text_right"/>
+            <!-- 底部紫线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/line_right"></View>
+        </RelativeLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fm_content"></FrameLayout>
+</LinearLayout>

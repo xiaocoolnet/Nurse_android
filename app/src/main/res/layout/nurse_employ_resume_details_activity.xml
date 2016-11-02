@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whilte"
+    android:orientation="vertical">
+    <include layout="@layout/title_top"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/purple"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <chinanurse.cn.nurse.ui.ReboundScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whilte"
+            android:orientation="vertical">
+
+
+            <!--个人信息标题-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:text="个人信息"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_15" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_size_11"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:background="@color/purple" />
+            <!--主要信息-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whilte"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_size_15"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/nurse_employ_resume_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="苏丽珍"
+                        android:textColor="@color/black1"
+                        android:textSize="@dimen/activity_size_22" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="性别："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="女"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="出生日期："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_birthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="1988/12/2"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="学历："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_education"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="大专"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+                    <!--居住地-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="居住地："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_15" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_live_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_5"
+                            android:text="北京-大兴区"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_15" />
+                    </LinearLayout>
+                    <!--居住地-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="工作经验："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_15" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_experience"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_5"
+                            android:text=""
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_15" />
+                    </LinearLayout>
+                    <!--居住地-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="职务名称："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_15" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_jobstate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_5"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_15" />
+                    </LinearLayout>
+                    <!--目前薪资-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="目前薪资："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_15" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_money_now"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_5"
+                            android:text="5000"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_15" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_size_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="求职状态："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_15" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/activity_size_5"
+                            android:text="离职"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_15" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+
+                    <ImageView
+                        android:id="@+id/nurse_employ_resume_pic"
+                        android:layout_width="@dimen/activity_size_120"
+                        android:layout_height="@dimen/activity_size_150"
+                        android:layout_marginTop="@dimen/activity_size_15"
+                        android:layout_marginRight="@dimen/activity_size_15"
+                        android:background="@color/gray2"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <!--求职意向标题-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:text="求职意向"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_15" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_size_11"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:background="@color/purple" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="到岗时间："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_arrive_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="一周以内"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="期望薪资："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_want_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="8000"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/activity_size_5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="目标地点："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_want_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="北京朝阳区"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/activity_size_5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="目标职位："
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/activity_size_14" />
+
+                        <TextView
+                            android:id="@+id/nurse_employ_resume_want_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="护士长"
+                            android:textColor="@color/gray4"
+                            android:textSize="@dimen/activity_size_14" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!--自我评价标题-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:text="自我评价"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_15" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_size_11"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:background="@color/purple" />
+
+            <TextView
+                android:id="@+id/nurse_employ_resume_evaluate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_gravity="center_horizontal"
+                android:text="本人吃苦耐劳，性格热情开朗快乐大方能与他人好好相处，也能做好工作，为人诚实谦虚，做事一丝不苟，与大家相处融洽。" />
+
+            <!--联系方式标题-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:text="联系方式"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_15" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_marginBottom="@dimen/activity_size_11"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:background="@color/purple" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="联系人："
+                    android:textColor="@color/black1" />
+                <TextView
+                    android:id="@+id/tv_lianxiren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black1"
+                    android:layout_marginRight="@dimen/activity_size_10"
+                    android:text="157"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:layout_marginTop="@dimen/activity_size_10"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="联系方式："
+                    android:textColor="@color/black1" />
+                <LinearLayout
+                    android:id="@+id/linear_text_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:id="@+id/employ_tv_contact_gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="查看联系方式"
+                        android:textColor="@color/purple"
+                        android:background="@drawable/button_boder_gray_purple"
+                        android:textSize="@dimen/text_size_15" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/linear_text_phone_name"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/activity_size_10"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:id="@+id/nurse_employ_resume_contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:autoLink="email|phone|web"
+                        android:textColorLink="@color/purple"
+                        />
+                    <TextView
+                        android:id="@+id/nurse_employ_resume_contact_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignParentRight="true"
+                        android:autoLink="email|phone|web"
+                        android:textColorLink="@color/purple"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </chinanurse.cn.nurse.ui.ReboundScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/activity_size_10"
+            android:layout_marginLeft="@dimen/activity_size_15"
+            android:layout_marginRight="@dimen/activity_size_15"
+            >
+
+            <TextView
+                android:id="@+id/rela_yaoqingmianshi"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/image_sendjianli"
+                android:gravity="center"
+                android:text="邀请面试"
+                android:background="@drawable/button_boder"
+                android:textColor="@color/purple"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/tv_sendjianli_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/button_boder"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/image_sendjianli"
+                android:gravity="center"
+                android:text="返回"
+                android:textColor="@color/purple"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

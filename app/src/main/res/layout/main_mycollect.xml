@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_top" />
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@color/purple"-->
+    <!--/>-->
+    <!--<ListView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/main_collect_listview"-->
+    <!--/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/purple" />
+
+
+    <!--<com.viewpagerindicator.TabPageIndicator-->
+    <!--android:id="@+id/nurse_indicator"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/activity_size_48"-->
+    <!--android:background="@color/white"-->
+    <!--android:visibility="gone"></com.viewpagerindicator.TabPageIndicator>-->
+
+
+    <!--头布局-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nurse_second_findwork"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="文章"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/nurse_second_findwork_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/purple" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nurse_second_findtalents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="试题"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/nurse_second_findtalents_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/gray2" />
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/nurse_second_book"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@color/whilte"-->
+                <!--android:gravity="center"-->
+                <!--android:text="帖子"-->
+                <!--android:textColor="@color/gray4"-->
+                <!--android:textSize="@dimen/activity_size_16" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/nurse_second_book_line"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/activity_size_2"-->
+                <!--android:background="@color/whilte" />-->
+        <!--</LinearLayout>-->
+
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/nurse_secondpage_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/nurse_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"></android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+
+</LinearLayout>

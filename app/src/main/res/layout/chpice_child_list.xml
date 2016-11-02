@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/child_choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tv_choice_child"
+        android:padding="@dimen/activity_size_10"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:layout_marginBottom="@dimen/activity_size_10"
+        />
+</LinearLayout>

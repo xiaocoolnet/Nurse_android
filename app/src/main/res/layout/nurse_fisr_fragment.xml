@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/view_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.viewpagerindicator.TabPageIndicator
+            android:id="@+id/nurse_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_48"
+            android:background="@color/white"
+            android:visibility="gone"></com.viewpagerindicator.TabPageIndicator>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/nurse_vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"></android.support.v4.view.ViewPager>
+
+            <ImageButton
+                android:id="@+id/nurse_community_write_post"
+                android:layout_width="@dimen/activity_size_50"
+                android:layout_height="@dimen/activity_size_50"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/activity_size_20"
+                android:layout_marginRight="@dimen/activity_size_20"
+                android:background="@mipmap/ic_edit" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

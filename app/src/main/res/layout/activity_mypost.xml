@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment_Nurse_mine.MyPost.Mypost">
+    <!-- 标题栏-->
+    <RelativeLayout
+        style="@style/back_title_RelativeLayout">
+        <!-- 返回按钮，扩大点击面，所以用一个布局包裹住-->
+        <LinearLayout
+            style="@style/back_layout"
+            android:id="@+id/mypost_back">
+            <ImageView
+                style="@style/back_img"/>
+            <TextView
+                style="@style/back_text" />
+        </LinearLayout>
+        <!-- 标题-->
+        <TextView
+            style="@style/back_title_text"
+            android:text="我的帖子"/>
+        <!-- 底部紫线-->
+        <TextView
+            style="@style/back_title_pupleline"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/detail_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/view_color"
+            android:text="护士网"
+            android:textColor="@color/title_color"
+            android:textSize="30sp" />
+        <chinanurse.cn.nurse.pnlllist.PullToRefreshListView
+            android:id="@+id/lv_comprehensive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/title_color"
+            android:drawSelectorOnTop="false"
+            android:scrollbars="none"
+            />
+        <TextView
+            android:id="@+id/fans_no_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="没有数据"
+            android:textSize="@dimen/text_size_25"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rela_item_mypost"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="78dp">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical">
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="请问各位同行，职场新手如何‘谈薪’才合适？"
+            android:textColor="#000000"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <!-- 时间-->
+            <LinearLayout
+                style="@style/mypost_listview_linearlayout"
+                android:layout_marginLeft="2dp">
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:src="@mipmap/ic_time_gray" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/mypost_listview_text"
+                    android:text="2016 / 03 / 18" />
+            </LinearLayout>
+            <!-- 阅读量-->
+            <LinearLayout style="@style/mypost_listview_linearlayout">
+
+                <ImageView
+                    android:layout_width="9dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/ic_eye_gray" />
+
+                <TextView
+                    android:id="@+id/tv_read"
+                    style="@style/mypost_listview_text"
+                    android:text="2254" />
+            </LinearLayout>
+            <!-- 点赞-->
+            <LinearLayout style="@style/mypost_listview_linearlayout">
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:src="@mipmap/ic_like_gray" />
+
+                <TextView
+                    android:id="@+id/tv_like"
+                    style="@style/mypost_listview_text"
+                    android:text="2254" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:src="@mipmap/ic_you" />
+
+
+</RelativeLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/all_title_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_45"
+        android:background="@color/whilte">
+        <!--返回按钮的布局-->
+        <RelativeLayout
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/activity_size_80"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/btn_back_icon"
+                android:layout_width="@dimen/activity_size_12"
+                android:layout_height="@dimen/activity_size_22"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:background="@mipmap/btn_back" />
+
+            <TextView
+                android:id="@+id/top_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/activity_size_5"
+                android:layout_toRightOf="@+id/btn_back_icon"
+                android:text="返回"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_18" />
+        </RelativeLayout>
+
+        <!--标题头文本-->
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_20" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/activity_size_80"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:id="@+id/community_write_release"
+            >
+
+            <ImageView
+                android:id="@+id/question_answer_submit_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_size_10"
+                />
+
+            <TextView
+                android:id="@+id/question_answer_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/activity_size_5"
+                android:layout_toLeftOf="@id/question_answer_submit_image"
+                android:gravity="center"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_18" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

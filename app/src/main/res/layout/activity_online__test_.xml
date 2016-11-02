@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/activity_all_layout"
+            android:orientation="vertical">
+
+            <include layout="@layout/title_top" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_1"
+                android:background="@color/purple" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/ril_image_question_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_size_15"
+                    android:background="@mipmap/ic_choice" />
+
+                <TextView
+                    android:id="@+id/question_title_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ril_image_question_title"
+                    android:text="@string/stu_question_title_text"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/question_title_score_text"
+                    android:layout_marginLeft="@dimen/activity_size_10"
+                    android:layout_toRightOf="@id/question_title_score_text"
+                    android:text="@string/stu_question__title_score_text"
+                    android:textSize="@dimen/text_size_16" />
+
+                <TextView
+                    android:id="@+id/quedtion_at_present_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/activity_size_10"
+                    android:text="@string/stu_question__title_NUM_text"
+                    android:textSize="@dimen/text_size_20" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/mine_bg">
+
+                    <chinanurse.cn.nurse.question_viewpager.ViewFlipperSelfe
+                        android:id="@+id/question_vp_topic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_size_45"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="@dimen/activity_size_15"
+                        android:layout_marginTop="@dimen/activity_size_25"
+                        android:background="#fff"></chinanurse.cn.nurse.question_viewpager.ViewFlipperSelfe>
+
+                    <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/question_vp_topic"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="@dimen/activity_size_45"-->
+                    <!--android:layout_marginLeft="@dimen/activity_size_15"-->
+                    <!--android:layout_marginRight="@dimen/activity_size_15"-->
+                    <!--android:layout_marginTop="@dimen/activity_size_25"-->
+                    <!--android:background="#fff" />-->
+
+                    <com.viewpagerindicator.CirclePageIndicator
+                        android:id="@+id/question_topic_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="10dp"
+                        android:padding="10dp"
+                        app:fillColor="@color/indicator"
+                        app:pageColor="@color/white"
+                        app:radius="3dp"
+                        app:strokeColor="@color/indicator"
+                        app:strokeWidth="0dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/question_all_choice_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#90000000"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/question_pop_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="."
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/ril_last_question"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_15"
+                android:background="@mipmap/btn_arrow_left" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.0"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/rg_answer_function"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.0"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtn_answer_sheet"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:button="@null"
+                    android:drawableTop="@drawable/question_answer_sheet"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/activity_size_5"
+                    android:text="答题卡"
+                    android:textColor="@drawable/main_textcolor" />
+
+                <RadioButton
+                    android:id="@+id/rbtn_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:button="@null"
+                    android:drawableTop="@drawable/question_answer"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/activity_size_10"
+                    android:text="答案"
+                    android:textColor="@drawable/main_textcolor" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/rbtn_collect"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:clickable="true"
+                android:drawableTop="@drawable/question_collect"
+                android:enabled="true"
+                android:gravity="center"
+                android:paddingTop="@dimen/activity_size_8"
+                android:text="收藏"
+                android:textColor="@drawable/main_textcolor" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ril_next_question"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:background="@mipmap/btn_arrow_right" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

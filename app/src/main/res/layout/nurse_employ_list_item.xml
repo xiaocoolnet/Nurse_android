@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_size_160"
+    android:orientation="vertical"
+    android:background="@color/whilte">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="horizontal"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:layout_marginBottom="@dimen/activity_size_10"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <chinanurse.cn.nurse.picture.RoudImage
+                android:id="@+id/commany_photo"
+                android:layout_width="@dimen/activity_size_60"
+                android:layout_height="@dimen/activity_size_60"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/nurse_ex_logo" />
+
+            <TextView
+                android:id="@+id/nurse_employ_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray5"
+                android:textSize="@dimen/activity_size_10" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:layout_marginBottom="@dimen/activity_size_10"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3.2">
+
+            <TextView
+                android:id="@+id/nurse_employ_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/activity_size_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="招聘职位："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/recruitment_position"
+                        android:layout_width="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:layout_height="wrap_content"
+                        android:text="5000-8000元"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="薪资待遇："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/recruitment_money"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"
+                        android:text="社保、包吃住"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="福利待遇："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        android:id="@+id/textView2" />
+
+                    <TextView
+                        android:id="@+id/recruitment_security"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="护士/护理（20人）"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学历要求："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/recruitment_certificate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="中专"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.0"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="工作年限："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/recruitment_jobtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1~2年"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="招聘人数："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/recruitment_certificate_new"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="护士证"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.7"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_10"
+                    android:layout_height="@dimen/activity_size_10"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/nurse_employ_time" />
+
+                <TextView
+                    android:id="@+id/recruitment_createtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="25-16"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/activity_size_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_10"
+                    android:layout_height="@dimen/activity_size_14"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/nurse_employ_location" />
+
+                <TextView
+                    android:id="@+id/nurse_employ_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/activity_size_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/post_resume"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/nurse_employ_resume"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+</LinearLayout>
+

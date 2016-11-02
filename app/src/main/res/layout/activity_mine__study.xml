@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context=".Fragment_Nurse_mine.Mine_Study">
+
+
+    <RelativeLayout style="@style/back_title_RelativeLayout">
+        <!-- 返回按钮，扩大点击面，所以用一个布局包裹住-->
+        <LinearLayout
+            android:id="@+id/mystudy_back"
+            style="@style/back_layout">
+
+            <ImageView style="@style/back_img" />
+
+            <TextView style="@style/back_text" />
+        </LinearLayout>
+        <!-- 标题-->
+        <TextView
+            style="@style/back_title_text"
+            android:text="我的学习" />
+        <!-- 底部紫线-->
+        <TextView style="@style/back_title_pupleline" />
+    </RelativeLayout>
+
+
+    <chinanurse.cn.nurse.ui.ReboundScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/line_zhexian"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@mipmap/mine_bg"
+                android:orientation="vertical">
+
+
+                <chinanurse.cn.nurse.MinePage.ChartView
+                    android:id="@+id/chartview_zhexian"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"></chinanurse.cn.nurse.MinePage.ChartView>
+                <!--<chinanurse.cn.nurse.MinePage.LineCharView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:id="@+id/test"-->
+                    <!--android:layout_height="200dp"-->
+                    <!-->-->
+                    <!--</chinanurse.cn.nurse.MinePage.LineCharView>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/tv_num_01"
+                                android:text="综合正确率"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tv_num_01"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/tv_1"
+                                android:text="0"
+                                android:textColor="@color/yellow"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/tv_num_01"
+                                android:text="%"
+                                android:textColor="@color/yellow"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/tv_2"
+                                android:layout_toRightOf="@+id/tv_2"
+                                android:text="，击败了"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tv_num_02"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/tv_3"
+                                android:text="0"
+                                android:textColor="@color/yellow"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/tv_num_02"
+                                android:text="%"
+                                android:textColor="@color/yellow"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/tv_4"
+                                android:layout_toRightOf="@+id/tv_4"
+                                android:text="用户"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:gravity="center_horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="继续努力！"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/purple"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_num_03"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="0"
+                                android:textColor="@color/whilte"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_finish"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_num_03"
+                                android:layout_centerHorizontal="true"
+                                android:text="已做题的次数"
+                                android:textColor="@color/red"
+
+                                android:textSize="15sp" />
+
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/red" />
+
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_num_04"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="0"
+                                android:textColor="@color/whilte"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_collent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_num_04"
+                                android:layout_centerHorizontal="true"
+                                android:text="收藏试题（题）"
+                                android:textColor="@color/red"
+
+                                android:textSize="15sp" />
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/rela_qusetion_record"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView_record"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/ic_pen" />
+
+
+                        <TextView
+                            android:id="@+id/tv_record"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView_record"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:text="做题记录"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray2" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/rela_error_question"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView_mistakes"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/ic_yuan_purple" />
+
+
+                        <TextView
+                            android:id="@+id/tv_mistakes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView_mistakes"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="错题集"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/rela_collect_question"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView_collection"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/ic_lifang" />
+
+
+                        <TextView
+                            android:id="@+id/tv_collection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView_collection"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:text="收藏试题"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray2" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/rela_other_collect"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imageView_other_collection"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/ic_folder" />
+
+
+                        <TextView
+                            android:id="@+id/tv_other_collection"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView_other_collection"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="5dp"
+                            android:text="其他收藏"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </chinanurse.cn.nurse.ui.ReboundScrollView>
+</LinearLayout>

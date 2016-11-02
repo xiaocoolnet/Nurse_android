@@ -1,0 +1,37 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//android {
+//    signingConfigs {
+//        config {
+//            keyAlias 'config'
+//            keyPassword '320306'
+//            storeFile file('G:/nursenew/nursenew/nurse_android0817All/debug.jks')
+//            storePassword '320306'
+//        }
+//    }
+//}
+//dependencies {
+//    compile files('app/libs/universal-image-loader-1.9.3.jar')
+//    compile files('app/libs/alicloud-android-push-sdk-2.3.2.jar')
+//}

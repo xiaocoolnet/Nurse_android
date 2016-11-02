@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whilte"
+    android:orientation="vertical"
+    >
+    <!--第一行-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_50"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/ril_daily_iamgetitle"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/study_daily_iamgetitle"
+                android:layout_width="@dimen/activity_size_30"
+                android:layout_height="@dimen/activity_size_25"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_size_15"
+            >
+
+            <TextView
+                android:id="@+id/study_daily_titleone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/activity_size_16" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_size_10"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/daily_all"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/activity_size_15" />
+
+            <TextView
+                android:id="@+id/study_daily_numone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/activity_size_3"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/activity_size_15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/activity_size_3"
+                android:text="@string/daily_question"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/activity_size_15" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/start_answer_one"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/activity_size_10"
+            android:layout_marginLeft="@dimen/activity_size_10"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/tv_anser_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:background="@drawable/button_boder"
+                android:paddingLeft="@dimen/activity_size_7"
+                android:paddingRight="@dimen/activity_size_7"
+                android:paddingTop="@dimen/activity_size_3"
+                android:paddingBottom="@dimen/activity_size_3"
+                android:text="开始考试"
+                android:textColor="@color/purple"
+                android:textSize="12sp"
+                />
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:background="@mipmap/start_answer_questions" />-->
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/gray2"
+        />
+</LinearLayout>

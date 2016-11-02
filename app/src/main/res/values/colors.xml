@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="indicator">#8F006A</color>
+    <color name="study_text">#000000</color>
+    <color name="black">#303030</color>
+    <color name="black1">#000000</color>
+    <color name="canlendar_text_color">#323232</color>
+    <color name="dingbu_ban_touming">#e0333333</color>
+    <color name="view_color">#dfdfdf</color>
+    <color name="red">#eb382f</color>
+    <color name="yellow">#ffff00</color>
+    <color name="green">#34be67</color>
+    <color name="white">#ffffff</color>
+    <color name="whilte">#ffffff</color>
+    <color name="gray">#b3b3b3</color>
+    <color name="gray7">#EBEBEB</color>
+    <color name="gray2">#e5e5e5</color>
+    <color name="gray3">#4f5555</color>
+    <color name="gray4">#808080</color>
+    <color name="gray5">#b3b3b3</color>
+    <color name="gray6">#B3B3B3</color>
+    <color name="blue">#2db3f8</color>
+    <color name="purple">#90006b</color>
+    <color name="main_ground_color">#eff2f7</color>
+    <color name="title_color">#ffffffff</color>
+    <color name="bottom_bar_normal_bg">#2D2F31</color>
+    <color name="bottom_text_color_normal">#ffffff</color>
+    <color name="btn_white_normal">#f7f8f8</color>
+    <color name="btn_white_pressed">#b5b5b6</color>
+    <color name="btn_green_noraml">#68C270</color>
+    <color name="btn_green_pressed">#6FCD78</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed_status">#b5b5b6</color>
+    <color name="btn_gray_pressed">#666667</color>
+    <color name="btn_blue_normal">#1e90ff</color>
+    <color name="btn_blue_pressed">#0066FF</color>
+    <color name="mine_gray_unselected">#999999</color>
+    <color name="activity_all_layout">#F1F1F1</color>
+    <color name="color_score_name">#FFD39B</color>
+    <color name="common_signin_btn_default_background">#eb382f</color>
+    <color name="color_choice_child">#FFE4E1</color>
+
+    <drawable name="color_red">#eb382f</drawable>
+    <drawable name="color_white">#ffffff</drawable>
+    <drawable name="color_black">#000000</drawable>
+    <drawable name="color_blue">#2db3f8</drawable>
+    <drawable name="color_green">#34be67</drawable>
+    <drawable name="color_">#34be67</drawable>
+
+
+
+    <color name="color_light_purple">#EED2EE</color>
+
+    <color name="province_line_border">#C7C7C7</color>
+
+
+</resources>

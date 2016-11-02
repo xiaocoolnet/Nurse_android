@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_top"></include>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/purple" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/gray2"
+        android:layout_marginTop="@dimen/activity_size_20">
+        <!--第一行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_20"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titleone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--第二行-->
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_size_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_30"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon_rn" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titletwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numtwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--第三行-->
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_size_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_30"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon_inter" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titlethree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numthree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--第四行-->
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_size_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_20"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon_moon" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titlefour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numfour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_four"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!--第五行-->
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_size_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_20"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon0" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titlefive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numfive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_five"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--第六行-->
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_size_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:background="@color/whilte"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_30"
+                    android:layout_height="@dimen/activity_size_20"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/study_daily_icon1" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/study_daily_titlesix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_18" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/daily_all"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:id="@+id/study_daily_numsix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/activity_size_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="@string/daily_question"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/activity_size_15" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/start_answer_six"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/start_answer_questions" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

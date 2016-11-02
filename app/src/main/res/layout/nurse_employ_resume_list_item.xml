@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@color/whilte">
+    <LinearLayout
+        android:id="@+id/all_voerical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:layout_marginBottom="@dimen/activity_size_10"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <chinanurse.cn.nurse.picture.RoudImage
+                android:id="@+id/iv_nurse_employ_resume_pic"
+                android:layout_width="@dimen/activity_size_60"
+                android:layout_height="@dimen/activity_size_60"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/nurse_ex_logo" />
+
+            <TextView
+                android:id="@+id/nurse_employ_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_size_6"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_12" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:layout_marginBottom="@dimen/activity_size_10"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/employ_resume_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="sdasfasdas"
+                android:gravity="center_vertical"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_18" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/activity_size_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="性别："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_sex"
+                        android:layout_width="wrap_content"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:layout_height="wrap_content"
+                        android:text="男"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前薪资："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_currentsalary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10000-20000元"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:layout_weight="1.0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="工作状态："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_jobstate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="在职"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:layout_weight="1.4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学历："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_education"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="中专"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1.0"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="生日："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_birthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1~2年"
+                        android:textColor="@color/black"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_0"
+                    android:layout_weight="1.0"
+                    android:layout_marginTop="@dimen/activity_size_5"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="职务名称："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                    <TextView
+                        android:id="@+id/employ_resume_certificate"
+                        android:layout_width="wrap_content"
+                        android:gravity="bottom"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_10"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_size_10"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_10"
+                    android:layout_height="@dimen/activity_size_10"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/nurse_employ_time" />
+
+                <TextView
+                    android:id="@+id/employ_resume_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:text="3-16"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/activity_size_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:layout_weight="1.0">
+
+                <ImageView
+                    android:layout_width="@dimen/activity_size_10"
+                    android:layout_height="@dimen/activity_size_14"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/nurse_employ_location" />
+
+                <TextView
+                    android:id="@+id/employ_resume_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_size_3"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/activity_size_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Invited_to_the_interview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_25"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/activity_size_15"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_size_5"
+                android:paddingRight="@dimen/activity_size_5"
+                android:background="@drawable/button_boder"
+                android:layout_weight="1.1">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/ic_note_small"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="邀请面试"
+                    android:gravity="center"
+                    android:textColor="@color/purple"
+                    android:padding="@dimen/activity_size_2"
+                    android:textSize="@dimen/activity_size_12"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

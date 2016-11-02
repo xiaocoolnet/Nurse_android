@@ -1,0 +1,174 @@
+<resources>
+    <string name="app_name">中国护士网</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <integer name="versioncode">25</integer>
+    <string name="versionname">5.1.5</string>
+    <string name="nurse_text1">社区</string>
+    <string name="nurse_text2">招聘</string>
+    <string name="abroad_btn0">在线翻译</string>
+    <string name="abroad_btn1">汇率查询</string>
+    <string name="abroad_btn2">时差查询</string>
+    <string name="abroad_btn3">学历认证</string>
+    <string name="abroad_btn4">天气查询</string>
+    <string name="abroad_btn5">地图查询</string>
+    <string name="abroad_btn6">机票查询</string>
+    <string name="abroad_btn7">酒店预订</string>
+    <string name="abroad_btn8">签证查询</string>
+    <!--net-->
+    <string name="net_erroy">您的网络不稳定，请稍后再试！</string>
+    <string name="no_information">您的网络不稳定，请稍后再试！</string>
+    <string name="update_content">修改成功！</string>
+    <string name="my_info_update_result">暂无</string>
+    <string name="question_collect_succcess">成功收藏</string>
+    <string name="question_cancel_collect">取消收藏</string>
+    <!--News_WebView-->
+    <string name="web_back_text">返回</string>
+    <string name="news_webview_title_text">学术会议</string>
+    <string name="news_webview_source_text">来源:</string>
+    <string name="news_webview_shared_text">分享到</string>
+    <string name="news_webview_having_text">已有</string>
+    <string name="news_webview_more_people_text">人点赞</string>
+    <string name="news_webview_correlation_reading_text">相关阅读</string>
+    <!--MainActivity-->
+    <string name="main_news">新闻</string>
+    <string name="main_study">学习</string>
+    <string name="main_abroad">出国</string>
+    <string name="main_nurse">护士站</string>
+    <string name="main_mine">我</string>
+    <!--StuduFragment-->
+    <string name="stu_every_relation_title_text">每日一练</string>
+    <string name="stu_Goman_topic_bank_text">5万道题库</string>
+    <string name="stu_online_test_text">模拟考场</string>
+    <string name="stu_goabroad_test_text">出国考试</string>
+    <string name="stu_clinic_nurse_text">临床护理</string>
+    <string name="stu_fifty_nurse_operation_text">50项护理操作</string>
+    <string name="stu_test_book_text">考试宝典</string>
+    <string name="stu_paper_nurse_text">护理部</string>
+    <!--WXAPI-->
+    <string name="wxapi">这里替换第一次申请的app_id</string>
+    <!--DailyPracticeActivity-->
+    <string name="daily_all">共</string>
+    <string name="daily_question">道题</string>
+    <!--QuestionActivity-->
+    <string name="stu_question_details">练习题</string>
+    <string name="stu_question_title_text">单选题</string>
+    <string name="stu_question_more_title_text">多选题</string>
+    <string name="stu_question__title_score_text">(A1, 2分)</string>
+    <string name="stu_question__title_NUM_text">1/10</string>
+    <!--AbroadFragment-->
+    <string name="main_title_abroad">出国动态</string>
+    <string name="main_title_success_case">成功案例</string>
+    <string name="main_title_abroad_treasure_chest">出国百宝箱</string>
+
+    <string name="abroad_first_America">美国</string>
+    <string name="abroad_first_Canada">加拿大</string>
+    <string name="abroad_first_Germany">德国</string>
+    <string name="abroad_first_Finland">芬兰</string>
+    <string name="abroad_first_Australia">澳洲</string>
+    <string name="abroad_first_New_Zealand">日本</string>
+    <string name="abroad_first_New_Singapore">新加坡</string>
+    <string name="abroad_first_Saudi_Arabia">沙特</string>
+    <!--LoginActivity-->
+    <string name="login_thoast_name">请填写用户名</string>
+    <string name="login_thoast_pass">请填写密码</string>
+    <string name="login_thoast_mphone">该手机号已经被注册!</string>
+    <string name="register_thoast_surephone">请填写手机号</string>
+
+    <string name="register_thoast_phone">请填写手机号</string>
+    <string name="register_thoast_code">请填写验证码</string>
+    <string name="register_thoast_pass">请填写密码</string>
+    <string name="register_thoast_gain_code">请获取验证码</string>
+
+    <string name="login_thoast_else">用户或密码错误</string>
+    <!--MyInFo_Update-->
+    <string name="my_info_update_save">保存</string>
+    <string name="my_info_update_title_name">修改名称</string>
+    <string name="my_info_update_title_head">修改头像</string>
+    <string name="my_info_update_title_sex">修改性别</string>
+    <string name="my_info_update_title_phone">修改手机</string>
+    <string name="my_info_update_title_email">修改邮箱</string>
+    <string name="my_info_update_title_birthday">修改生日</string>
+    <string name="my_info_update_title_address">修改地址</string>
+    <string name="my_info_update_title_school">修改学校</string>
+    <string name="my_info_update_title_major">修改专业</string>
+    <string name="my_info_update_title_education">修改学历</string>
+    <string name="my_info_update_womanorman">您的输入不正确!</string>
+    <string name="my_info_update_woman">女</string>
+    <string name="my_info_update_man">男</string>
+    <!--MineFragment-->
+    <string name="mine_name_no">请登录</string>
+    <!-- Pop_answer-->
+    <string name="mine_question_answer_text">A</string>
+    <string name="mine_question_answer">您的答案</string>
+    <string name="sure_question_answer">正确答案</string>
+    <string name="sure_question_answer_text">B</string>
+    <string name="question_difficulty">题目难度</string>
+    <string name="question_analysis">答案解析:</string>
+    <!-- Pop_answer_sheet-->
+    <string name="question_dot_correct">答对</string>
+    <string name="question_dot_error">答错</string>
+    <string name="question_dot_not_answer">未答</string>
+    <string name="question_dot_at_present">当前题</string>
+    <!-- Goman_Topic_Bank-->
+    <string name="goman_topic_RN">护士资格</string>
+    <string name="goman_topic_nation_station">初级护师</string>
+    <string name="goman_topic_nurse_competency">主管护师</string>
+    <!--GoAbroad_WebView-->
+    <string name="gobroad_adapter_title">护士出国</string>
+    <string name="gobroad_adapter_title_success">成功案例</string>
+    <string name="gobroad_adapter_title_all">出国百宝</string>
+    <!-- GoAbroad_chest_WebView-->
+    <string name="chest_online_translation">在线翻译</string>
+    <string name="chest_exchange_rate_query">汇率查询</string>
+    <string name="chest_time_difference_query">时差查询</string>
+    <string name="chest_degree_certificate">学历认证</string>
+    <string name="chest_weather_query">天气查询</string>
+    <string name="chest_map_query">地图查询</string>
+    <string name="chest_ticket_query">机票查询</string>
+    <string name="chest_hotel_reservation">酒店预订</string>
+    <string name="chest_visa_query">签证查询</string>
+
+    <!-- News_WebView-->
+    <string name="news_webview_title_headline_information">头条资讯</string>
+    <string name="news_webview_title_Nursing_in_situ">护理原地</string>
+    <string name="news_webview_title_Health_knowledge">健康知识</string>
+    <string name="news_webview_title_Academic_conference">学术会议</string>
+
+
+    <!--  Write_Community_Post-->
+    <string name="community_Posting">发帖</string>
+    <string name="community_write_title">我只是个标题(必填)</string>
+    <string name="community_write_content">我只是个正文（不少于5个字）</string>
+    <string name="community_choose_column">选择栏目</string>
+    <string name="community_Insert_the_picture">插入图片</string>
+
+
+    <!-- Mycollect-->
+    <string name="main_my_collect">我的收藏</string>
+    <string name="main_my_news">我的消息</string>
+    <string name="action_refresh">Refresh</string>
+
+    <!-- 下拉刷新和上拉加载更多的文本 -->
+    <string name="pushmsg_center_no_more_msg">已经到底啦</string>
+    <string name="pushmsg_center_pull_up_text">松开加载更多</string>
+    <string name="pushmsg_center_pull_down_text">下拉可以刷新</string>
+    <string name="pushmsg_center_pull_release_text">松开获取更多</string>
+    <string name="pushmsg_center_pull_down_update_time">最后更新时间 : </string>
+    <string name="pushmsg_center_load_more_ongoing_text">正在加载中</string>
+    <string name="xsearch_loading">正在加载中…</string>
+    <string name="pull_to_refresh_header_hint_normal">@string/pushmsg_center_pull_down_text</string>
+    <string name="pull_to_refresh_header_hint_normal2">上拉可以加载</string>
+    <string name="pull_to_refresh_header_hint_ready">松开后加载</string>
+    <string name="pull_to_refresh_header_hint_loading">@string/pushmsg_center_load_more_ongoing_text</string>
+    <string name="pull_to_refresh_header_last_time">@string/pushmsg_center_pull_down_update_time</string>
+    <string name="pull_to_refresh_footer_hint_ready">松开载入更多</string>
+    <string name="pull_to_refresh_no_more_data">@string/pushmsg_center_no_more_msg</string>
+    <string name="zhaopin">%1$s公司邀请您面试%2$s的职位</string>
+    <string name="yaoqing">%1$s申请面试%2$s的职位</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="time_error">时间有问题</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+</resources>

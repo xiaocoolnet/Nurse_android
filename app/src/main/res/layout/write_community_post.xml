@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_top" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/purple" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_community_write_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:layout_marginLeft="@dimen/activity_size_10"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/community_write_title"
+                    android:textSize="@dimen/text_size_20" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_1"
+                    android:layout_marginLeft="@dimen/activity_size_10"
+                    android:layout_marginRight="@dimen/activity_size_10"
+                    android:background="@color/btn_gray_normal" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/et_community_write_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/activity_size_45"
+                        android:layout_marginLeft="@dimen/activity_size_10"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:layout_marginTop="@dimen/activity_size_20"
+                        android:background="@null"
+                        android:gravity="top"
+                        android:hint="@string/community_write_content" />
+                </RelativeLayout>
+
+                <GridView
+                    android:id="@+id/community_write_gridview_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_250"
+                    android:numColumns="auto_fit"
+                    android:columnWidth="@dimen/activity_size_110"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/activity_size_10"
+                    android:verticalSpacing="@dimen/activity_size_20"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/community_write_insert_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_size_100"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_size_80"
+            android:layout_marginRight="@dimen/activity_size_10">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@mipmap/img_bg_nor" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/activity_size_10"
+                android:text="@string/community_Insert_the_picture" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/community_write_choose_column"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_50"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_light_purple"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_20"
+                android:text="@string/community_choose_column"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_18" />
+
+            <ImageView
+                android:id="@+id/community_write_release_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:background="@mipmap/ic_arrow_purple" />
+
+            <TextView
+                android:id="@+id/write_post_classify"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/activity_size_5"
+                android:layout_toLeftOf="@id/community_write_release_image"
+                android:gravity="center"
+                android:text="儿科"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_18" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

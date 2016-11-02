@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_second"
+    android:orientation="vertical">
+
+
+    <!--头布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nurse_second_findwork"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="找工作"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/nurse_second_findwork_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/purple" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nurse_second_findtalents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="找人才"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/nurse_second_findtalents_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nurse_second_book"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="职场宝典"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/nurse_second_book_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/gray2"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/nurse_secondpage_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/imagebutton_bi"
+            android:layout_width="@dimen/activity_size_50"
+            android:layout_height="@dimen/activity_size_50"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_size_20"
+            android:layout_marginRight="@dimen/activity_size_20"
+            android:background="@mipmap/ic_edit" />
+    </RelativeLayout>
+
+</LinearLayout>
