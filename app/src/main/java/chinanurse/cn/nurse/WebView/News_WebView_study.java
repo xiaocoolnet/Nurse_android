@@ -35,7 +35,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.sina.weibo.sdk.api.WebpageObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
@@ -65,6 +68,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import chinanurse.cn.nurse.Fragment_Nurse.constant.CommunityNetConstant;
+import chinanurse.cn.nurse.Fragment_Nurse.net.NurseAsyncHttpClient;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.LoginActivity;
@@ -81,8 +86,7 @@ import chinanurse.cn.nurse.publicall.SecondPage;
 import chinanurse.cn.nurse.publicall.adapter.News_Down_Adapter;
 import chinanurse.cn.nurse.weibo.AccessTokenKeeper;
 import chinanurse.cn.nurse.weibo.Constants;
-
-//import chinanurse.cn.nurse.bean.FirstPageNews.FirstNewsData;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * 新闻界面列表详情
@@ -147,6 +151,10 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
     private Dialog dialog;
     private int positionlist;
     private Bitmap thumbBmp;
+    private Bitmap bitmap;
+    private Long commentCount = 0L;
+    private int pager = 1;
+    private TextView tv_more;
     /**
      * 推送消息发送广播
      */
@@ -185,7 +193,7 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
                                         @Override
                                         public void run() {
                                             try {
-                                                Thread.sleep(1000);
+                                                Thread.sleep(3000);
                                                 dialog.dismiss();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
@@ -409,16 +417,25 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
                     comments = gson.fromJson(result,Webview_comments_bean.class);
                     commentslist.addAll(comments.getData());
                     if (commentslist != null&&commentslist.size() > 0){
-                        popchoice  = new Pop_Adapter_Choice(commentslist,mactivity,0,handler);
-                        web_list.setAdapter(popchoice);
+                        if (popchoice==null){
+                            popchoice = new Pop_Adapter_Choice(commentslist, mactivity, 0, handler);
+                            web_list.setAdapter(popchoice);
+                        }
+                        popchoice.setCommentCount(commentCount);
+                        popchoice.notifyDataSetChanged();
                         setListViewHeightBasedOnChildren(web_list);
-                        tv_choice_num.setText(commentslist.size() + "");
+                        tv_choice_num.setText(commentCount + "");
                         linear_list.setVisibility(View.GONE);
                         web_list.setVisibility(View.VISIBLE);
                     }else{
                         tv_choice_num.setText("0");
                         linear_list.setVisibility(View.VISIBLE);
                         web_list.setVisibility(View.GONE);
+                    }
+                    if (commentslist != null&&commentslist.size() >= commentCount) {
+                        tv_more.setVisibility(View.GONE);
+                    } else {
+                        tv_more.setVisibility(View.VISIBLE);//TODO
                     }
                     break;
                 case 15:
@@ -565,15 +582,14 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
             web_from.setText(fndData.getPost_source().toString() + "");//设置文章来源
             web_read.setText(fndData.getPost_hits().toString() + "");//设置文章阅读量
             web_time.setText(fndData.getPost_modified().toString().substring(0, 10) + "");//设置文章时间
-            if (null != fndData.getLikes() && fndData.getLikes().size() > 0) {
-                Log.i("fnddatalike","-------------->"+fndData.getLikes().size());
-                web_like.setText(fndData.getLikes().size() + "");
+            if (null != fndData.getLikes_count()) {
+                Log.i("fnddatalike","-------------->"+fndData.getLikes_count());
+                web_like.setText(fndData.getLikes_count());
             } else {
                 web_like.setText("0");
             }
 
             // 解析出来的格式就是2016-06-14 09:45:14
-            Log.e("aaaa", fndData.getPost_date().toString());
             description = fndData.getPost_excerpt().toString();//文章的内容a
             webId = fndData.getObject_id().toString();//文章的id\
             webtitleId = fndData.getTerm_id().toString();//获取新闻的id
@@ -625,22 +641,11 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
 //        });
         adbout_read_view = (TextView) findViewById(R.id.adbout_read_view);
         about_read = (TextView) findViewById(R.id.about_read);
-//        getscoreread();
+        tv_more = (TextView) findViewById(R.id.tv_forum_details_comment_more);
+        tv_more.setOnClickListener(this);
+        tv_more.setVisibility(View.GONE);
         gotoweb();
 
-    }
-    private void getscoreread() {
-        if (user.getUserid().length() > 0) {
-            if (HttpConnect.isConnnected(mactivity)) {
-                Log.i("onResume", "initData1");
-                new StudyRequest(mactivity, handler).ADDSCORE_read(user.getUserid(),webId, ADDSCORE);
-            } else {
-                Log.i("onResume", "initData2");
-                Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
     }
     private void getscore() {
         if (user.getUserid().length() > 0) {
@@ -665,6 +670,47 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
 
         }
     }
+    private void getCommentsCount() {
+//      id(文章id/帖子id),type(1文章，2帖子)
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("id", webId);
+        requestParams.put("type", "1");
+        NurseAsyncHttpClient.get(CommunityNetConstant.GET_COMMENTS_COUNT, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (response != null) {
+//                    {
+//                        "status":"success",
+//                            "data":"1"
+//                    }
+                    try {
+                        String status = response.getString("status");
+                        if (status.equals("success")) {
+                            String data = response.getString("data");
+                            if (data != null && !data.equals("")) {
+                                commentCount = Long.valueOf(data);
+                                if(popchoice!=null){
+                                    popchoice.setCommentCount(commentCount);
+                                    popchoice.notifyDataSetChanged();
+                                    setListViewHeightBasedOnChildren(web_list);
+                                    tv_choice_num.setText(""+commentCount);
+                                }
+                                if (commentslist != null&&commentslist.size() >= commentCount) {
+                                    tv_more.setVisibility(View.GONE);
+                                } else {
+                                    tv_more.setVisibility(View.VISIBLE);//TODO
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
     /*
     开启子线程，获取网络数据
      */
@@ -704,9 +750,13 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
         if (compressBitmapToData(checkImageSize(thumbBmp),32) != null &&compressBitmapToData(checkImageSize(thumbBmp),32).length > 0){
             mediaObject.thumbData = compressBitmapToData(checkImageSize(thumbBmp),32);
         }else{
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
+            try{
+           bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
             // 设置 Bitmap 类型的图片到视频对象里         设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
             mediaObject.setThumbImage(bitmap);
+            }catch (OutOfMemoryError e){
+                e.printStackTrace();
+            }
         }
         mediaObject.actionUrl = NetBaseConstant.NET_WEB_VIEW +fndData.getObject_id().toString()+"&type=1";
         // 1. 初始化微博的分享消息
@@ -756,9 +806,13 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
         if (compressBitmapToData(checkImageSize(thumbBmp),32) != null &&compressBitmapToData(checkImageSize(thumbBmp),32).length > 0){
             msg.thumbData = compressBitmapToData(checkImageSize(thumbBmp),32);
         }else{
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
+            try{
+            bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
             // 设置 Bitmap 类型的图片到视频对象里         设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
             msg.setThumbImage(bitmap);
+            }catch (OutOfMemoryError e){
+                e.printStackTrace();
+            }
         }
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
@@ -776,8 +830,16 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             //点击返回按钮,finish()掉本页面，显示上一页
             case R.id.web_back:
-                unregisterReceiver(receiver);
-                News_WebView_study.this.finish();
+                if(bitmap != null && !bitmap.isRecycled()){
+                    // 回收并且置为null
+                    bitmap.recycle();
+                    bitmap = null;
+                }
+                finish();
+                break;
+            case R.id.tv_forum_details_comment_more:
+                pager = pager + 1;
+                new StudyRequest(mactivity, handler).GETrefcomments(webId, GETREFCOMMENTS,pager);
                 break;
             case R.id.wechat:
                 if (user.getUserid().length() <= 0) {
@@ -897,14 +959,34 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
     protected void onResume() {
         super.onResume();
         Log.e("onResume", "==============>+onResume");
+        StatService.onPageStart(this, "学习网页");
+        getCommentsCount();
         collect();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPageEnd(this, "学习网页");
+        if(bitmap != null && !bitmap.isRecycled()){
+            // 回收并且置为null
+            bitmap.recycle();
+            bitmap = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
     public void collect() {
         if (null != user.getUserid() && user.getUserid().length() > 0) {
             if (HttpConnect.isConnnected(mactivity)) {
                 new StudyRequest(mactivity, handler).CheckHadFavorite(user.getUserid(), webId, "3", GETSTHECURRENT);
                 new StudyRequest(mactivity, handler).CheckHadLike(user.getUserid(), webId, "1", GETLIKE);
-                new StudyRequest(mactivity, handler).GETrefcomments(webId, GETREFCOMMENTS);
+                new StudyRequest(mactivity, handler).GETrefcomments(webId, GETREFCOMMENTS, pager);
 //                new StudyRequest(mactivity, handler).getNewsListAbout(titletype, FIRSTPAGELIST_ABOUT);
             } else {
                 Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
@@ -914,52 +996,7 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
             webview_like.setBackgroundResource(R.mipmap.img_like_nol);
         }
     }
-    private void showPopupMenu() {
-        View layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_share_popupmenu, null);
-        //初始化popwindow
-        final PopupWindow popupWindow = new PopupWindow(layout, FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        //设置弹出位置
-        int[] location = new int[2];
-        webview_ff.getLocationOnScreen(location);
-        popupWindow.showAsDropDown(webview_ff);
-        TextView tv_share_pyq = (TextView) layout.findViewById(R.id.tv_share_pyq);
-        TextView tv_share_hy = (TextView) layout.findViewById(R.id.tv_share_hy);
-        TextView tv_share_wb = (TextView) layout.findViewById(R.id.tv_share_wb);
-        tv_share_pyq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wechatShare(1);
-                popupWindow.dismiss();
-            }
-        });
-        tv_share_hy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wechatShare(0);
-                popupWindow.dismiss();
-            }
-        });
-        tv_share_wb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMultiMessage(isChecked);
-                popupWindow.dismiss();
-            }
-        });
-        final WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = 0.5f;
-        getWindow().setAttributes(lp);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                lp.alpha = 1.0f;
-                getWindow().setAttributes(lp);
-            }
-        });
-    }
+
     /*
       解决scrollview下listview显示不全
     */
@@ -992,8 +1029,8 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("是否点击查看")
-                    .setCancelable(false)
+            builder.setTitle("新通知")
+                    .setMessage(newstypebean.getPost_title())
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Bundle bundle = new Bundle();
@@ -1009,10 +1046,7 @@ public class News_WebView_study extends AppCompatActivity implements View.OnClic
                             dialog.cancel();
                         }
                     }).create().show();
-            context.unregisterReceiver(this);
-//            AlertDialog alert = builder.create();
-//            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-//            alert.show();
+
         }
     }
     //网络下载图片

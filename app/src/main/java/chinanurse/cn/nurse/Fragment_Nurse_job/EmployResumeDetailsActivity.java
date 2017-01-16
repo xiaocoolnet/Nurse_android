@@ -2,6 +2,7 @@ package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -72,6 +74,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
     private DisplayImageOptions options;
     private Boolean isname = true;
     private Boolean isnameone = true;
+    private ProgressDialog dialogpgd;
     /**
      * 推送消息发送广播
      */
@@ -83,21 +86,25 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case INDERVIEW:
-                    if (msg.obj != null){
-                        result = (String) msg.obj;
-                        try {
-                            JSONObject json = new JSONObject(result);
-                            if ("success".equals(json.optString("status"))){
-                                Toast.makeText(getApplicationContext(),"邀请成功",Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getApplicationContext(),"邀请失败",Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
+//                case INDERVIEW:
+//                    if (msg.obj != null){
+//                        result = (String) msg.obj;
+//                        try {
+//                            JSONObject json = new JSONObject(result);
+//                            if ("success".equals(json.optString("status"))){
+//
+//                                Toast.makeText(getApplicationContext(),"邀请成功",Toast.LENGTH_SHORT).show();
+//                            }else{
+//                                Toast.makeText(getApplicationContext(),"邀请失败",Toast.LENGTH_SHORT).show();
+//                            }
+//                            dialogpgd.dismiss();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }else{
+//                        dialogpgd.dismiss();
+//                    }
+//                    break;
                 case GETMYPUBLISHJOB:
                     result = (String) msg.obj;
                     talentlist.clear();
@@ -108,6 +115,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                     for (int i = 0; i < talentlist.size(); i++) {
                         ralent[i] = talentlist.get(i).getJobtype();
                     }
+                    dialogpgd.dismiss();
 //                    final String[] sexchoose = new String[]{"女", "男"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(EmployResumeDetailsActivity.this);
                     builder.setTitle("请选择");
@@ -117,7 +125,15 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
 
                         public void onClick(DialogInterface dialog, int which) {
                             jobid = talentlist.get(which).getId();
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             if (HttpConnect.isConnnected(getApplicationContext())) {
+                                dialogpgd.setMessage("正在邀请...");
+                                dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                dialogpgd.show();
                                 new StudyRequest(getApplicationContext(), handler).InviteJob_judge(mine_recruit.getUserid(), user.getUserid(), jobid, INDERVIEWAPPLY);
 //                            new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
                                 //userid个人  companyid企业   jobid招聘信息
@@ -127,7 +143,12 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton("取消", null);
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
                     builder.show();
                     break;
                 case INDERVIEWAPPLY:
@@ -139,6 +160,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                                 String data = json .getString("data");
                                 if ("1".equals(data)){
                                     Toast.makeText(getApplicationContext(),"您已经邀请过该用户",Toast.LENGTH_SHORT).show();
+                                    dialogpgd.dismiss();
                                 }else if ("0".equals(data)){
                                     if (HttpConnect.isConnnected(getApplicationContext())) {
                                         new StudyRequest(getApplicationContext(), handler).InviteJob(user.getUserid(), jobid, mine_recruit.getUserid(),JBOPOST);
@@ -169,9 +191,12 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                             }else{
                                 Toast.makeText(getApplicationContext(), "邀请失败", Toast.LENGTH_SHORT).show();
                             }
+                            dialogpgd.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }else{
+                        dialogpgd.dismiss();
                     }
                     break;
             }
@@ -198,9 +223,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
         setText();
         // 显示图片的配置
         options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.img_head_nor).showImageOnFail(R.mipmap.img_head_nor).cacheInMemory(true).cacheOnDisc(true).build();
-        receiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter("com.USER_ACTION");
-        registerReceiver(receiver, filter);
+
     }
 
     private void initDisPlay() {
@@ -213,7 +236,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
         if (mine_recruit.getAvatar().length() > 0&&null != mine_recruit.getAvatar()){//头像
             imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + mine_recruit.getAvatar(), ivPic, options);
         }else{
-            new HeadPicture().getHeadPicture(ivPic);
+            ivPic.setBackground(getResources().getDrawable(R.mipmap.headlogo));
         }
         if (mine_recruit.getSex().length() > 0&&null != mine_recruit.getSex()){
             if ("0".equals(mine_recruit.getSex())){
@@ -339,6 +362,10 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
     protected void onResume() {
         super.onResume();
         Log.i("onResume", "----------->onResume");
+        StatService.onPageStart(this, "公司招聘信息");
+        receiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter("com.USER_ACTION");
+        registerReceiver(receiver, filter);
         workview();
     }
 
@@ -354,6 +381,7 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
     }
     private void initView() {
         btnBack = (RelativeLayout) findViewById(R.id.btn_back);
+        dialogpgd=new ProgressDialog(this, android.app.AlertDialog.THEME_HOLO_LIGHT);
         btnBack.setOnClickListener(this);
         ivPic = (ImageView) findViewById(R.id.nurse_employ_resume_pic);
         tvName = (TextView) findViewById(R.id.nurse_employ_resume_name);//名字
@@ -400,6 +428,9 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                             Toast.makeText(getApplicationContext(), "您是个人用户，不能邀请面试", Toast.LENGTH_SHORT).show();
                         } else if ("2".equals(user.getUsertype())) {
                             if (HttpConnect.isConnnected(getApplicationContext())) {
+                                dialogpgd.setMessage("正在获取您的职位列表..");
+                                dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                dialogpgd.show();
                                 new StudyRequest(getApplicationContext(), handler).getMyPublishJobList(user.getUserid(), GETMYPUBLISHJOB);
 //                            new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
                                 //userid个人  companyid企业   jobid招聘信息
@@ -421,10 +452,10 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
         @Override
         public void onReceive(final Context context, Intent intent) {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
-
+            String title = intent.getStringExtra("title");
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
+                    .setMessage(title)
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -441,9 +472,18 @@ public class EmployResumeDetailsActivity extends Activity implements View.OnClic
                             dialog.cancel();
                         }
                     }).create().show();
+            context.unregisterReceiver(this);
 //            AlertDialog alert = builder.create();
 //            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //            alert.show();
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "公司招聘信息");
     }
 }

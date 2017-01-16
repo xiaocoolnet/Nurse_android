@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="chinanurse.cn.nurse"  android:versionCode="@integer/versioncode" android:versionName="@string/versionname">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="chinanurse.cn.nurse"
+    android:versionCode="@integer/versioncode"
+    android:versionName="@string/versionname">
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!--弹出框-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"></uses-permission>
     <!--Android 6.0版本可去除，用于选举信息（通道复用）的同步-->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-     <!-- 读写sdk权限
-  -->
+    <!-- 读写sdk权限
+ -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!--小米通道相关权限 -->
     <permission
         android:name="chinanurse.cn.nurse.permission.MIPUSH_RECEIVE"
-        android:protectionLevel="signatureOrSystem"/>
-    <uses-permission android:name="chinanurse.cn.nurse.permission.MIPUSH_RECEIVE"/>
+        android:protectionLevel="signatureOrSystem" />
+    <uses-permission android:name="chinanurse.cn.nurse.permission.MIPUSH_RECEIVE" />
     <!--网络库使用，当网络操作时需要确保事务完成不被杀掉-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-   <!--  拍照要用到的权限
-  -->
+    <!--  拍照要用到的权限
+   -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!--<code class="code">-->
@@ -27,7 +31,7 @@
     <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-<!--</code>-->
+    <!--</code>-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--选举使用，当应用有删除或者更新时需要重新选举，复用推送通道-->
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
@@ -41,132 +45,294 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 允许task重排序 -->
     <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <!-- 用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <!-- 访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
     <application
         android:name=".AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
+        android:persistent="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-        <meta-data android:name="com.alibaba.app.appkey" android:value="23442294"/> <!-- 请填写你自己的- appKey -->
-        <meta-data android:name="com.alibaba.app.appsecret" android:value="0f9e9e29d7e6c6d6792183658370b55b"/> <!-- 请填写你自己的appSecret -->
-    <activity android:name=".SplashActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTask">
-    <intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-    <category android:name="android.intent.category.LAUNCHER" />
-</intent-filter>
-</activity>
-    <activity android:name=".MainActivity" android:screenOrientation="portrait" />
-    <activity android:name=".LoginActivity" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.Myinfo" android:screenOrientation="portrait" />
-    - <!-- <activity
-  -->
-    - <!-- android:name=".MyA"
-  -->
-    - <!-- android:screenOrientation="portrait" />
-  -->
-    <activity android:name=".Fragment_Nurse_mine.Fans" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_Abroad.Abroad_Firstpage.Abroad_first_abroad" android:screenOrientation="portrait" />
-    <activity android:name=".Syudyfragment.DailyPractice" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.MyPost.Mypost" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.mine_info.MyInFo_Update" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.Mine_study_collect" android:screenOrientation="portrait" />
-    <activity android:name=".Syudyfragment.DailyPracticeActivity" android:screenOrientation="portrait" />
-    <activity android:name=".Syudyfragment.QuestionActivity" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.work.Mine_Recruit_Second_Detail_work" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_Study_News.goman.Goman_Topic_Bank" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_job.Add_EmployWork_Fragment" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_job.Add_EmployTalent_Fragment" android:screenOrientation="portrait" />
-    <activity android:name=".WebView.News_WebView" android:screenOrientation="portrait" />
-    <activity android:name=".WebView.News_WebView_study" android:screenOrientation="portrait" />
-    <activity android:name=".WebView.News_WebView_collect" android:screenOrientation="portrait" />
-    <activity android:name=".WebView.News_WebView_url" android:screenOrientation="portrait" />
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="23442294" /> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="0f9e9e29d7e6c6d6792183658370b55b" /> <!-- 请填写你自己的appSecret -->
+        <meta-data
+            android:name="BaiduMobAd_STAT_ID"
+            android:value="wexpBvRcB5hmEUioCFdrKiuL4dkeuT0T" /> <!-- abcd1234 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Ke1HimxOxfDe7ujdsbCWUXjo9eoQteH0" />       //key:开发者申请的Key
 
-        <!--2016-10-26   于意-->
-        <activity android:name=".Fragment_Nurse_job.EmployDetailsActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTask" />
-        <activity android:name=".Fragment_Nurse_job.EmployResumeDetailsActivity" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait" android:launchMode="singleTask"/>
-        <activity android:name=".Fragment_Nurse_mine.Mine_Post_News" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait" android:launchMode="singleTask"/>
-        <activity android:name=".Fragment_Nurse_job.IdentityFragment_ACTIVITY" android:configChanges="orientation|keyboardHidden" android:screenOrientation="portrait" android:launchMode="singleTask"/>
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Myinfo"
+            android:screenOrientation="portrait" />
+
 
         - <!-- <activity
   -->
-    - <!-- android:name=".MinePage.MyPost.Mypost"
+        - <!-- android:name=".MyA"
   -->
-    - <!-- android:screenOrientation="portrait" />
+        - <!-- android:screenOrientation="portrait" />
   -->
-    - <!-- <activity
+        <activity
+            android:name=".Fragment_Mine.Fans"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Abroad.Abroad_Firstpage.Abroad_first_abroad"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Syudyfragment.DailyPractice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.MyPost.Mypost"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.mine_info.MyInFo_Update"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.Mine_study_collect"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Syudyfragment.DailyPracticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Syudyfragment.QuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.work.Mine_Recruit_Second_Detail_work"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Study.goman.Goman_Topic_Bank"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Nurse_job.Add_EmployWork_Fragment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Nurse_job.Add_EmployTalent_Fragment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_News.activity.NewsWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebView.News_WebView_study"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebView.News_WebView_collect"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebView.News_WebView_url"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Study.goman.Goman_topic_second"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Study.goman.Goman_topic_Competency_fragment"
+            android:screenOrientation="portrait" />
+
+        <!--2016-10-26   于意-->
+        <activity
+            android:name=".Fragment_Nurse_job.EmployDetailsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Nurse_job.EmployResumeDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mine_Post_News"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Nurse_job.IdentityFragment_ACTIVITY"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        - <!-- <activity
   -->
-    - <!-- android:name=".MinePage.Myrecruit"
+        - <!-- android:name=".MinePage.MyPost.Mypost"
   -->
-    - <!-- android:screenOrientation="portrait" />
+        - <!-- android:screenOrientation="portrait" />
   -->
-    <activity android:name=".publicall.SecondPage" android:screenOrientation="portrait" />
-        <activity android:name=".wxapi.WXEntryActivity" android:exported="true" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    - <!--              ATTENTION: This was auto-generated to add Google Play services to your project for
+        - <!-- <activity
+  -->
+        - <!-- android:name=".MinePage.Myrecruit"
+  -->
+        - <!-- android:screenOrientation="portrait" />
+  -->
+        <activity
+            android:name=".publicall.SecondPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        - <!--              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         
   -->
-    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-    <activity android:name=".Fragment_Nurse_Study_News.Paper_Protect" />
-    <activity android:name=".Fragment_Nurse_Study_News.Exam_Canon" />
-    <activity android:name=".Fragment_Nurse_Study_News.Nursing_Operation" />
-    <activity android:name=".Fragment_Nurse_Study_News.Clinic_Nurse" />
-    <activity android:name=".Fragment_Nurse_Study_News.gobroad.GoAbroad_main" />
-    <activity android:name=".Syudyfragment.Online_Test_Activity" />
-    - <intent-filter>
-    <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_RESP_ACTIVITY" />
-    <category android:name="android.intent.category.DEFAULT" />
-</intent-filter>
-    - <!--  必须注册在微博授权，分享微博时候用到
-  -->
-    <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" android:configChanges="keyboardHidden|orientation" android:windowSoftInputMode="adjustResize" android:exported="false" />
-    - <!--  新的
-  -->
-    <activity android:name=".new_Activity.Question_Activity"  android:screenOrientation="portrait"/>
-    <activity android:name=".WebView.GoAbroad_chest_WebView" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.Mine_Study" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.Mycollect"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.Myrecruit"  android:screenOrientation="portrait"/>
-    <activity android:name=".NurseFragment.Write_Community_Post" android:screenOrientation="portrait" />
-    <activity android:name=".NurseFragment.Write_Community_Show" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.Mine_Recruit_Frist_Details" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.Mine_Recruit_Second_Detail"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.MyPost.Mine_Post_Detail"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.My_News"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.Question_Over"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.error.MyCollect_Question_Activity_mystudy"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.Question_Error"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.Question_Collect"  android:screenOrientation="portrait"/>
-    <activity android:name=".Fragment_Nurse_mine.my_collect_study.over.MyCollect_Question_Activity_over"  android:screenOrientation="portrait"/>
-  <activity android:name=".MinePage.Nuerse_score_money" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.My_personal_recruit"  android:screenOrientation="portrait"/>
-  <activity android:name=".MinePage.Nurse_score_sort" android:screenOrientation="portrait" />
-    <activity android:name=".Fragment_Nurse_mine.mine_collext.MyCollect_Question_Activity"  android:screenOrientation="portrait"/>
-  <activity android:name=".loginragment.Navigation_register"  android:screenOrientation="portrait"/>
-  <!--QQ-->
-  <activity
-      android:name="com.tencent.tauth.AuthActivity"
-      android:noHistory="true"
-      android:launchMode="singleTask" >
-    <intent-filter>
-      <action android:name="android.intent.action.VIEW" />
-      <category android:name="android.intent.category.DEFAULT" />
-      <category android:name="android.intent.category.BROWSABLE" />
-      <data android:scheme="tencent1105552541" />
-    </intent-filter>
-  </activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-  <activity android:name="com.tencent.connect.common.AssistActivity"
-      android:theme="@android:style/Theme.Translucent.NoTitleBar"
-      android:configChanges="orientation|keyboardHidden|screenSize"
-      />
+        <activity android:name=".Fragment_Study.Paper_Protect" />
+        <activity android:name=".Fragment_Study.Nursing_Operation" />
+        <activity android:name=".Fragment_Study.Clinic_Nurse" />
+        <activity android:name=".Fragment_Study.gobroad.GoAbroad_main" />
+        <activity android:name=".Syudyfragment.Online_Test_Activity" />
+        -
+        <intent-filter>
+            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_RESP_ACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        - <!--  必须注册在微博授权，分享微博时候用到
+  -->
+        <activity
+            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        - <!--  新的
+  -->
+        <activity
+            android:name=".new_Activity.Question_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebView.GoAbroad_chest_WebView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mine_Study"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mycollect"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Myrecruit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NurseFragment.Write_Community_Post"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NurseFragment.Write_Community_Show"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mine_Recruit_Frist_Details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mine_Recruit_Second_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.MyPost.Mine_Post_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.My_News"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.Question_Over"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.error.MyCollect_Question_Activity_mystudy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.Question_Error"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.Question_Collect"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.my_collect_study.over.MyCollect_Question_Activity_over"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MinePage.Nuerse_score_money"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.My_personal_recruit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MinePage.Nurse_score_sort"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.mine_collext.MyCollect_Question_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".loginragment.Navigation_register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Study.example.Exam_second_canon"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Study.Example_Canon"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Fragment_Mine.Mine_Post_Newslist"
+            android:screenOrientation="portrait" />
+        <!--QQ-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105552541" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- 通道保持服务 -->
-        <service android:name="com.alibaba.sdk.android.push.ChannelService"
-            android:exported="true" android:process=":channel">
+        <service
+            android:name="com.alibaba.sdk.android.push.ChannelService"
+            android:exported="true"
+            android:process=":channel">
             <intent-filter>
-                <action android:name="com.taobao.accs.intent.action.SERVICE"/>
+                <action android:name="com.taobao.accs.intent.action.SERVICE" />
             </intent-filter>
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.PING_V4" />
@@ -174,7 +340,8 @@
             </intent-filter>
         </service>
         <!-- 消息接收服务 -->
-        <service android:name="com.alibaba.sdk.android.push.MsgService"
+        <service
+            android:name="com.alibaba.sdk.android.push.MsgService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
@@ -184,17 +351,19 @@
             </intent-filter>
         </service>
         <!-- 消息接收增强服务（可提高通知/消息达到率）-->
-        <service android:name="com.alibaba.sdk.android.push.channel.TaobaoRecvService" android:exported="true">
+        <service
+            android:name="com.alibaba.sdk.android.push.channel.TaobaoRecvService"
+            android:exported="true">
             <intent-filter>
-                <action android:name="org.android.agoo.client.MessageReceiverService"/>
+                <action android:name="org.android.agoo.client.MessageReceiverService" />
             </intent-filter>
         </service>
-        <receiver android:name=".Fragment_Nurse_mine.mine_news.MyMessageReceiver">
+        <receiver android:name=".Fragment_Mine.mine_news.MyMessageReceiver">
             <intent-filter>
-                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED"/>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED"/>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.taobao.accs.intent.action.COMMAND" />
@@ -212,18 +381,29 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
         <!-- 小米通道官方配置 -->
-        <service android:name="com.xiaomi.push.service.XMPushService" android:enabled="true" android:process=":channel" />
-        <service android:name="com.xiaomi.mipush.sdk.PushMessageHandler" android:enabled="true" android:exported="true" />
-        <service android:enabled="true" android:name="com.xiaomi.mipush.sdk.MessageHandleService" />
-        <receiver android:name="com.alibaba.sdk.android.push.MiPushBroadcastReceiver" android:exported="true" >
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:process=":channel" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" />
+
+        <receiver
+            android:name="com.alibaba.sdk.android.push.MiPushBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
             </intent-filter>
@@ -234,13 +414,18 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver" android:exported="true" >
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.xiaomi.push.service.receivers.PingReceiver" android:exported="false" android:process=":channel" >
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+            android:exported="false"
+            android:process=":channel">
             <intent-filter>
                 <action android:name="com.xiaomi.push.PING_TIMER" />
             </intent-filter>
@@ -248,12 +433,34 @@
         <!-- 华为通道官方配置 -->
         <receiver android:name="com.alibaba.sdk.android.push.HuaWeiReceiver">
             <intent-filter>
-                <action android:name="com.huawei.android.push.intent.REGISTRATION"/>
-                <action android:name="com.huawei.android.push.intent.RECEIVE"/>
-                <action android:name="com.huawei.intent.action.PUSH"/>
-                <action android:name="com.huawei.intent.action.PUSH_STATE"/>
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <action android:name="com.huawei.intent.action.PUSH" />
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
             </intent-filter>
         </receiver>
+        <!--圈子-->
+        <activity android:name=".Fragment_Nurse.activity.PublishForumActivity" />
+        <activity android:name=".Fragment_Nurse.activity.release.MultiImageSelectorActivity" />
+        <activity android:name=".Fragment_Nurse.activity.ChoicePublishCommunityActivity" />
+        <activity android:name=".Fragment_Nurse.activity.ForumDetailsActivity" />
+        <activity android:name=".Fragment_Nurse.activity.ImageCycleActivity" />
+        <activity android:name=".Fragment_Nurse.activity.CommunityListActivity" />
+        <activity android:name=".Fragment_Nurse.activity.CommunityDetailActivity" />
+        <activity android:name=".Fragment_Nurse.activity.CommunityParticularsActivity" />
+        <activity android:name=".Fragment_Nurse.activity.PersonalHomePageActivity" />
+        <activity android:name=".Fragment_Nurse.activity.ApplyCommunityActivity" />
+        <activity android:name=".Fragment_Nurse.activity.TopOrBestActivity" />
+
+        <activity android:name=".Fragment_Nurse.activity.MyForumActivity" />
+        <activity android:name=".Fragment_Nurse.activity.MyAuthenticationActivity" />
+        <activity android:name=".Fragment_Nurse.activity.SearchForumActivity" />
+        <activity android:name=".Fragment_Nurse.activity.MessageActivity"/>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
     </application>
 
 </manifest>

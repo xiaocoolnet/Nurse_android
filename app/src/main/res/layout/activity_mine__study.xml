@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".Fragment_Nurse_mine.Mine_Study">
+    tools:context=".Fragment_Mine.Mine_Study">
 
 
     <RelativeLayout style="@style/back_title_RelativeLayout">

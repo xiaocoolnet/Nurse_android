@@ -99,7 +99,7 @@ public class NurseEmployTalentAdapter extends BaseAdapter  {
         interview= (LinearLayout) convertView.findViewById(R.id.Invited_to_the_interview);
         all_voerical = (LinearLayout) convertView.findViewById(R.id.all_voerical);
         // 显示图片的配置
-        options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.nurse_ex_logo).showImageOnFail(R.mipmap.nurse_ex_logo).cacheInMemory(true).cacheOnDisc(true).build();
+        options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.headlogo).showImageOnFail(R.mipmap.headlogo).cacheInMemory(true).cacheOnDisc(true).build();
 //        imageLoader.displayImage(NetBaseConstant.NET_HOST + talentDataList.get(position).getAvatar(),
 //                ivPic, displayImage);
         if (!"".equals(talentDataList.get(position).getAvatar())&&talentDataList.get(position).getAvatar() != null&&talentDataList.get(position).getAvatar().length() > 0){

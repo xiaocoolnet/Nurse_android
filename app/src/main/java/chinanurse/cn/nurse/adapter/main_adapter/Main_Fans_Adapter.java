@@ -64,7 +64,6 @@ public class Main_Fans_Adapter extends BaseAdapter{
                     mainfnas.img_head = (RoudImage) convertView.findViewById(R.id.img_head);
                     mainfnas.name = (TextView) convertView.findViewById(R.id.name);
                     mainfnas.level = (TextView) convertView.findViewById(R.id.level);
-                    mainfnas.ril_fans = (RelativeLayout) convertView.findViewById(R.id.ril_fans);
                     // 显示图片的配置
                     options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.img_head_nor).showImageOnFail(R.mipmap.img_head_nor).cacheInMemory(true).cacheOnDisc(true).build();
                     break;
@@ -84,12 +83,6 @@ public class Main_Fans_Adapter extends BaseAdapter{
                 }
                 mainfnas.name.setText(minefanslist.get(position).getName());
                 mainfnas.level.setText(minefanslist.get(position).getLevel());
-                mainfnas.ril_fans.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //����
-                    }
-                });
                 break;
         }
         return convertView;
@@ -97,6 +90,5 @@ public class Main_Fans_Adapter extends BaseAdapter{
     class MainFans{
         private RoudImage img_head;
         private TextView name,level;
-        private RelativeLayout ril_fans;
     }
 }

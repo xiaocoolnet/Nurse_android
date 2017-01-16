@@ -15,13 +15,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -35,7 +35,7 @@ import java.util.Date;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.WebView.News_WebView;
+import chinanurse.cn.nurse.Fragment_News.activity.NewsWebViewActivity;
 import chinanurse.cn.nurse.WebView.News_WebView_url;
 import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.bean.News_list_type;
@@ -106,7 +106,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                                 stopRefresh();
                             }else{
                                 if ("end".equals(data)){
-                                    Toast.makeText(mactivity,"无更新数据",Toast.LENGTH_SHORT).show();
                                     stopRefresh();
                                 }
                             }
@@ -164,7 +163,6 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 if (fndlist.size()%20 != 0){
                     stopRefresh();
-                    Toast.makeText(mactivity,"无更新数据",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 page = page+1;
@@ -195,7 +193,7 @@ public class SecondPage extends AppCompatActivity implements View.OnClickListene
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fndinfo", fndData);
                 bundle.putString("position", String.valueOf(position));
-                Intent intent = new Intent(mactivity, News_WebView.class);
+                Intent intent = new Intent(mactivity, NewsWebViewActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
             }
@@ -291,10 +289,10 @@ private void getnewslistother() {
         @Override
         public void onReceive(final Context context, Intent intent) {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
-
+            String title = intent.getStringExtra("title");
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
+                    .setMessage(title)
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -315,5 +313,18 @@ private void getnewslistother() {
 //            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //            alert.show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onPageStart(this, "小标题");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "小标题");
     }
 }

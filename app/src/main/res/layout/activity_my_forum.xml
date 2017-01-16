@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_48">
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_my_forum_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_fragment_my_forum_back"
+                android:layout_width="@dimen/activity_size_9"
+                android:layout_height="@dimen/activity_size_17"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_7"
+                android:layout_toRightOf="@id/iv_fragment_my_forum_back"
+                android:text="@string/web_back_text"
+                android:textColor="@color/indicator"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的帖子"
+            android:textColor="@color/indicator"
+            android:textSize="@dimen/text_size_18" />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/indicator"></View>
+    </RelativeLayout>
+    <!--头布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_my_forum_forum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="帖子"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/iv_my_forum_forum_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/purple" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_my_forum_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="评论"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/iv_my_forum_content_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/gray2"
+        />
+
+    <LinearLayout
+        android:id="@+id/my_forum_replace_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+</LinearLayout>

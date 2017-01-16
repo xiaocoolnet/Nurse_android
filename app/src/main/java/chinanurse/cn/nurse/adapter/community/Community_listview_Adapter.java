@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,6 @@ import chinanurse.cn.nurse.NurseFragment.Write_Community_Show;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
 import chinanurse.cn.nurse.bean.Nuser_community;
-import chinanurse.cn.nurse.imageload.MyApplication;
 
 /**
  * Created by Administrator on 2016/7/13.

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
@@ -28,10 +27,11 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import chinanurse.cn.nurse.Fragment_Nurse.activity.ForumDetailsActivity;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.WebView.News_WebView;
+import chinanurse.cn.nurse.Fragment_News.activity.NewsWebViewActivity;
 import chinanurse.cn.nurse.bean.UserBean;
 
 /**
@@ -39,7 +39,7 @@ import chinanurse.cn.nurse.bean.UserBean;
  */
 public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClickListener,View.OnFocusChangeListener{
     private static final int SENDCOMMENT = 1;
-    private News_WebView mactivity;
+    private NewsWebViewActivity mactivity;
     private UserBean user;
     private EditText pop_et_choice;
     private Button pop_bt_send_choice;
@@ -67,6 +67,7 @@ public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClick
                                 tv_choic.setText("");
                                 pop_et_choice.setText("");
                                 Toast.makeText(mactivity,"发表成功",Toast.LENGTH_SHORT).show();
+                                pop_bt_send_choice.setClickable(true);
                                 if (jsondata.getString("score") != null &&jsondata.getString("score").length() > 0){
                                     View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
                                     final Dialog dialog = new AlertDialog.Builder(mactivity).create();
@@ -89,6 +90,7 @@ public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClick
                                     }).start();
                                 }
 
+                                mactivity.pager=1;
                                 mactivity.collect();
                             }else{
                                 Toast.makeText(mactivity,"发表失败",Toast.LENGTH_SHORT).show();
@@ -103,7 +105,7 @@ public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClick
         }
     };
 
-    public Pop_EditText(News_WebView mactivity) {
+    public Pop_EditText(NewsWebViewActivity mactivity) {
         this.mactivity = mactivity;
         user = new UserBean(mactivity);
         View view = LayoutInflater.from(mactivity).inflate(R.layout.pop_edittext, null);
@@ -135,6 +137,7 @@ public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClick
         popupWindow.setOnDismissListener(this);// 当popWindow消失时的监听
 
     }
+
     private String getet(){
         Log.i("getet3","----------------->"+pop_et_choice.getText().toString());
         return pop_et_choice.getText().toString();
@@ -198,6 +201,7 @@ public class Pop_EditText implements PopupWindow.OnDismissListener, View.OnClick
                             Toast.makeText(mactivity,"评论内容不能为空!",Toast.LENGTH_SHORT).show();
                         }else {
                             if (HttpConnect.isConnnected(mactivity)) {
+                                pop_bt_send_choice.setClickable(false);
                                 new StudyRequest(mactivity, handler).ADDCOMMENT(user.getUserid(), objectid, getet(), "1", "", SENDCOMMENT);
                             } else {
                                 Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();

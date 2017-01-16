@@ -1,6 +1,7 @@
 package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import chinanurse.cn.nurse.FragmentTag;
-import chinanurse.cn.nurse.Fragment_Main.SecondFragment;
+import chinanurse.cn.nurse.Fragment_Nurse.EmployFragment;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.Bean_list;
 import chinanurse.cn.nurse.Fragment_Nurse_job.bean.Talent_work_bean;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
@@ -43,7 +45,6 @@ import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
 import chinanurse.cn.nurse.bean.NurseEmployTalentBean;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.bean.mine_main_bean.Company_news_beans;
-import chinanurse.cn.nurse.ui.HeadPicture;
 
 /**
  * Created by wzh on 2016/6/26.
@@ -54,6 +55,7 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
     private static final int INDERVIEWAPPLY = 3;
     private static final int JBOPOST = 4;
     private static final int GETCOMANYCERTIFY = 5;
+    private static final int GETCOMANYCERTIFYONE = 6;
     private RelativeLayout btnBack;
     private static final int INDERVIEW = 1;
     private String companyid,userid,avatar,type;
@@ -73,31 +75,18 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
     private LinearLayout linear_text_phone;
     private View mView;
     private DisplayImageOptions options;
-    private SecondFragment cf;
+    private EmployFragment cf;
     private Company_news_beans.DataBean combean;
     private Boolean isname = true;
     private Boolean isnameone = true;
+    private ProgressDialog dialogpgd;
+    private MainActivity activity;
 
 
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case INDERVIEW:
-                    if (msg.obj != null){
-                        result = (String) msg.obj;
-                        try {
-                            JSONObject json = new JSONObject(result);
-                            if ("success".equals(json.optString("status"))){
-                                Toast.makeText(getActivity(),"邀请成功",Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getActivity(),"邀请失败",Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
                 case GETMYPUBLISHJOB:
                     result = (String) msg.obj;
                     talentlist.clear();
@@ -108,8 +97,7 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                     for (int i = 0; i < talentlist.size(); i++) {
                         ralent[i] = talentlist.get(i).getJobtype();
                     }
-//                    final String[] sexchoose = new String[]{"女", "男"};
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EmployResumeDetailsfragment.this.getActivity());
                     builder.setTitle("请选择");
                     builder.setSingleChoiceItems(ralent, 0, new DialogInterface.OnClickListener() {
 
@@ -117,7 +105,15 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
 
                         public void onClick(DialogInterface dialog, int which) {
                             jobid = talentlist.get(which).getId();
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             if (HttpConnect.isConnnected(getActivity())) {
+                                dialogpgd.setMessage("正在邀请...");
+                                dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                dialogpgd.show();
                                 new StudyRequest(getActivity(), handler).InviteJob_judge(mine_recruit.getUserid(), user.getUserid(), jobid, INDERVIEWAPPLY);
 //                            new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
                                 //userid个人  companyid企业   jobid招聘信息
@@ -127,7 +123,12 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton("取消", null);
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
                     builder.show();
                     break;
                 case INDERVIEWAPPLY:
@@ -183,20 +184,20 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                             if ("success".equals(json.optString("status"))){
                                 JSONObject item =  new JSONObject(data);
                                 combean = new Company_news_beans.DataBean();
-                                combean.setId(item.getString("id"));
-                                combean.setUserid(item.getString("userid"));
-                                combean.setCreate_time(item.getString("create_time"));
-                                combean.setCompanyname(item.getString("companyname"));
-                                combean.setCompanyinfo(item.getString("companyinfo"));
-                                combean.setLinkman(item.getString("linkman"));
-                                combean.setPhone(item.getString("phone"));
-                                combean.setEmail(item.getString("email"));
-                                combean.setLicense(item.getString("license"));
                                 combean.setStatus(item.getString("status"));
                                 if (!"".equals(item.getString("status"))&&item.getString("status") != null){
                                     if ("1".equals(item.getString("status"))){
                                         linear_text_phone.setVisibility(View.GONE);
                                         linear_text_phone_name.setVisibility(View.VISIBLE);
+                                        combean.setId(item.getString("id"));
+                                        combean.setUserid(item.getString("userid"));
+                                        combean.setCreate_time(item.getString("create_time"));
+                                        combean.setCompanyname(item.getString("companyname"));
+                                        combean.setCompanyinfo(item.getString("companyinfo"));
+                                        combean.setLinkman(item.getString("linkman"));
+                                        combean.setPhone(item.getString("phone"));
+                                        combean.setEmail(item.getString("email"));
+                                        combean.setLicense(item.getString("license"));
                                         if (mine_recruit.getPhone().length() > 0 && null != mine_recruit.getPhone()) {
                                             tvPhone.setText(mine_recruit.getPhone() + "");
                                         } else {
@@ -222,6 +223,53 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                                                         dialog.cancel();
                                                     }
                                                 }).create().show();
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+
+                    }
+                    break;
+                case GETCOMANYCERTIFYONE:
+                    if (msg.obj != null){
+                        String result = (String) msg.obj;
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            String data = json.getString("data");
+                            if ("success".equals(json.optString("status"))){
+                                JSONObject item =  new JSONObject(data);
+                                combean = new Company_news_beans.DataBean();
+                                combean.setStatus(item.getString("status"));
+                                if (!"".equals(item.getString("status"))&&item.getString("status") != null){
+                                    if ("1".equals(item.getString("status"))){
+                                        linear_text_phone.setVisibility(View.GONE);
+                                        linear_text_phone_name.setVisibility(View.VISIBLE);
+                                        combean.setId(item.getString("id"));
+                                        combean.setUserid(item.getString("userid"));
+                                        combean.setCreate_time(item.getString("create_time"));
+                                        combean.setCompanyname(item.getString("companyname"));
+                                        combean.setCompanyinfo(item.getString("companyinfo"));
+                                        combean.setLinkman(item.getString("linkman"));
+                                        combean.setPhone(item.getString("phone"));
+                                        combean.setEmail(item.getString("email"));
+                                        combean.setLicense(item.getString("license"));
+                                        if (mine_recruit.getPhone().length() > 0 && null != mine_recruit.getPhone()) {
+                                            tvPhone.setText(mine_recruit.getPhone() + "");
+                                        } else {
+                                            tvPhone.setText("无");
+                                        }
+                                        if (mine_recruit.getEmail().length() > 0 && null != mine_recruit.getEmail()) {
+                                            tvEmail.setText(mine_recruit.getEmail() + "");
+                                        } else {
+                                            tvEmail.setText("无");
+                                        }
+                                    }else {
+                                        linear_text_phone.setVisibility(View.VISIBLE);
+                                        linear_text_phone_name.setVisibility(View.GONE);
+                                        employ_tv_contact_gone.setOnClickListener(EmployResumeDetailsfragment.this);
                                     }
                                 }
                             }
@@ -272,7 +320,7 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
         if (mine_recruit.getAvatar().length() > 0&&null != mine_recruit.getAvatar()){//头像
             imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + mine_recruit.getAvatar(), ivPic, options);
         }else{
-            new HeadPicture().getHeadPicture(ivPic);
+            ivPic.setBackground(getResources().getDrawable(R.mipmap.headlogo));
         }
         if (mine_recruit.getSex().length() > 0&&null != mine_recruit.getSex()){
             if ("0".equals(mine_recruit.getSex())){
@@ -371,18 +419,26 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
         }
         if (user.getUserid() != null&&user.getUserid().length() > 0){
             if ("2".equals(user.getUsertype())) {
-                linear_text_phone.setVisibility(View.GONE);
-                linear_text_phone_name.setVisibility(View.VISIBLE);
-                if (mine_recruit.getPhone().length() > 0 && null != mine_recruit.getPhone()) {
-                    tvPhone.setText(mine_recruit.getPhone() + "");
-                } else {
-                    tvPhone.setText("无");
+                linear_text_phone.setVisibility(View.VISIBLE);
+                linear_text_phone_name.setVisibility(View.GONE);
+                employ_tv_contact_gone.setOnClickListener(this);
+                if (HttpConnect.isConnnected(getActivity())){
+                    new StudyRequest(getActivity(),handler).getCompanyCertify(user.getUserid(),GETCOMANYCERTIFYONE);
+                }else{
+                    Toast.makeText(getActivity(), R.string.net_erroy,Toast.LENGTH_SHORT).show();
                 }
-                if (mine_recruit.getEmail().length() > 0 && null != mine_recruit.getEmail()) {
-                    tvEmail.setText(mine_recruit.getEmail() + "");
-                } else {
-                    tvEmail.setText("无");
-                }
+//                linear_text_phone.setVisibility(View.GONE);
+//                linear_text_phone_name.setVisibility(View.VISIBLE);
+//                if (mine_recruit.getPhone().length() > 0 && null != mine_recruit.getPhone()) {
+//                    tvPhone.setText(mine_recruit.getPhone() + "");
+//                } else {
+//                    tvPhone.setText("无");
+//                }
+//                if (mine_recruit.getEmail().length() > 0 && null != mine_recruit.getEmail()) {
+//                    tvEmail.setText(mine_recruit.getEmail() + "");
+//                } else {
+//                    tvEmail.setText("无");
+//                }
             }else{
                 linear_text_phone.setVisibility(View.VISIBLE);
                 linear_text_phone_name.setVisibility(View.GONE);
@@ -399,22 +455,28 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
     public void onResume() {
         super.onResume();
         Log.i("onResume", "----------->onResume");
+        StatService.onPageStart(getActivity(), "公司招聘信息详情");
         mine_recruit = Bean_list.Beantanle_ist.get(0);
         if (mine_recruit != null){
             companyid = mine_recruit.getId();
             userid = mine_recruit.getUserid();
         }
         workview();
-//        cf= (SecondFragment) ((MainActivity) getActivity())
+//        cf= (EmployFragment) ((MainActivity) getActivity())
 //                .getSupportFragmentManager().findFragmentById(
 //                        R.id.main_fragment);
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "公司招聘信息详情");
+    }
     private void workview() {
         if (user.getUserid() != null&&user.getUserid().length() > 0){
             if ("2".equals(user.getUsertype())){
                 if (HttpConnect.isConnnected(getActivity())){
-                    new StudyRequest(getActivity(),handler).getCompanyCertify(user.getUserid(),GETCOMANYCERTIFY);
+                    new StudyRequest(getActivity(),handler).getCompanyCertify(user.getUserid(),GETCOMANYCERTIFYONE);
                 }else{
                     Toast.makeText(getActivity(), R.string.net_erroy,Toast.LENGTH_SHORT).show();
                 }
@@ -422,7 +484,7 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
        }
     }
     private void initView() {
-
+        dialogpgd=new ProgressDialog(getActivity(), android.app.AlertDialog.THEME_HOLO_LIGHT);
         ivPic = (ImageView)  mView.findViewById(R.id.nurse_employ_resume_pic);
         tvName = (TextView)  mView.findViewById(R.id.nurse_employ_resume_name);//名字
         tvBirthday = (TextView)  mView.findViewById(R.id.nurse_employ_resume_birthday);//出生日期
@@ -464,6 +526,9 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                             Toast.makeText(getActivity(), "您是个人用户，不能邀请面试", Toast.LENGTH_SHORT).show();
                         } else if ("2".equals(user.getUsertype())) {
                             if (HttpConnect.isConnnected(getActivity())) {
+                                dialogpgd.setMessage("正在获取您的职位列表..");
+                                dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                dialogpgd.show();
                                 new StudyRequest(getActivity(), handler).getMyPublishJobList(user.getUserid(), GETMYPUBLISHJOB);
 //                              new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
                                 //userid个人  companyid企业   jobid招聘信息
@@ -480,6 +545,9 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
                         Toast.makeText(getActivity(), "您是个人用户，不能查看联系方式", Toast.LENGTH_SHORT).show();
                     }else{
                         if (HttpConnect.isConnnected(getActivity())){
+                            dialogpgd.setMessage("正在加载...");
+                            dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                            dialogpgd.show();
                             new StudyRequest(getActivity(),handler).getCompanyCertify(user.getUserid(),GETCOMANYCERTIFY);
                         }else{
                             Toast.makeText(getActivity(), R.string.net_erroy,Toast.LENGTH_SHORT).show();
@@ -492,15 +560,19 @@ public class EmployResumeDetailsfragment extends Fragment implements View.OnClic
 
                 break;
             case R.id.tv_sendjianli_back:
-                try{
-                    cf = (SecondFragment) ((MainActivity) getActivity())
-                            .getSupportFragmentManager().findFragmentByTag(
-                                    FragmentTag.TAG_NURSE.getTag());
-                    cf.switchFragmentone(FragmentTag.TAG_TALENT);
-                    cf.visible_gone();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                activity = (MainActivity) getActivity();
+                activity.switchFragmentAddHide(FragmentTag.TAG_NURSE);
+//                try{
+//                    cf = (EmployFragment) getActivity()
+//                            .getSupportFragmentManager()
+//                            .findFragmentByTag(FragmentTag.TAG_NURSE.getTag())
+//                            .getChildFragmentManager()
+//                            .findFragmentByTag(FragmentTag.TAG_EMPLOY.getTag());
+//                    cf.switchFragmentone(FragmentTag.TAG_TALENT);
+//                    cf.visible_gone();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 break;
         }
     }

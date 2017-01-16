@@ -31,7 +31,7 @@ import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.LoginActivity;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.UrlPath.RegexUtil;
+import chinanurse.cn.nurse.utils.RegexUtil;
 import chinanurse.cn.nurse.bean.UserBean;
 
 /**
@@ -123,8 +123,7 @@ public class Login_register extends Fragment implements View.OnClickListener,Vie
 //                                new Thread(new Runnable() {
 //                                    @Override
 //                                    public void run() {
-                                        Intent intent = new Intent(getActivity(),LoginActivity.class);
-                                        startActivity(intent);
+
 //                                    }
 //                                }).start();
 
@@ -142,7 +141,7 @@ public class Login_register extends Fragment implements View.OnClickListener,Vie
                                         @Override
                                         public void run() {
                                             try {
-                                                Thread.sleep(1000);
+                                                Thread.sleep(3000);
                                                 dialog.dismiss();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
@@ -150,6 +149,8 @@ public class Login_register extends Fragment implements View.OnClickListener,Vie
                                         }
                                     }).start();
                                 }
+                                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                                startActivity(intent);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

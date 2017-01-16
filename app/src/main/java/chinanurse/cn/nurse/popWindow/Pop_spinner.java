@@ -31,9 +31,8 @@ import java.util.List;
 
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
-import chinanurse.cn.nurse.Fragment_Nurse_mine.Myinfo;
+import chinanurse.cn.nurse.Fragment_Mine.Myinfo;
 
-import chinanurse.cn.nurse.Other.SetListview;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.adapter.Spinner_Adapter;
 import chinanurse.cn.nurse.bean.Spinner_Bean;
@@ -72,6 +71,7 @@ public class Pop_spinner implements PopupWindow.OnDismissListener, View.OnClickL
                                 JSONObject jsonobj = new JSONObject(result);
                                 Toast.makeText(mactivity, R.string.update_content, Toast.LENGTH_SHORT).show();
                                 user.setName(et_content);
+                                mactivity.getPersoanl();
                                 dissmiss();
                                 if (json.getString("score") != null &&json.getString("score").length() > 0){
                                     View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
@@ -144,6 +144,7 @@ public class Pop_spinner implements PopupWindow.OnDismissListener, View.OnClickL
                                 JSONObject jsonobj = new JSONObject(result);
                                 Toast.makeText(mactivity, R.string.update_content, Toast.LENGTH_SHORT).show();
                                 user.setName(et_content);
+                                mactivity.getPersoanl();
                                 dissmiss();
                                 if (json.getString("score") != null &&json.getString("score").length() > 0){
                                     View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);

@@ -1,405 +1,462 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <chinanurse.cn.nurse.list.WaveSwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/main_swipe"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E5E5E5">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <!-- 我的学习上面部分，包括个人中心、头像、昵称、签到、粉丝、关注、护士币-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:background="@mipmap/mine_bg">
-
-            <TextView
-                android:id="@+id/mine_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="个人中心"
-                android:textColor="#FFFFFF"
-                android:textSize="18dp" />
-
-            <ImageView
-                android:id="@+id/mine_setting"
-                android:layout_width="26dp"
-                android:layout_height="21dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="19dp"
-                android:src="@mipmap/ic_bg_set" />
-            <!-- 头像-->
-            <chinanurse.cn.nurse.picture.RoudImage
-                android:id="@+id/mine_headimg"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_below="@+id/mine_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:src="@mipmap/img_head_nor" />
-            <!-- 昵称-->
-            <LinearLayout
-                android:id="@+id/lil_mine_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/mine_headimg"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                >
-            <TextView
-                android:id="@+id/mine_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请登录"
-                android:textColor="#FFFFFF"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/tv_mine_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@mipmap/ic_shield_yellow"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#FFFF00"
-                android:textSize="9dp" />
-            </LinearLayout>
-            <!-- 每日签到按钮-->
-            <RelativeLayout
-                android:id="@+id/mine_sign_in"
-                android:layout_width="240dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/lil_mine_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/qiandao_button">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerInParent="true"
-                        android:src="@mipmap/ic_lalendar" />
-
-                    <TextView
-                        android:id="@+id/mine_sign_in_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="11dp"
-                        android:text="每日签到"
-                        android:textColor="#FFFF00"
-                        android:textSize="16dp" />
-                </LinearLayout>
-
-            </RelativeLayout>
-            <!-- 签到下面三个按钮-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-                <!-- 粉丝-->
-                <LinearLayout
-                    android:id="@+id/mine_fans"
-                    style="@style/mine_three_LinareLayout"
-                    android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 我的学习上面部分，包括个人中心、头像、昵称、签到、粉丝、关注、护士币-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:background="@mipmap/mine_bg">
 
                     <TextView
-                        android:id="@+id/tv_mine_fans"
-                        style="@style/mine_LinareLayout_text1"
-                        android:text="0" />
+                        android:id="@+id/mine_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:text="个人中心"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:id="@+id/mine_setting"
+                        android:layout_width="26dp"
+                        android:layout_height="21dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="19dp"
+                        android:src="@mipmap/ic_bg_set" />
+                    <!-- 头像-->
+                    <chinanurse.cn.nurse.picture.RoudImage
+                        android:id="@+id/mine_headimg"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/mine_title"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/logo" />
+                    <!-- 昵称-->
+                    <LinearLayout
+                        android:id="@+id/lil_mine_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mine_headimg"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/mine_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="请登录"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/tv_mine_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:background="@mipmap/ic_shield_yellow"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="#FFFF00"
+                            android:textSize="9dp" />
+                    </LinearLayout>
+                    <!-- 每日签到按钮-->
+                    <RelativeLayout
+                        android:id="@+id/mine_sign_in"
+                        android:layout_width="240dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@+id/lil_mine_name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/qiandao_button">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerInParent="true"
+                                android:src="@mipmap/ic_lalendar" />
+
+                            <TextView
+                                android:id="@+id/mine_sign_in_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="11dp"
+                                android:text="每日签到"
+                                android:textColor="#FFFF00"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                    <!-- 签到下面三个按钮-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+                        <!-- 粉丝-->
+                        <LinearLayout
+                            android:id="@+id/mine_fans"
+                            style="@style/mine_three_LinareLayout"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_mine_fans"
+                                style="@style/mine_LinareLayout_text1"
+                                android:text="0" />
+
+                            <TextView
+                                style="@style/mine_LinareLayout_text2"
+                                android:text="粉丝" />
+                        </LinearLayout>
+                        <!-- 分割线-->
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="#A22990"></LinearLayout>
+                        <!-- 关注-->
+                        <LinearLayout
+                            android:id="@+id/mine_attention"
+                            style="@style/mine_three_LinareLayout">
+
+                            <TextView
+                                android:id="@+id/tv_mine_attention"
+                                style="@style/mine_LinareLayout_text1"
+                                android:text="0" />
+
+                            <TextView
+                                style="@style/mine_LinareLayout_text2"
+                                android:text="关注" />
+                        </LinearLayout>
+                        <!-- 分割线-->
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="#A22990"></LinearLayout>
+                        <!-- 护士币-->
+                        <LinearLayout
+                            android:id="@+id/mine_nurse_money"
+                            style="@style/mine_three_LinareLayout">
+
+                            <TextView
+                                android:id="@+id/tv_mine_nurse_money"
+                                style="@style/mine_LinareLayout_text1"
+                                android:text="0" />
+
+                            <TextView
+                                style="@style/mine_LinareLayout_text2"
+                                android:text="护士币" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <!-- 我的学习-->
+                <RelativeLayout
+                    android:id="@+id/rela_mine_study"
+                    style="@style/study_RelativeLayout">
+                    <!-- 图片-->
+                    <ImageView
+                        android:id="@+id/mine_pic1"
+                        android:layout_width="23dp"
+                        android:layout_height="18dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_maozi" />
 
                     <TextView
-                        style="@style/mine_LinareLayout_text2"
-                        android:text="粉丝" />
-                </LinearLayout>
-                <!-- 分割线-->
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="#A22990"></LinearLayout>
-                <!-- 关注-->
-                <LinearLayout
-                    android:id="@+id/mine_attention"
-                    style="@style/mine_three_LinareLayout">
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic1"
+                        android:text="我的学习" />
+
+                    <ImageView style="@style/study_image_right" />
+                </RelativeLayout>
+                <!-- 我的帖子-->
+                <RelativeLayout
+                    android:id="@+id/mine_post"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/mine_pic2"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_liuyan" />
 
                     <TextView
-                        android:id="@+id/tv_mine_attention"
-                        style="@style/mine_LinareLayout_text1"
-                        android:text="0" />
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic2"
+                        android:text="我的帖子" />
+
+                    <ImageView style="@style/study_image_right" />
+                </RelativeLayout>
+                <!-- 我的消息-->
+                <RelativeLayout
+                    android:id="@+id/mine_news"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/mine_pic3"
+                        android:layout_width="23dp"
+                        android:layout_height="14dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_message" />
 
                     <TextView
-                        style="@style/mine_LinareLayout_text2"
-                        android:text="关注" />
-                </LinearLayout>
-                <!-- 分割线-->
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="#A22990"></LinearLayout>
-                <!-- 护士币-->
-                <LinearLayout
-                    android:id="@+id/mine_nurse_money"
-                    style="@style/mine_three_LinareLayout">
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic3"
+                        android:text="我的消息" />
+
+                    <ImageView
+                        android:id="@+id/mine_pic3_next"
+                        style="@style/study_image_right" />
+                    <!--显示消息数量-->
+                    <TextView
+                        android:id="@+id/mine_scroll_count"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/mine_pic3_next"
+                        android:background="@drawable/yuan"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp"
+                        android:visibility="gone" />
 
                     <TextView
-                        android:id="@+id/tv_mine_nurse_money"
-                        style="@style/mine_LinareLayout_text1"
-                        android:text="0" />
+                        android:id="@+id/message_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:layout_toLeftOf="@id/mine_scroll_count"
+                        android:text="new!"
+                        android:textColor="@color/red"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+                <!-- 我的收藏-->
+                <RelativeLayout
+                    android:id="@+id/ril_mine_collection"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="1dp">
+
+                    <ImageView
+                        android:id="@+id/mine_pic4"
+                        android:layout_width="20dp"
+                        android:layout_height="23dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_lifang" />
 
                     <TextView
-                        style="@style/mine_LinareLayout_text2"
-                        android:text="护士币" />
-                </LinearLayout>
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic4"
+                        android:text="我的收藏" />
+
+                    <ImageView style="@style/study_image_right" />
+
+                </RelativeLayout>
+                <!-- 我的招聘-->
+                <RelativeLayout
+                    android:id="@+id/mine_myrecruit"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/mine_pic5"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_xie" />
+
+                    <TextView
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic5"
+                        android:text="我的招聘" />
+
+                    <ImageView
+                        android:id="@+id/image"
+                        style="@style/study_image_right" />
+
+                    <TextView
+                        android:id="@+id/mine_recuit_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/activity_size_10"
+                        android:layout_toLeftOf="@id/image"
+                        android:background="@drawable/question_sheet_dot_violet"
+                        android:padding="2dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/activity_size_16"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <!-- wifi下载图片-->
+                <RelativeLayout
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/mine_pic6"
+                        android:layout_width="23dp"
+                        android:layout_height="17dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_singal" />
+
+                    <TextView
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic6"
+                        android:text="仅WIFI下下载图片" />
+                    <!-- 开关按钮-->
+                    <Switch
+                        android:id="@+id/is_show_image"
+                        android:layout_width="57dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:thumb="@drawable/mine_switch_thumb"
+                        android:track="@drawable/mine_switch_track" />
+
+                </RelativeLayout>
+                <!-- 我的学习-->
+                <RelativeLayout
+                    android:id="@+id/rela_mine_clear"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="@dimen/activity_size_10">
+                    <!-- 图片-->
+                    <ImageView
+                        android:id="@+id/mine_pic7"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_xie" />
+
+                    <TextView
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_pic7"
+                        android:text="清除缓存" />
+
+                    <ImageView style="@style/study_image_right" />
+                </RelativeLayout>
+                <!-- 我的消息-->
+                <RelativeLayout
+                    android:id="@+id/mine_post_news"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/mine_postnews"
+                        android:layout_width="23dp"
+                        android:layout_height="14dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_message" />
+
+                    <TextView
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_postnews"
+                        android:text="意见反馈" />
+
+                    <ImageView style="@style/study_image_right" />
+
+                </RelativeLayout>
+                <!-- 我的消息-->
+                <RelativeLayout
+                    android:id="@+id/mine_version_information"
+                    style="@style/study_RelativeLayout"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/mine_version"
+                        android:layout_width="23dp"
+                        android:layout_height="14dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_message" />
+
+                    <TextView
+                        style="@style/mine_scroll_text"
+                        android:layout_toRightOf="@+id/mine_version"
+                        android:text="版本信息" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/activity_size_18"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/news"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/activity_size_10"
+                            android:text="new!"
+                            android:textColor="@color/red"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_arrow_right" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/bt_outlogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/button_boder"
+                    android:gravity="center"
+                    android:text="退出登录"
+                    android:textColor="#8F006A"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-        </RelativeLayout>
-        <!-- 我的学习-->
-        <RelativeLayout
-            android:id="@+id/rela_mine_study"
-            style="@style/study_RelativeLayout">
-            <!-- 图片-->
-            <ImageView
-                android:id="@+id/mine_pic1"
-                android:layout_width="23dp"
-                android:layout_height="18dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_maozi" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic1"
-                android:text="我的学习" />
-
-            <ImageView style="@style/study_image_right" />
-        </RelativeLayout>
-        <!-- 我的帖子-->
-        <RelativeLayout
-            android:id="@+id/mine_post"
-            android:visibility="gone"
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="15dp">
-
-            <ImageView
-                android:id="@+id/mine_pic2"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_liuyan" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic2"
-                android:text="我的帖子" />
-
-            <ImageView style="@style/study_image_right" />
-        </RelativeLayout>
-        <!-- 我的消息-->
-        <RelativeLayout
-            android:id="@+id/mine_news"
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/mine_pic3"
-                android:layout_width="23dp"
-                android:layout_height="14dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_message" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic3"
-                android:text="我的消息" />
-
-            <ImageView
-                android:id="@+id/mine_pic3_next"
-                style="@style/study_image_right" />
-            <!--显示消息数量-->
-            <TextView
-                android:id="@+id/mine_scroll_count"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@+id/mine_pic3_next"
-                android:background="@drawable/yuan"
-                android:gravity="center"
-                android:text="1"
-                android:visibility="gone"
-                android:textColor="#FFFFFF"
-                android:textSize="14dp" />
-        </RelativeLayout>
-        <!-- 我的收藏-->
-        <RelativeLayout
-            android:id="@+id/ril_mine_collection"
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="1dp">
-
-            <ImageView
-                android:id="@+id/mine_pic4"
-                android:layout_width="20dp"
-                android:layout_height="23dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_lifang" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic4"
-                android:text="我的收藏" />
-
-            <ImageView style="@style/study_image_right" />
-
-        </RelativeLayout>
-        <!-- 我的招聘-->
-        <RelativeLayout
-            android:id="@+id/mine_myrecruit"
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/mine_pic5"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_xie" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic5"
-                android:text="我的招聘" />
-
-            <ImageView
-                android:id="@+id/image"
-                style="@style/study_image_right" />
-            <TextView
-                android:id="@+id/mine_recuit_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/image"
-                android:textSize="@dimen/activity_size_16"
-                android:layout_marginRight="@dimen/activity_size_10"
-                android:padding="2dp"
-                android:textColor="@color/white"
-                android:background="@drawable/question_sheet_dot_violet"
-                android:visibility="gone"
-                />
-        </RelativeLayout>
-
-        <!-- wifi下载图片-->
-        <RelativeLayout
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/mine_pic6"
-                android:layout_width="23dp"
-                android:layout_height="17dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_singal" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic6"
-                android:text="仅WIFI下下载图片" />
-            <!-- 开关按钮-->
-            <Switch
-                android:id="@+id/is_show_image"
-                android:layout_width="57dp"
-                android:layout_height="40dp"
-                android:thumb="@drawable/mine_switch_thumb"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:track="@drawable/mine_switch_track"
-                android:layout_marginRight="15dp" />
-
-        </RelativeLayout>
-        <!-- 我的学习-->
-        <RelativeLayout
-            android:id="@+id/rela_mine_clear"
-            android:layout_marginTop="@dimen/activity_size_10"
-            style="@style/study_RelativeLayout">
-            <!-- 图片-->
-            <ImageView
-                android:id="@+id/mine_pic7"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_xie" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_pic7"
-                android:text="清除缓存" />
-
-            <ImageView style="@style/study_image_right" />
-        </RelativeLayout>
-        <!-- 我的消息-->
-        <RelativeLayout
-            android:id="@+id/mine_post_news"
-            style="@style/study_RelativeLayout"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/mine_postnews"
-                android:layout_width="23dp"
-                android:layout_height="14dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_message" />
-
-            <TextView
-                style="@style/mine_scroll_text"
-                android:layout_toRightOf="@+id/mine_postnews"
-                android:text="意见反馈" />
-
-            <ImageView
-                style="@style/study_image_right" />
-
-        </RelativeLayout>
-        <Button
-            android:id="@+id/bt_outlogin"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:background="@drawable/button_boder"
-            android:gravity="center"
-            android:text="退出登录"
-            android:textColor="#8F006A"
-            android:textSize="16sp"/>
-    </LinearLayout>
-
-</ScrollView>
+        </ScrollView>
     </chinanurse.cn.nurse.list.WaveSwipeRefreshLayout>
-    </LinearLayout>
+</LinearLayout>
 

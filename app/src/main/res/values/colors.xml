@@ -22,6 +22,7 @@
     <color name="gray4">#808080</color>
     <color name="gray5">#b3b3b3</color>
     <color name="gray6">#B3B3B3</color>
+    <color name="gray8">#666666</color>
     <color name="blue">#2db3f8</color>
     <color name="purple">#90006b</color>
     <color name="main_ground_color">#eff2f7</color>
@@ -46,15 +47,20 @@
     <drawable name="color_red">#eb382f</drawable>
     <drawable name="color_white">#ffffff</drawable>
     <drawable name="color_black">#000000</drawable>
+    <color name="color_transtion">#00000000</color>
     <drawable name="color_blue">#2db3f8</drawable>
     <drawable name="color_green">#34be67</drawable>
     <drawable name="color_">#34be67</drawable>
+    <color name="dialog_bg">#D0FFFFFF</color>
+    <color name="dialog_btn_h">#89b7db</color>
 
 
 
     <color name="color_light_purple">#EED2EE</color>
 
     <color name="province_line_border">#C7C7C7</color>
+
+    <color name="actionsheet_gray">#8F8F8F</color>
 
 
 </resources>

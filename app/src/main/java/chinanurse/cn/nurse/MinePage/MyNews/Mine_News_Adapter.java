@@ -14,16 +14,12 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.List;
 
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
-import chinanurse.cn.nurse.bean.FirstPageNews;
-import chinanurse.cn.nurse.bean.News_bean;
 import chinanurse.cn.nurse.bean.News_list_type;
-import chinanurse.cn.nurse.imageload.MyApplication;
 import chinanurse.cn.nurse.pnlllist.SwipeItemLayout;
 
 /**
@@ -64,8 +60,8 @@ public class Mine_News_Adapter extends BaseAdapter {
         ViewHolder vh;
 
         if (convertView == null) {
-            View view01 = LayoutInflater.from(activity).inflate(R.layout.item_mine_news, null);
-            View view02 = LayoutInflater.from(activity).inflate(R.layout.item_delet, null);
+            View view01 =View.inflate(activity,R.layout.item_mine_news, null);
+            View view02 = View.inflate(activity,R.layout.item_delet, null);
             convertView = new SwipeItemLayout(view01, view02, null, null);
             vh = new ViewHolder();
             vh.news_delet = (TextView) view02.findViewById(R.id.news_delet);
@@ -119,6 +115,5 @@ public class Mine_News_Adapter extends BaseAdapter {
         private TextView tv_title, tv_content,tv_time,news_delet;
         private RelativeLayout rela_mine_news;
         private ImageView iv_image,dot_red;
-
     }
 }

@@ -14,6 +14,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
+
 import org.w3c.dom.Text;
 
 import chinanurse.cn.nurse.bean.UserBean;
@@ -76,5 +78,17 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction ft=fm.beginTransaction();
         ft.replace(R.id.login_frag, mFragment);
         ft.commit();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onPageStart(this, "登录");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "登录");
     }
 }

@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -32,7 +33,7 @@ import java.util.Date;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.WebView.News_WebView;
+import chinanurse.cn.nurse.Fragment_News.activity.NewsWebViewActivity;
 import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.pnlllist.PullToRefreshBase;
@@ -108,7 +109,6 @@ public class EmployBookFragment extends Fragment {
                                 stopRefresh();
                             }else{
                                 if ("end".equals(data)){
-                                    Toast.makeText(getActivity(),"无更新数据",Toast.LENGTH_SHORT).show();
                                     stopRefresh();
                                 }
                             }
@@ -284,7 +284,7 @@ public class EmployBookFragment extends Fragment {
                                         @Override
                                         public void run() {
                                             try {
-                                                Thread.sleep(1000);
+                                                Thread.sleep(3000);
                                                 dialog.dismiss();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
@@ -364,7 +364,6 @@ public class EmployBookFragment extends Fragment {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 if (fndlist.size()%20 != 0){
                     stopRefresh();
-                    Toast.makeText(getActivity(),"无更新数据",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 page = page+1;
@@ -388,7 +387,7 @@ public class EmployBookFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("fndinfo", fndData);
                     bundle.putString("position", String.valueOf(position));
-                    Intent intent = new Intent(getActivity(), News_WebView.class);
+                    Intent intent = new Intent(getActivity(), NewsWebViewActivity.class);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 0);
                 }else{
@@ -396,7 +395,7 @@ public class EmployBookFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("fndinfo", fndData);
                     bundle.putString("position", String.valueOf(position));
-                    Intent intent = new Intent(getActivity(), News_WebView.class);
+                    Intent intent = new Intent(getActivity(), NewsWebViewActivity.class);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 0);
                 }
@@ -409,7 +408,11 @@ public class EmployBookFragment extends Fragment {
             dialogpgd.setMessage("正在加载...");
             dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialogpgd.show();
-            new StudyRequest(mactivity, handler).getNewsListother(channelid,String.valueOf(page),FIRSTPAGELIST);
+            if (user.getUserid() != null && user.getUserid().length() > 0) {
+                new StudyRequest(mactivity, handler).getNewsListtwo(channelid, String.valueOf(page),user.getUserid(),"1", FIRSTPAGELIST);
+            }else{
+                new StudyRequest(mactivity, handler).getNewsListtwo(channelid, String.valueOf(page),"","", FIRSTPAGELIST);
+            }
         }else{
             Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
             ril_shibai.setVisibility(View.VISIBLE);
@@ -452,17 +455,27 @@ public class EmployBookFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        StatService.onPageStart(getActivity(), "职场宝典");
         Log.i("onResume", "------------onResume");
         BookView();
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "职场宝典");
+    }
     private void BookView() {
         if (HttpConnect.isConnnected(mactivity)){
             dialogpgd.setMessage("正在加载...");
             dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialogpgd.show();
             page = 1;
-            new StudyRequest(mactivity, handler).getNewsListother(channelid,String.valueOf(page),FIRSTPAGELIST);
+            if (user.getUserid() != null && user.getUserid().length() > 0) {
+                new StudyRequest(mactivity, handler).getNewsListtwo(channelid, String.valueOf(page),user.getUserid(),"1", FIRSTPAGELIST);
+            }else{
+                new StudyRequest(mactivity, handler).getNewsListtwo(channelid, String.valueOf(page),"","", FIRSTPAGELIST);
+            }
         }else{
             Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
             ril_shibai.setVisibility(View.VISIBLE);

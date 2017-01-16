@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -83,6 +84,25 @@ public class GoAbroad_chest_WebView extends AppCompatActivity {
             top_title.setText(R.string.chest_hotel_reservation);
         } else if ("9".equals(chesttype)) {
             top_title.setText(R.string.chest_visa_query);
+        }else if ("11".equals(chesttype)) {
+            web_webview.setWebChromeClient(new WebChromeClient(){
+                @Override
+                public void onReceivedTitle(WebView view, String title) {
+                    super.onReceivedTitle(view, title);
+                    top_title.setText(title);
+                    top_title.setTextSize(16);
+                }
+            });
+        }else if ("12".equals(chesttype)) {
+            web_webview.setWebChromeClient(new WebChromeClient(){
+                @Override
+                public void onReceivedTitle(WebView view, String title) {
+                    super.onReceivedTitle(view, title);
+                    top_title.setText(title);
+                    top_title.setTextSize(16);
+                    top_title.setPadding(40,0,0,0);
+                }
+            });
         }
 
         web_webview.getSettings().setJavaScriptEnabled(true);
@@ -113,6 +133,10 @@ public class GoAbroad_chest_WebView extends AppCompatActivity {
 //            web_webview.loadUrl();
         }else if ("10".equals(chesttype)){
             web_webview.loadUrl("http://crm.chinanurse.cn/form/sign_up.php");
+        }else if ("11".equals(chesttype)){
+            web_webview.loadUrl("http://app.chinanurse.cn/index.php?g=portal&m=article&a=index&id=406&type=2");
+        }else if ("12".equals(chesttype)){//排行榜
+            web_webview.loadUrl("http://app.chinanurse.cn/index.php?g=portal&m=article&a=index&id=407&type=2");
         }
 //        web_webview.loadUrl(study_Data.getPath());
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开

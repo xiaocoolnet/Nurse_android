@@ -29,6 +29,7 @@ import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
 import chinanurse.cn.nurse.bean.NurseEmployTalentBean;
 import chinanurse.cn.nurse.bean.TalentAdapter_bean;
 import chinanurse.cn.nurse.bean.UserBean;
+import chinanurse.cn.nurse.pnlllist.SwipeItemLayout;
 
 /**
  * Created by wzh on 2016/6/25.
@@ -47,6 +48,8 @@ public class NurseEmployTalentAdapter_recuit extends BaseAdapter  {
     private int type;
     private TalentAdapter_bean talenbean;
     private UserBean user;
+    private Boolean isname = true;
+    private Boolean isnameone = true;
 
 
     public NurseEmployTalentAdapter_recuit(Context mContext, List<Talent_work_bean.DataBean> talentDataList,int type) {
@@ -117,7 +120,16 @@ public class NurseEmployTalentAdapter_recuit extends BaseAdapter  {
                 break;
             case 1:
                 vh.tvTitle.setText(talentDataList.get(position).getTitle()+"");
-                vh.tvmoney.setText(talentDataList.get(position).getSalary()+"");
+                String moneyname = talentDataList.get(position).getSalary();
+                isname = moneyname.contains("&lt;");
+                isnameone = moneyname.contains("&gt;");
+                if (isname){
+                    vh.tvmoney.setText("<"+talentDataList.get(position).getSalary().substring(4)+"");
+                }else if (isnameone){
+                    vh.tvmoney.setText(">"+talentDataList.get(position).getSalary().substring(4)+"");
+                }else{
+                    vh.tvmoney.setText(talentDataList.get(position).getSalary()+"");
+                }
                 vh.tvcertificate.setText(talentDataList.get(position).getEducation()+"");
                 vh.tvsecurity.setText(talentDataList.get(position).getWelfare()+"");
                 vh.tvposition.setText(talentDataList.get(position).getJobtype()+"");
@@ -126,10 +138,12 @@ public class NurseEmployTalentAdapter_recuit extends BaseAdapter  {
                     long time = Long.parseLong(talentDataList.get(position).getCreate_time());
                     vh.tvcreatetime.setText(simpleDateFormat.format(new Date(time*1000)));
                 }
-                vh.tvcertificate_new.setText(talentDataList.get(position).getCertificate()+"");
+                vh.tvcertificate_new.setText(talentDataList.get(position).getCount()+"");
                 vh.tvjobtime.setText(talentDataList.get(position).getExperience()+"");
                 vh.post_resume.setVisibility(View.GONE);
-                vh.tvAddress.setText(talentDataList.get(position).getAddress()+"");
+                String s = new String(talentDataList.get(position).getAddress());
+                String[]  destString = s.split("-");
+                vh.tvAddress.setText(destString[0]+ "-"+destString[1]+"");
                 break;
         }
         return convertView;

@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/activity_size_60"
                 android:layout_height="@dimen/activity_size_60"
                 android:layout_gravity="center_horizontal"
-                android:background="@mipmap/nurse_ex_logo" />
+                android:background="@mipmap/headlogo" />
 
             <TextView
                 android:id="@+id/nurse_employ_company_name"
@@ -228,7 +228,7 @@
                         android:id="@+id/recruitment_certificate_new"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="护士证"
+                        android:text="5人"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:ellipsize="end"

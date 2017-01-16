@@ -361,6 +361,9 @@ public class Pop_shared_Activity implements PopupWindow.OnDismissListener, View.
         this.excerpt = excerpt;//内容
         this.webview = webview+"&type=1";//网址
         this.title = title;//题目
+        if (path==null){
+            path="http://app.chinanurse.cn/logo_main_qq.png";
+        }
         this.path = path;//图片
 
         int[] location = new int[2];
@@ -382,12 +385,17 @@ public class Pop_shared_Activity implements PopupWindow.OnDismissListener, View.
             public void run() {
                 //这里下载数据
                 try{
-                    URL  url = new URL(path);
-                    HttpURLConnection conn  = (HttpURLConnection)url.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream inputStream=conn.getInputStream();
-                    thumbBmp = BitmapFactory.decodeStream(inputStream);
+                    if(path==null){
+                        thumbBmp = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.logo);
+                    }else {
+                        URL  url = new URL(path);
+                        HttpURLConnection conn  = (HttpURLConnection)url.openConnection();
+                        conn.setDoInput(true);
+                        conn.connect();
+                        InputStream inputStream=conn.getInputStream();
+                        thumbBmp = BitmapFactory.decodeStream(inputStream);
+                    }
+
                     wechatShare(num);
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
@@ -405,12 +413,16 @@ public class Pop_shared_Activity implements PopupWindow.OnDismissListener, View.
             public void run() {
                 //这里下载数据
                 try{
-                    URL  url = new URL(path);
-                    HttpURLConnection conn  = (HttpURLConnection)url.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream inputStream=conn.getInputStream();
-                    thumbBmp = BitmapFactory.decodeStream(inputStream);
+                    if(path==null){
+                        thumbBmp = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.logo);
+                    }else {
+                        URL  url = new URL(path);
+                        HttpURLConnection conn  = (HttpURLConnection)url.openConnection();
+                        conn.setDoInput(true);
+                        conn.connect();
+                        InputStream inputStream=conn.getInputStream();
+                        thumbBmp = BitmapFactory.decodeStream(inputStream);
+                    }
                     sendMultiMessage(isChecked);
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();

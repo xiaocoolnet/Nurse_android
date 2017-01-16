@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment_Nurse_mine.fans_and_attion.FansFragment">
+    tools:context=".Fragment_Mine.fans_and_attion.FansFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

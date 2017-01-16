@@ -62,7 +62,6 @@ public class Main_Attion_Adapter extends BaseAdapter {
             attionactivity.img_head = (RoudImage) convertView.findViewById(R.id.img_head);
             attionactivity.name = (TextView) convertView.findViewById(R.id.name);
             attionactivity.level = (TextView) convertView.findViewById(R.id.level);
-            attionactivity.ril_fans = (RelativeLayout) convertView.findViewById(R.id.ril_fans);
             // 显示图片的配置
             options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.img_head_nor).showImageOnFail(R.mipmap.img_head_nor).cacheInMemory(true).cacheOnDisc(true).build();
 
@@ -70,7 +69,6 @@ public class Main_Attion_Adapter extends BaseAdapter {
         } else {
             attionactivity = (AttionActivity) convertView.getTag();
         }
-//        attionactivity.img_head.setImageBitmap();
         //头部图片
         if (attionlist.get(position).getPhoto() != null&&attionlist.get(position).getPhoto().length() > 0) {
             imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + attionlist.get(position).getPhoto(), attionactivity.img_head, options);
@@ -79,19 +77,12 @@ public class Main_Attion_Adapter extends BaseAdapter {
         }
         attionactivity.name.setText(attionlist.get(position).getName());
         attionactivity.level.setText(attionlist.get(position).getLevel());
-        attionactivity.ril_fans.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //����
-            }
-        });
         return convertView;
     }
 
     class AttionActivity {
         private RoudImage img_head;
         private TextView name,level;
-        private RelativeLayout ril_fans;
 
     }
 }

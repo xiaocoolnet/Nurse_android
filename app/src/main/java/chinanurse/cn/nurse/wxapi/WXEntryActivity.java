@@ -3,6 +3,7 @@ package chinanurse.cn.nurse.wxapi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,6 +33,7 @@ import chinanurse.cn.nurse.bean.UserBean;
  */
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private static final int ADDSCORE = 1;
+    private final String SHARE_SUCCESS="shareSuccess";
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
     private UserBean user;
@@ -88,10 +90,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 //                if (HttpConnect.isConnnected(WXEntryActivity.this)) {
 //                    new StudyRequest(WXEntryActivity.this, handler).ADDSCORE(user.getUserid(), ADDSCORE);
 //                } else {
-//                    Toast.makeText(WXEntryActivity.this, R.string.net_erroy, Toast.LENGTH_SHORT).show();
+////                    Toast.makeText(WXEntryActivity.this, R.string.net_erroy, Toast.LENGTH_SHORT).show();
 //                }
-//                getscore();
                 Toast.makeText(WXEntryActivity.this, "微信分享成功", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent();
+                intent.setAction(SHARE_SUCCESS);
+                sendBroadcast(intent);
+//                getscore();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 result = "errcode_cancel";
@@ -120,12 +125,12 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Thread.sleep(3000);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(3000);
+                        new StudyRequest(WXEntryActivity.this, handler).ADDSCORE(user.getUserid(), ADDSCORE);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }).start();
 

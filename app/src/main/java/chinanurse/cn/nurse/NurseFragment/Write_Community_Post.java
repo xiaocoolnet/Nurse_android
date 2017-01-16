@@ -349,7 +349,7 @@ public class Write_Community_Post extends Activity implements View.OnClickListen
      *
      * @param data
      */
-    private void getImageToView(Intent data) {
+    private void  getImageToView(Intent data) {
 //        Bundle extras = data.getExtras();
 //        if (extras != null) {
 //            Bitmap photo = extras.getParcelable("data");

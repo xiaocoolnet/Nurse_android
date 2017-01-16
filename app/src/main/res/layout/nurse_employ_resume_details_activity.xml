@@ -268,11 +268,11 @@
 
                     <ImageView
                         android:id="@+id/nurse_employ_resume_pic"
-                        android:layout_width="@dimen/activity_size_120"
-                        android:layout_height="@dimen/activity_size_150"
+                        android:layout_width="@dimen/activity_size_100"
+                        android:layout_height="@dimen/activity_size_100"
                         android:layout_marginTop="@dimen/activity_size_15"
                         android:layout_marginRight="@dimen/activity_size_15"
-                        android:background="@color/white"/>
+                        android:background="@mipmap/headlogo"/>
 
                 </RelativeLayout>
 

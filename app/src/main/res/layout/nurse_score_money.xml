@@ -5,7 +5,6 @@
     android:orientation="vertical"
     >
     <include layout="@layout/title_top"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +17,6 @@
             android:background="@mipmap/cup"
             />
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/activity_size_50"
@@ -43,16 +41,23 @@
                 android:scrollbars="none"
                 />
         </LinearLayout>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/activity_size_80"
+               android:layout_centerVertical="true"
+               android:layout_alignParentBottom="true"
+               android:layout_marginLeft="@dimen/activity_size_10"
+               android:layout_marginRight="@dimen/activity_size_10"
+               >
             <TextView
+                android:id="@+id/score_tv_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/activity_size_10"
-                android:layout_marginRight="@dimen/activity_size_10"
-                android:layout_marginBottom="@dimen/activity_size_20"
-                android:text="\t\t排行榜是一个对进行综合评比和展示的栏目。以日为单位，主要依据会员买卖通指数、登录次数、受关注程度、信息丰富程度等来进行评比。"
+                android:layout_centerVertical="true"
+                android:text="\t\t在中国护士网，赚积分、赢大奖。榜上有名，期待您的参与上榜！点击查看>>"
                 android:textColor="@color/white"
                 />
+           </RelativeLayout>
         </RelativeLayout>
 
         <Button
@@ -72,5 +77,4 @@
         android:layout_height="@dimen/activity_size_1"
         android:id="@+id/textview"
         />
-
 </LinearLayout>

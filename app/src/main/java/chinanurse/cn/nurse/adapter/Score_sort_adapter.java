@@ -55,10 +55,9 @@ public class Score_sort_adapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         CommonViewHolder comholder = null;
 
-        if (convertView == null){
+//        if (convertView == null){
             switch (type){
                 case 0:
-
                     convertView = View.inflate(mactivtiy, R.layout.score_short_adapter, null);
                     comholder = new CommonViewHolder();
                     comholder.lv_imaage = (TextView) convertView.findViewById(R.id.score_sort_image);
@@ -68,65 +67,144 @@ public class Score_sort_adapter extends BaseAdapter{
                     comholder.score_time = (TextView) convertView.findViewById(R.id.score_time);
                     break;
             }
-            convertView.setTag(comholder);
-        }else{
-            comholder = (CommonViewHolder) convertView.getTag();
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH");
-        if (position == 0){
-            comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_1);
-            int timei = Integer.parseInt(scorelist.get(0).getTime().toString());
-            String times = sdf.format(new Date(timei * 1000L));
-            comholder.score_time.setText(times+"");
-            comholder.score_detail_num.setText("+"+scorelist.get(0).getScore().toString()+"");
-            comholder.score_name.setText(scorelist.get(0).getName().toString() + "");
-            if (scorelist.get(0).getPhoto() != null &&scorelist.get(0).getPhoto().length() > 0){
-                imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(0).getPhoto(), comholder.lv_head_image, options);
+//            convertView.setTag(comholder);
+//        }else{
+//            comholder = (CommonViewHolder) convertView.getTag();
+//        }
+        switch (type) {
+            case 0:
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//             if (scorelist.size() > 9) {
+//                 if (position == 0) {
+//                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_1);
+//                     int timei = Integer.parseInt(scorelist.get(0).getTime().toString());
+//                     String times = sdf.format(new Date(timei * 1000L));
+//                     comholder.score_time.setText(times + "");
+//                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+//                         comholder.score_detail_num.setText(scorelist.get(0).getScore().toString() + "");
+//                     } else {
+//                         comholder.score_detail_num.setText("+" + scorelist.get(0).getScore().toString() + "");
+//                     }
+//                     comholder.score_name.setText(scorelist.get(0).getName().toString() + "");
+//                     if (scorelist.get(0).getPhoto() != null && scorelist.get(0).getPhoto().length() > 0) {
+//                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(0).getPhoto(), comholder.lv_head_image, options);
+//                     }
+//                 } else if (position == 1) {
+//                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_2);
+//                     int timei = Integer.parseInt(scorelist.get(1).getTime().toString());
+//                     String times = sdf.format(new Date(timei * 1000L));
+//                     comholder.score_time.setText(times + "");
+//                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+//                         comholder.score_detail_num.setText(scorelist.get(1).getScore().toString() + "");
+//                     } else {
+//                         comholder.score_detail_num.setText("+" + scorelist.get(1).getScore().toString() + "");
+//                     }
+//                     comholder.score_name.setText(scorelist.get(1).getName().toString() + "");
+//                     if (scorelist.get(1).getPhoto() != null && scorelist.get(1).getPhoto().length() > 0) {
+//                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(1).getPhoto(), comholder.lv_head_image, options);
+//                     }
+//                 } else if (position == 2) {
+//                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_3);
+//                     int timei = Integer.parseInt(scorelist.get(2).getTime().toString());
+//                     String times = sdf.format(new Date(timei * 1000L));
+//                     comholder.score_time.setText(times + "");
+//                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+//                         comholder.score_detail_num.setText(scorelist.get(2).getScore().toString() + "");
+//                     } else {
+//                         comholder.score_detail_num.setText("+" + scorelist.get(2).getScore().toString() + "");
+//                     }
+//                     comholder.score_name.setText(scorelist.get(2).getName().toString() + "");
+//                     if (scorelist.get(2).getPhoto() != null && scorelist.get(2).getPhoto().length() > 0) {
+//                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(2).getPhoto(), comholder.lv_head_image, options);
+//                     }
+//                 }else {
+////                     for (int i = 3; i < 10; i++) {
+////                         if (position == i) {
+//                             comholder.lv_imaage.setText(String.valueOf(position + 1));
+//                             int timei = Integer.parseInt(scorelist.get(position).getTime().toString());
+//                             String times = sdf.format(new Date(timei * 1000L));
+//                             comholder.score_time.setText(times + "");
+//                             if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+//                                 comholder.score_detail_num.setText(scorelist.get(position).getScore().toString() + "");
+//                             } else {
+//                                 comholder.score_detail_num.setText("+" + scorelist.get(position).getScore().toString() + "");
+//                             }
+//                             comholder.score_name.setText(scorelist.get(position).getName().toString() + "");
+//                             if (scorelist.get(position).getPhoto() != null && scorelist.get(position).getPhoto().length() > 0) {
+//                                 imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(position).getPhoto(), comholder.lv_head_image, options);
+//                             }
+////                         }
+////                    }
+//                }
+//            } else if (scorelist.size() <= 9) {
+                 if (position == 0) {
+                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_1);
+                     int timei = Integer.parseInt(scorelist.get(0).getTime().toString());
+                     String times = sdf.format(new Date(timei * 1000L));
+                     comholder.score_time.setText(times + "");
+                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+                         comholder.score_detail_num.setText(scorelist.get(0).getScore().toString() + "");
+                     } else {
+                         comholder.score_detail_num.setText("+" + scorelist.get(0).getScore().toString() + "");
+                     }
+                     comholder.score_name.setText(scorelist.get(0).getName().toString() + "");
+                     if (scorelist.get(0).getPhoto() != null && scorelist.get(0).getPhoto().length() > 0) {
+                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(0).getPhoto(), comholder.lv_head_image, options);
+                     }
+                     break;
+                 }
+                if (position == 1) {
+                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_2);
+                     int timei = Integer.parseInt(scorelist.get(1).getTime().toString());
+                     String times = sdf.format(new Date(timei * 1000L));
+                     comholder.score_time.setText(times + "");
+                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+                         comholder.score_detail_num.setText(scorelist.get(1).getScore().toString() + "");
+                     } else {
+                         comholder.score_detail_num.setText("+" + scorelist.get(1).getScore().toString() + "");
+                     }
+                     comholder.score_name.setText(scorelist.get(1).getName().toString() + "");
+                     if (scorelist.get(1).getPhoto() != null && scorelist.get(1).getPhoto().length() > 0) {
+                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(1).getPhoto(), comholder.lv_head_image, options);
+                     }
+                    break;
+                 }
+                if (position == 2) {
+                     comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_3);
+                     int timei = Integer.parseInt(scorelist.get(2).getTime().toString());
+                     String times = sdf.format(new Date(timei * 1000L));
+                     comholder.score_time.setText(times + "");
+                     if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+                         comholder.score_detail_num.setText(scorelist.get(2).getScore().toString() + "");
+                     } else {
+                         comholder.score_detail_num.setText("+" + scorelist.get(2).getScore().toString() + "");
+                     }
+                     comholder.score_name.setText(scorelist.get(2).getName().toString() + "");
+                     if (scorelist.get(2).getPhoto() != null && scorelist.get(2).getPhoto().length() > 0) {
+                         imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(2).getPhoto(), comholder.lv_head_image, options);
+                     }
+                    break;
+                 }
+//                     for (int i = 3; i < position + 1; i++) {
+                         if (position >= 3) {
+                             comholder.lv_imaage.setText(String.valueOf(position + 1));
+                             int timei = Integer.parseInt(scorelist.get(position).getTime().toString());
+                             String times = sdf.format(new Date(timei * 1000L));
+                             comholder.score_time.setText(times + "");
+                             if ("-".equals(scorelist.get(position).getScore().substring(0, 1))) {
+                                 comholder.score_detail_num.setText(scorelist.get(position).getScore().toString() + "");
+                             } else {
+                                 comholder.score_detail_num.setText("+" + scorelist.get(position).getScore().toString() + "");
+                             }
+                             comholder.score_name.setText(scorelist.get(position).getName().toString() + "");
+                             if (scorelist.get(position).getPhoto() != null && scorelist.get(position).getPhoto().length() > 0) {
+                                 imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(position).getPhoto(), comholder.lv_head_image, options);
+                         }
+//                    }
+                             break;
+//                }
             }
-        }else if (position == 1){
-            comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_2);
-            int timei = Integer.parseInt(scorelist.get(1).getTime().toString());
-            String times = sdf.format(new Date(timei * 1000L));
-            comholder.score_time.setText(times+"");
-            comholder.score_detail_num.setText("+"+scorelist.get(1).getScore().toString()+"");
-            comholder.score_name.setText(scorelist.get(1).getName().toString() + "");
-            if (scorelist.get(1).getPhoto() != null &&scorelist.get(1).getPhoto().length() > 0){
-                imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(1).getPhoto(), comholder.lv_head_image, options);
-            }
-        }else if (position == 2){
-            comholder.lv_imaage.setBackgroundResource(R.mipmap.rank_3);
-            int timei = Integer.parseInt(scorelist.get(2).getTime().toString());
-            String times = sdf.format(new Date(timei * 1000L));
-            comholder.score_time.setText(times+"");
-            comholder.score_detail_num.setText("+"+scorelist.get(2).getScore().toString()+"");
-            comholder.score_name.setText(scorelist.get(2).getName().toString() + "");
-            if (scorelist.get(2).getPhoto() != null &&scorelist.get(2).getPhoto().length() > 0){
-                imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(2).getPhoto(), comholder.lv_head_image, options);
-            }
-        }else if (position > 9){
-            for (int i = 3;i < 10;i++){
-                comholder.lv_imaage.setText(String.valueOf(i+1));
-                int timei = Integer.parseInt(scorelist.get(i).getTime().toString());
-                String times = sdf.format(new Date(timei * 1000L));
-                comholder.score_time.setText(times+"");
-                comholder.score_detail_num.setText("+"+scorelist.get(i).getScore().toString()+"");
-                comholder.score_name.setText(scorelist.get(i).getName().toString() + "");
-                if (scorelist.get(i).getPhoto() != null &&scorelist.get(i).getPhoto().length() > 0){
-                    imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(i).getPhoto(), comholder.lv_head_image, options);
-                }
-            }
-        }else if (position <= 9){
-            for (int i = 3;i < position+1;i++){
-                comholder.lv_imaage.setText(String.valueOf(i + 1));
-                int timei = Integer.parseInt(scorelist.get(i).getTime().toString());
-                String times = sdf.format(new Date(timei * 1000L));
-                comholder.score_time.setText(times+"");
-                comholder.score_detail_num.setText("+"+scorelist.get(i).getScore().toString()+"");
-                comholder.score_name.setText(scorelist.get(i).getName().toString() + "");
-                if (scorelist.get(i).getPhoto() != null &&scorelist.get(i).getPhoto().length() > 0){
-                    imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + scorelist.get(i).getPhoto(), comholder.lv_head_image, options);
-                }
-            }
+                break;
         }
         return convertView;
     }

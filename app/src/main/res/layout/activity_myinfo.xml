@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="#E5E5E5">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Fragment_Nurse_mine.Myinfo">
+
         <!-- 标题栏-->
         <RelativeLayout style="@style/back_title_RelativeLayout">
             <!-- 返回按钮，扩大点击面，所以用一个布局包裹住-->
@@ -28,6 +24,16 @@
             <!-- 底部紫线-->
             <TextView style="@style/back_title_pupleline" />
         </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Fragment_Mine.Myinfo">
         <!-- 第一块-->
         <LinearLayout style="@style/myinfo_linearlayout">
 
@@ -59,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
 
@@ -82,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
 
@@ -105,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
             <RelativeLayout
@@ -126,6 +135,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:layout_marginLeft="15dp"
                 android:background="@color/gray2" />
 
@@ -168,6 +178,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:layout_marginLeft="15dp"
                 android:background="@color/gray2" />
 
@@ -192,6 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
 
@@ -238,6 +250,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
 
@@ -261,6 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/activity_size_15"
                 android:background="@color/gray2" />
 
 
@@ -290,5 +304,6 @@
 
 
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
 

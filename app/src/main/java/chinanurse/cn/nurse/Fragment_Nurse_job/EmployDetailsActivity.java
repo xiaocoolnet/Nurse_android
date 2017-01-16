@@ -2,6 +2,7 @@ package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.baidu.mobstat.StatService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +49,7 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
     private static final int APPLYjOB = 5;
     private Activity mactivity;
     private String id, title, infor, companyid, companyName, education, address, count, welfare, description, phone,type;
-    private TextView tvTitle, tvCompanyName, tvCompanyIntro, tvEducation,
+    private TextView tvTitle, tvCompanyName, tvCompanyIntro, tvEducation,tvjobtime,
             tvAddress, tvCount, tvWelfare, tvDescrip, tvContact,title_top,tvContact_name,tvcrite,employ_tv_xinzi,employ_tv_jobtime;
     private RelativeLayout btnBack,ril_phonename;
     private UserBean user;
@@ -60,11 +63,13 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
     private Dialog dialog;
     private Boolean isname = true;
     private Boolean isnameone = true;
+    private ProgressDialog dialogpgd;
     /**
      * 推送消息发送广播
      */
     private MyReceiver receiver;
     private News_list_type.DataBean newstypebean;
+
 
     private Handler handler = new Handler() {
         @Override
@@ -78,21 +83,7 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
                             JSONObject json = new JSONObject(result);
                             String data = json.getString("data");
                             if ("success".endsWith(json.optString("status"))) {
-                                if ("".equals(data)) {
-                                    new AlertDialog.Builder(mactivity).setTitle("系统提示").setMessage("请填写简历")
-                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(mactivity, Add_EmployWork_Fragment.class);
-                                                    mactivity.startActivity(intent);
-                                                }
-                                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                                        }
-                                    });
-                                } else {
                                     JSONObject obj = new JSONObject(data);
                                     mrinfo = new MineResumeinfo.DataBean();
                                     mrinfo.setId(obj.getString("id"));
@@ -114,19 +105,40 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
                                     mrinfo.setPhone(obj.getString("phone"));
                                     mrinfo.setHiredate(obj.getString("hiredate"));
                                     mrinfo.setWantcity(obj.getString("wantcity"));
+                                    dialogpgd.dismiss();
                                     if (HttpConnect.isConnnected(mactivity)) {
+                                        dialogpgd.setMessage("正在投递...");
+                                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                        dialogpgd.show();
 //                     new StudyRequest(mcontext, handler).send_ApplyJob(companyid, jobid, userid);
                                         new StudyRequest(mactivity, handler).ApplyJob_judge(user.getUserid(), companyid, id, APPLYjOB);
 //                                        new StudyRequest(mactivity, handler).send_ApplyJob(companyid, id,  user.getUserid());
                                     } else {
                                         Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
                                     }
-                                }
+
+                            }else{
+                                    dialogpgd.dismiss();
+                                new AlertDialog.Builder(mactivity).setTitle("系统提示").setMessage("请填写简历")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(mactivity, Add_EmployWork_Fragment.class);
+                                                mactivity.startActivity(intent);
+                                            }
+                                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
+                    }else{
+                        dialogpgd.dismiss();
                     }
                     break;
                 case APPLYjOB://判断是否投递过这家公司
@@ -137,6 +149,7 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
                             if ("success".endsWith(json.optString("status"))){
                                 String data = json .getString("data");
                                 if ("1".equals(data)){
+                                    dialogpgd.dismiss();
                                     Toast.makeText(mactivity, "您已经投递过该公司", Toast.LENGTH_SHORT).show();
                                 }else if ("0".equals(data)){
                                     if (HttpConnect.isConnnected(mactivity)) {
@@ -153,40 +166,45 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
                     break;
                 case CommunalInterfaces.APPLYJOB:
                     JSONObject json = (JSONObject) msg.obj;
-                    try {
-                        String status = json.getString("status");
-                        Log.e("data", status);
-                        if (status.equals("success")) {
-                            JSONObject obj = new JSONObject(json.getString("data"));
-                            Log.e("data", "666666");
-                            Toast.makeText(mactivity, "投递成功", Toast.LENGTH_SHORT).show();
-                            if (obj.getString("score") != null &&obj.getString("score").length() > 0){
-                                View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
-                                dialog = new android.app.AlertDialog.Builder(mactivity).create();
-                                dialog.show();
-                                dialog.getWindow().setContentView(layout);
-                                TextView tv_score = (TextView) layout.findViewById(R.id.dialog_score);
-                                tv_score.setText("+"+obj.getString("score"));
-                                TextView tv_score_name = (TextView) layout.findViewById(R.id.dialog_score_text);
-                                tv_score_name.setText(obj.getString("event"));
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(1000);
-                                            dialog.dismiss();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
+                    if (json != null) {
+                        try {
+                            String status = json.getString("status");
+                            Log.e("data", status);
+                            if (status.equals("success")) {
+                                JSONObject obj = new JSONObject(json.getString("data"));
+                                Log.e("data", "666666");
+                                Toast.makeText(mactivity, "投递成功", Toast.LENGTH_SHORT).show();
+                                if (obj.getString("score") != null && obj.getString("score").length() > 0) {
+                                    View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
+                                    dialog = new android.app.AlertDialog.Builder(mactivity).create();
+                                    dialog.show();
+                                    dialog.getWindow().setContentView(layout);
+                                    TextView tv_score = (TextView) layout.findViewById(R.id.dialog_score);
+                                    tv_score.setText("+" + obj.getString("score"));
+                                    TextView tv_score_name = (TextView) layout.findViewById(R.id.dialog_score_text);
+                                    tv_score_name.setText(obj.getString("event"));
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                Thread.sleep(1000);
+                                                dialog.dismiss();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    }
-                                }).start();
+                                    }).start();
+                                }
+                            } else {
+                                Toast.makeText(mactivity, "投递失败", Toast.LENGTH_SHORT).show();
+                                Log.e("data", "77777");
                             }
-                        } else {
-                            Toast.makeText(mactivity, "投递失败", Toast.LENGTH_SHORT).show();
-                            Log.e("data", "77777");
+                            dialogpgd.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    }else{
+                        dialogpgd.dismiss();
                     }
                     break;
             }
@@ -223,6 +241,11 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
             tvEducation.setText(nurseEmployData.getEducation().toString()+"");
         }else{
             tvEducation.setText("无");
+        }
+        if (nurseEmployData.getExperience() != null&&nurseEmployData.getExperience().length() > 0){
+            tvjobtime.setText(nurseEmployData.getExperience().toString()+"");
+        }else{
+            tvjobtime.setText("不限");
         }
         if (nurseEmployData.getAddress() != null&&nurseEmployData.getAddress().length() > 0){
             tvAddress.setText(nurseEmployData.getAddress().toString()+"");
@@ -292,6 +315,7 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
     }
 
     private void initView() {
+        dialogpgd = new ProgressDialog(mactivity, android.app.AlertDialog.THEME_HOLO_LIGHT);
         tvTitle = (TextView) findViewById(R.id.employ_tv_title);
         tvCompanyName = (TextView) findViewById(R.id.employ_tv_company_name);
         tvCompanyIntro = (TextView) findViewById(R.id.employ_tv_company_intro);
@@ -307,6 +331,8 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
         btnBack.setOnClickListener(this);
         title_top = (TextView) findViewById(R.id.top_title);
         title_top.setText("招聘详情");
+        tvjobtime = (TextView) findViewById(R.id.employ_tv_jobtime);//工作年限
+
 
         linear_text_phone = (LinearLayout) findViewById(R.id.linear_text_phone);//隐藏部分
         ril_phonename = (RelativeLayout) findViewById(R.id.linear_text_phone_name);//隐藏部分
@@ -320,6 +346,8 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
     public void onResume() {
         super.onResume();
         Log.i("onResume", "----------->onResume");
+        StatService.onPageStart(this, "个人信息详情");
+
         workview();
     }
 
@@ -347,6 +375,9 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
                     mactivity.startActivity(intentone);
                 }else{
                     if (HttpConnect.isConnnected(mactivity)) {
+                        dialogpgd.setMessage("正在查看是否填写过简历...");
+                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        dialogpgd.show();
                         new StudyRequest(mactivity, handler).getResumeInfo(user.getUserid(), GETRESUMEINFO);
                     } else {
                         Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
@@ -363,10 +394,10 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
         @Override
         public void onReceive(final Context context, Intent intent) {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
-
+            String title = intent.getStringExtra("title");
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
+                    .setMessage(title)
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -388,5 +419,11 @@ public class EmployDetailsActivity extends Activity implements View.OnClickListe
 //            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //            alert.show();
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "EmployDetailsActivity");
     }
 }

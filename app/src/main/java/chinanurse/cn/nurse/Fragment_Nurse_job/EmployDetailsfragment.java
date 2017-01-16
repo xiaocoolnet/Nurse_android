@@ -2,6 +2,7 @@ package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import chinanurse.cn.nurse.FragmentTag;
-import chinanurse.cn.nurse.Fragment_Main.SecondFragment;
+import chinanurse.cn.nurse.Fragment_Nurse.EmployFragment;
+import chinanurse.cn.nurse.utils.LogUtils;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.Bean_list;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
@@ -48,7 +52,7 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
     private static final int APPLYjOB = 5;
     private Activity mactivity;
     private String id, title, infor, companyid, companyName, education, address, count, welfare, description, phone,type;
-    private TextView tvTitle,hits, tvCompanyName, tvCompanyIntro, tvEducation,
+    private TextView tvTitle,hits, tvCompanyName, tvCompanyIntro, tvEducation,tvjobtime,
             tvAddress, tvCount, tvWelfare, tvDescrip, tvContact,title_top,tvContact_name,tvcrite,employ_tv_xinzi,employ_tv_jobtime;
     private RelativeLayout btnBack,ril_phonename;
     private UserBean user;
@@ -61,9 +65,11 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
     private String result;
     private Dialog dialog;
     private View mView;
-    private SecondFragment cf;
+    private EmployFragment cf;
     private Boolean isname = true;
     private Boolean isnameone = true;
+    private ProgressDialog dialogpgd;
+    private MainActivity activity;
 
     /**
      */
@@ -81,21 +87,6 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                             JSONObject json = new JSONObject(result);
                             String data = json.getString("data");
                             if ("success".endsWith(json.optString("status"))) {
-                                if ("".equals(data)) {
-                                    new AlertDialog.Builder(mactivity).setTitle("系统提示").setMessage("请填写简历")
-                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(mactivity, Add_EmployWork_Fragment.class);
-                                                    mactivity.startActivity(intent);
-                                                }
-                                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        }
-                                    });
-                                } else {
                                     JSONObject obj = new JSONObject(data);
                                     mrinfo = new MineResumeinfo.DataBean();
                                     mrinfo.setId(obj.getString("id"));
@@ -117,19 +108,36 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                                     mrinfo.setPhone(obj.getString("phone"));
                                     mrinfo.setHiredate(obj.getString("hiredate"));
                                     mrinfo.setWantcity(obj.getString("wantcity"));
+                                    dialogpgd.dismiss();
                                     if (HttpConnect.isConnnected(mactivity)) {
-//                     new StudyRequest(mcontext, handler).send_ApplyJob(companyid, jobid, userid);
+                                        dialogpgd.setMessage("正在投递...");
+                                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                        dialogpgd.show();
                                         new StudyRequest(mactivity, handler).ApplyJob_judge(user.getUserid(), companyid, id, APPLYjOB);
-//                                        new StudyRequest(mactivity, handler).send_ApplyJob(companyid, id,  user.getUserid());
                                     } else {
                                         Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
                                     }
-                                }
+                            }else{
+                                dialogpgd.dismiss();
+                                new AlertDialog.Builder(getActivity()).setTitle("系统提示").setMessage("请填写简历")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(getActivity(), Add_EmployWork_Fragment.class);
+                                                getActivity().startActivity(intent);
+                                            }
+                                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
+                    }else{
+                        dialogpgd.dismiss();
                     }
                     break;
                 case APPLYjOB://判断是否投递过这家公司
@@ -141,6 +149,7 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                                 String data = json .getString("data");
                                 if ("1".equals(data)){
                                     Toast.makeText(mactivity, "您已经投递过该公司", Toast.LENGTH_SHORT).show();
+                                    dialogpgd.dismiss();
                                 }else if ("0".equals(data)){
                                     if (HttpConnect.isConnnected(mactivity)) {
                                         new StudyRequest(mactivity, handler).send_ApplyJob(companyid, id, user.getUserid());
@@ -156,40 +165,45 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                     break;
                 case CommunalInterfaces.APPLYJOB:
                     JSONObject json = (JSONObject) msg.obj;
-                    try {
-                        String status = json.getString("status");
-                        Log.e("data", status);
-                        if (status.equals("success")) {
-                            JSONObject obj = new JSONObject(json.getString("data"));
-                            Log.e("data", "666666");
-                            Toast.makeText(mactivity, "投递成功", Toast.LENGTH_SHORT).show();
-                            if (obj.getString("score") != null &&obj.getString("score").length() > 0){
-                                View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
-                                dialog = new android.app.AlertDialog.Builder(mactivity).create();
-                                dialog.show();
-                                dialog.getWindow().setContentView(layout);
-                                TextView tv_score = (TextView) layout.findViewById(R.id.dialog_score);
-                                tv_score.setText("+"+obj.getString("score"));
-                                TextView tv_score_name = (TextView) layout.findViewById(R.id.dialog_score_text);
-                                tv_score_name.setText(obj.getString("event"));
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            Thread.sleep(1000);
-                                            dialog.dismiss();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
+                    if (json != null) {
+                        try {
+                            String status = json.getString("status");
+                            Log.e("data", status);
+                            if (status.equals("success")) {
+                                JSONObject obj = new JSONObject(json.getString("data"));
+                                Log.e("data", "666666");
+                                Toast.makeText(mactivity, "投递成功", Toast.LENGTH_SHORT).show();
+                                if (obj.getString("score") != null && obj.getString("score").length() > 0) {
+                                    View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);
+                                    dialog = new android.app.AlertDialog.Builder(mactivity).create();
+                                    dialog.show();
+                                    dialog.getWindow().setContentView(layout);
+                                    TextView tv_score = (TextView) layout.findViewById(R.id.dialog_score);
+                                    tv_score.setText("+" + obj.getString("score"));
+                                    TextView tv_score_name = (TextView) layout.findViewById(R.id.dialog_score_text);
+                                    tv_score_name.setText(obj.getString("event"));
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                Thread.sleep(1000);
+                                                dialog.dismiss();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    }
-                                }).start();
+                                    }).start();
+                                }
+                            } else {
+                                Toast.makeText(mactivity, "投递失败", Toast.LENGTH_SHORT).show();
+                                Log.e("data", "77777");
                             }
-                        } else {
-                            Toast.makeText(mactivity, "投递失败", Toast.LENGTH_SHORT).show();
-                            Log.e("data", "77777");
+                            dialogpgd.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    }else{
+                        dialogpgd.dismiss();
                     }
                     break;
             }
@@ -200,7 +214,6 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
         mView = View.inflate(getActivity(), R.layout.nurse_employ_details, null);
         mactivity = getActivity();
         user = new UserBean(mactivity);
-//        nurseEmployData = (NurseEmployTalentBean.DataBean) getArguments().getSerializable("recruit");
         nurseEmployData = Bean_list.Bean_ist.get(0);
         initView();
         hits.setText(nurseEmployData.getHits()+"");
@@ -232,6 +245,11 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
             tvCount.setText(nurseEmployData.getCount().toString()+"");
         }else{
             tvCount.setText("无");
+        }
+        if (nurseEmployData.getExperience() != null&&nurseEmployData.getExperience().length() > 0){
+            tvjobtime.setText(nurseEmployData.getExperience().toString()+"");
+        }else{
+            tvjobtime.setText("不限");
         }
         if (nurseEmployData.getCompanyinfo() != null&&nurseEmployData.getCompanyinfo().length() > 0){
             tvCompanyIntro.setText(nurseEmployData.getCompanyinfo().toString()+"");
@@ -304,6 +322,7 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
     }
 
     private void initView() {
+        dialogpgd = new ProgressDialog(getActivity(), android.app.AlertDialog.THEME_HOLO_LIGHT);
         hits = (TextView) mView.findViewById(R.id.hits);
         tvTitle = (TextView) mView.findViewById(R.id.employ_tv_title);
         tvCompanyName = (TextView) mView.findViewById(R.id.employ_tv_company_name);
@@ -318,6 +337,7 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
         tv_sendjianli.setOnClickListener(this);
         tv_sendjianli_back = (TextView) mView.findViewById(R.id.tv_sendjianli_back);
         tv_sendjianli_back.setOnClickListener(this);
+        tvjobtime = (TextView) mView.findViewById(R.id.employ_tv_jobtime);//工作年限
 
         linear_text_phone = (LinearLayout) mView.findViewById(R.id.linear_text_phone);//隐藏部分
         ril_phonename = (RelativeLayout) mView.findViewById(R.id.linear_text_phone_name);//隐藏部分
@@ -330,10 +350,15 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("onResume", "----------->onResume");
-//        workview();
+        StatService.onPageStart(getActivity(), "个人信息详情——我");
+        LogUtils.i("onResume", "----------->onResume");
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "个人信息详情——我");
+    }
     private void workview() {
         if (user.getUserid() != null&&user.getUserid().length() > 0){
             linear_text_phone.setVisibility(View.GONE);
@@ -364,6 +389,9 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                     mactivity.startActivity(intentone);
                 }else{
                     if (HttpConnect.isConnnected(mactivity)) {
+                        dialogpgd.setMessage("正在查看是否填写过简历...");
+                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        dialogpgd.show();
                         new StudyRequest(mactivity, handler).getResumeInfo(user.getUserid(), GETRESUMEINFO);
                     } else {
                         Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
@@ -371,14 +399,8 @@ public class EmployDetailsfragment extends Fragment implements View.OnClickListe
                 }
                 break;
             case R.id.tv_sendjianli_back://返回按钮
-//                cf= (SecondFragment) ((MainActivity) getActivity())
-//                        .getSupportFragmentManager().findFragmentById(
-//                                R.id.main_fragment);
-                cf = (SecondFragment) ((MainActivity) getActivity())
-                        .getSupportFragmentManager().findFragmentByTag(
-                                FragmentTag.TAG_NURSE.getTag());
-                cf.switchFragmentone(FragmentTag.TAG_WORK);
-                cf.visible_gone();
+                activity = (MainActivity) getActivity();
+                activity.switchFragmentAddHide(FragmentTag.TAG_NURSE);
                 break;
         }
     }

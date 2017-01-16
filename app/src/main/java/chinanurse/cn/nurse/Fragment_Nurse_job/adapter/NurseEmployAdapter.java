@@ -62,7 +62,7 @@ public class NurseEmployAdapter extends BaseAdapter  {
     private Boolean isnameone = true;
     private ImageLoader imageLoader = ImageLoader.getInstance();
     // 显示图片的配置
-    private DisplayImageOptions options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.nurse_ex_logo).showImageOnFail(R.mipmap.nurse_ex_logo).cacheInMemory(true).cacheOnDisc(true).build();
+    private DisplayImageOptions options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.headlogo).showImageOnFail(R.mipmap.headlogo).cacheInMemory(true).cacheOnDisc(true).build();
 
     public NurseEmployAdapter(Context mContext, List<NurseEmployBean.DataBean> nurseEmployDataList,String userid,String usertype,Handler handler,int type) {
         this.nurseEmployDataList = nurseEmployDataList;

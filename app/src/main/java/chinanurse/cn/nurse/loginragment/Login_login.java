@@ -29,10 +29,7 @@ import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.MainActivity;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.UrlPath.RegexUtil;
-import chinanurse.cn.nurse.WebView.News_WebView;
-import chinanurse.cn.nurse.bean.FirstPageNews;
-import chinanurse.cn.nurse.bean.study_main_bean.StudyBean;
+import chinanurse.cn.nurse.utils.RegexUtil;
 import chinanurse.cn.nurse.bean.UserBean;
 
 /**

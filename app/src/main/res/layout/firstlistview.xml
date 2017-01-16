@@ -29,4 +29,6 @@ android:layout_height="match_parent"
     />
     </RelativeLayout>
 <include layout="@layout/jiazaishibai"/>
+
+
 </RelativeLayout>

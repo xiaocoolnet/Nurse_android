@@ -4,8 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -42,6 +46,9 @@ import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
+import chinanurse.cn.nurse.utils.RegexUtil;
+import chinanurse.cn.nurse.WebView.News_WebView_url;
+import chinanurse.cn.nurse.bean.News_list_type;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.bean.mine_main_bean.Company_news_beans;
 
@@ -73,6 +80,11 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
     private boolean isfalse = true;
     private RelativeLayout btnback;
     private TextView toptitle;
+    /**
+     * 推送消息发送广播
+     */
+    private MyReceiver receiver;
+    private News_list_type.DataBean newstypebean;
     private LinearLayout ril_shenhechenggong,ril_renzhengshibai,ril_zhengzaishenhe;
     private Company_news_beans.DataBean combean;
     private Handler handler = new Handler() {
@@ -254,6 +266,7 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
                 break;
             case R.id.btn_back:
                 finish();
+
                 break;
         }
     }
@@ -337,7 +350,11 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
             Toast.makeText(activity,"请输入公司简介",Toast.LENGTH_SHORT).show();
         }else if (company_linkman == null || "".equals(company_linkman)){
             Toast.makeText(activity,"请输入联系人",Toast.LENGTH_SHORT).show();
-        }else if (company_phone == null || "".equals(company_phone)){
+        } else if (!isCanGetCode()||!ispHONE()) {
+            Toast.makeText(activity, "请填写正确的电话号码", Toast.LENGTH_SHORT).show();//电话
+        } else if (!isCanGetCodeemile()) {
+            Toast.makeText(activity, "请填写正确的邮箱", Toast.LENGTH_SHORT).show();//电话
+        } else if (company_phone == null || "".equals(company_phone)){
             Toast.makeText(activity,"请输入联系电话",Toast.LENGTH_SHORT).show();
         }else if (company_email == null || "".equals(company_email)){
             Toast.makeText(activity,"请输入联系邮箱",Toast.LENGTH_SHORT).show();
@@ -350,6 +367,24 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
                 Toast.makeText(activity,R.string.net_erroy,Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private Boolean isCanGetCode() {
+        if (!RegexUtil.checkMobile(et_company_phone.getText().toString())){
+            return true;
+        }
+        return true;
+    }
+    private Boolean ispHONE() {
+        if (!RegexUtil.checkPhone(et_company_phone.getText().toString())){
+            return true;
+        }
+        return true;
+    }
+    private Boolean isCanGetCodeemile() {
+        if (!RegexUtil.checkEmail(et_company_email.getText().toString())){
+            return false;
+        }
+        return true;
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -445,6 +480,10 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
     public void onResume() {
         super.onResume();
         Log.i("onResume", "-------->onResume");
+        StatService.onPageStart(this, "企业认证");
+        receiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter("com.USER_ACTION");
+        registerReceiver(receiver, filter);
         companyviews();
     }
 
@@ -453,6 +492,42 @@ public class IdentityFragment_ACTIVITY extends Activity implements View.OnClickL
             new StudyRequest(activity,handler).getCompanyCertify(user.getUserid(),GETCOMANYCERTIFY);
         }else{
             Toast.makeText(activity,R.string.net_erroy,Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "企业认证");
+    }
+    public class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
+            String title = intent.getStringExtra("title");
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+            builder.setTitle("新通知")
+                    .setMessage(title)
+                    .setCancelable(false)
+                    .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("fndinfo", newstypebean);
+                            Intent intent = new Intent(IdentityFragment_ACTIVITY.this, News_WebView_url.class);
+                            intent.putExtras(bundle);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            IdentityFragment_ACTIVITY.this.startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    }).create().show();
+            context.unregisterReceiver(this);
+//            AlertDialog alert = builder.create();
+//            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+//            alert.show();
         }
     }
 }

@@ -140,6 +140,7 @@
 
                 <TextView
                     style="@style/study_textview"
+                    android:layout_toRightOf="@id/study_image3"
                     android:text="@string/stu_online_test_text"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"

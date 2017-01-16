@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -98,7 +99,6 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
                             shuaxin_button.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
                                     getindata();
                                 }
                             });
@@ -157,6 +157,7 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_back:
+                unregisterReceiver(receiver);
                 finish();
                 break;
         }
@@ -181,6 +182,7 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
 
         refresh();
         super.onResume();
+        StatService.onPageStart(this, "题目");
         getindata();
     }
 
@@ -242,10 +244,10 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
         @Override
         public void onReceive(final Context context, Intent intent) {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
-
+            String title = intent.getStringExtra("title");
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
+                    .setMessage(title)
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -264,5 +266,16 @@ public class DailyPractice extends AppCompatActivity implements View.OnClickList
                     }).create().show();
             context.unregisterReceiver(this);
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "题目");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

@@ -1,17 +1,13 @@
 package chinanurse.cn.nurse.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,10 +20,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import chinanurse.cn.nurse.Fragment_Nurse.activity.PersonalHomePageActivity;
+import chinanurse.cn.nurse.Fragment_Nurse.bean.ForumDataBean;
+import chinanurse.cn.nurse.ui.MyListview;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
 import chinanurse.cn.nurse.WebView.webview_comments_bean.Webview_comments_bean;
-import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.picture.RoudImage;
 
 /**
@@ -42,12 +40,16 @@ public class Pop_Adapter_Choice extends BaseAdapter {
     private List<Webview_comments_bean.DataBean.ChildCommentsBean> childcomment = new ArrayList<>();
     private Handler handler;
     private Choice_child_list_adapter choiceadapter;
+    private Long commentCount = 0L;
 
     public Pop_Adapter_Choice( List<Webview_comments_bean.DataBean> commentslist, Activity mactivity, int type,Handler handler) {
         this.commentslist = commentslist;
         this.mactivity = mactivity;
         this.type = type;
         this.handler = handler;
+    }
+    public void setCommentCount(Long commentCount){
+        this.commentCount=commentCount;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class Pop_Adapter_Choice extends BaseAdapter {
                     holder.choice_float = (TextView) convertView.findViewById(R.id.choice_float);//楼
                     holder.choice_content = (TextView) convertView.findViewById(R.id.choice_content);//发布内容
                     holder.choice_time = (TextView) convertView.findViewById(R.id.choice_time);//发布时间
-                    holder.choice_content_sun = (ListView) convertView.findViewById(R.id.choice_content_sun);//字评论列表
+                    holder.choice_content_sun = (MyListview) convertView.findViewById(R.id.choice_content_sun);//字评论列表
                     holder.choice_time_reply = (TextView) convertView.findViewById(R.id.choice_time_reply);
                     break;
             }
@@ -93,11 +95,15 @@ public class Pop_Adapter_Choice extends BaseAdapter {
                     imageLoader.displayImage(NetBaseConstant.NET_HOST + "/" + commentslist.get(position).getPhoto().toString(), holder.choice_userimage, options);
                     holder.choice_username.setText(commentslist.get(position).getUsername().toString() + "");
                     if (commentslist != null && commentslist.size() > 0) {
-                        holder.choice_float.setText(commentslist.size() - position + "楼");
+                        if (commentCount==0){
+                            holder.choice_float.setText(commentslist.size() - position + "楼");
+                        }else{
+                            holder.choice_float.setText(commentCount - position + "楼");
+                        }
                     }
                     holder.choice_content.setText(commentslist.get(position).getContent().toString() + "");
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     long time = Long.parseLong(commentslist.get(position).getAdd_time().toString());
                     String timeone = simpleDateFormat.format(new Date(time * 1000));
                     holder.choice_time.setText(timeone + "");
@@ -117,6 +123,22 @@ public class Pop_Adapter_Choice extends BaseAdapter {
                             handler.sendMessage(msg);
                         }
                     });
+                    holder.choice_userimage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            ForumDataBean forumData = new ForumDataBean();
+                            forumData.setUserId(commentslist.get(position).getUserid().toString());
+                            forumData.setUserPhoto(commentslist.get(position).getPhoto().toString());
+                            forumData.setUserLevel(commentslist.get(position).getUserlevel().toString());
+                            Intent intentHomePage = new Intent();
+                            intentHomePage.setClass(mactivity, PersonalHomePageActivity.class);
+                            intentHomePage.putExtra("forum", forumData);
+                            intentHomePage.putExtra("from", "Pop_Adapter_Choice");
+                            mactivity.startActivity(intentHomePage);
+                        }
+                    });
+
                 }catch (Exception e){
 
                 }
@@ -155,7 +177,7 @@ public class Pop_Adapter_Choice extends BaseAdapter {
     class ViewHodler {
         private RoudImage choice_userimage;
         private TextView choice_username, choice_float, choice_content, choice_time,choice_time_reply;
-        private ListView choice_content_sun;
+        private MyListview choice_content_sun;
         private ArrayAdapter<String> commentsadapter;
     }
 }

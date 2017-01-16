@@ -48,6 +48,8 @@ import com.tencent.tauth.UiError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import chinanurse.cn.nurse.AppApplication;
@@ -118,12 +120,12 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.pop_weixinhaoyou://微信好友
+            case R.id.pop_weixinhaoyou://微信
                 wechatShare(1);
                 dissmiss();
                 break;
-            case R.id.weixin://微信
-                wechatShare(0);
+            case R.id.weixin://微信好友
+                wechatSharepersonal(0);
                 dissmiss();
                 break;
             case R.id.pop_qq://QQ
@@ -149,9 +151,9 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
     private void sendMultiMessage( boolean hasWebpage) {
         WebpageObject mediaObject = new WebpageObject();
         mediaObject.identify = Utility.generateGUID();
-        mediaObject.title =  "中国护士网";;
-        mediaObject.description = "服务于中国320万护士 白衣天使的网上家园";
-        Bitmap  bitmap = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.logo);
+        mediaObject.title =  "邀请护士好友加入中国护士网，赚积分赢大奖，OPPO、VIVO更多大奖等你拿>> ";;
+        mediaObject.description = "成为中国护士网会员，会享受100余项积分功能和政策。我们会有积分兑换商城，定期会有积分活动，让您真正享受到您的每一份支持都将获得我们的真情回报。";
+        Bitmap  bitmap = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.logo_main01);
         // 设置 Bitmap 类型的图片到视频对象里         设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
         mediaObject.setThumbImage(bitmap);
         mediaObject.actionUrl = "http://app.chinanurse.cn/index.php?g=Score&m=Score&a=scorepengyou&userid="+user.getUserid();
@@ -197,10 +199,10 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = "http://app.chinanurse.cn/index.php?g=Score&m=Score&a=scorepengyou&userid="+user.getUserid();
         WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title =  "中国护士网";
-        msg.description = "服务于中国320万护士 白衣天使的网上家园";
+        msg.title =  "邀请护士好友加入中国护士网，赚积分赢大奖，OPPO、VIVO更多大奖等你拿>>";
+        msg.description = "成为中国护士网会员，会享受100余项积分功能和政策。我们会有积分兑换商城，定期会有积分活动，让您真正享受到您的每一份支持都将获得我们的真情回报。";
         //这里替换一张自己工程里的图片资源
-        Bitmap thumb = BitmapFactory.decodeResource(activity.getResources(), R.drawable.icon_nurse);
+        Bitmap thumb = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.logo_main01);
         msg.setThumbImage(thumb);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
@@ -209,14 +211,29 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
         req.scene = flag == 0 ? SendMessageToWX.Req.WXSceneSession : SendMessageToWX.Req.WXSceneTimeline;
         iwxapi.sendReq(req);
     }
+    private void wechatSharepersonal(int flag) {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = "http://app.chinanurse.cn/index.php?g=Score&m=Score&a=scorepengyou&userid="+user.getUserid();
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title =  "中国护士网-邀请您加入";
+        msg.description = "邀请护士好友加入中国护士网，赚积分赢大奖，OPPO、VIVO更多大奖等你拿>>";
+        //这里替换一张自己工程里的图片资源
+        Bitmap thumb = BitmapFactory.decodeResource(activity.getResources(), R.mipmap.logo_main01);
+        msg.setThumbImage(thumb);
 
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.message = msg;
+        req.scene = flag == 0 ? SendMessageToWX.Req.WXSceneSession : SendMessageToWX.Req.WXSceneTimeline;
+        iwxapi.sendReq(req);
+    }
     private void onClickShare() {
         final Bundle params = new Bundle();
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-        params.putString(QQShare.SHARE_TO_QQ_TITLE, "中国护士网");//标题
-        params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "服务于中国320万护士 白衣天使的网上家园");//内容
+        params.putString(QQShare.SHARE_TO_QQ_TITLE, "中国护士网-邀请您加入");//标题
+        params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "邀请护士好友加入中国护士网，赚积分赢大奖，OPPO、VIVO更多大奖等你拿>>");//内容
         params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://app.chinanurse.cn/index.php?g=Score&m=Score&a=scorepengyou&userid="+user.getUserid());
-//        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://app.chinanurse.cn/logo_main_qq.png");
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "测试应用222222");
 //        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
         AppApplication.mTencent.shareToQQ(activity, params, new IUiListener() {
@@ -241,11 +258,11 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
     private void shareToQQzone() {
         final Bundle params = new Bundle();
         params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "中国护士网");
-        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,  "服务于中国320万护士 白衣天使的网上家园");
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "邀请护士好友加入中国护士网，赚积分赢大奖，OPPO、VIVO更多大奖等你拿>>");
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,  "成为中国护士网会员，会享受100余项积分功能和政策。我们会有积分兑换商城，定期会有积分活动，让您真正享受到您的每一份支持都将获得我们的真情回报。");
         params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,  "http://app.chinanurse.cn/index.php?g=Score&m=Score&a=scorepengyou&userid="+user.getUserid());
         ArrayList<String> imageUrls = new ArrayList<String>();
-        imageUrls.add("http://media-cdn.tripadvisor.com/media/photo-s/01/3e/05/40/the-sandbar-that-links.jpg");
+        imageUrls.add("http://app.chinanurse.cn/logo_main_qq.png");
         params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
         params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT,  QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
 
@@ -268,6 +285,26 @@ public class Pop_shared_activity_Activity implements PopupWindow.OnDismissListen
 
             }
         });
+    }
+    /**
+     * storeImageToSDCARD 将bitmap存放到sdcard中
+     */
+    public void storeImageToSDCARD(Bitmap colorImage, String ImageName, String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        File imagefile = new File(file, ImageName + ".jpg");
+        try {
+            imagefile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(imagefile);
+            colorImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void showAsDropDown(View parent) {
         int[] location = new int[2];

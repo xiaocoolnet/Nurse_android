@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
@@ -37,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 import chinanurse.cn.nurse.FragmentTag;
-import chinanurse.cn.nurse.Fragment_Main.SecondFragment;
+import chinanurse.cn.nurse.Fragment_Nurse.EmployFragment;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.Bean_list;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.NurseEmployAdapter;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
@@ -46,7 +47,7 @@ import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.MainActivity;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
-import chinanurse.cn.nurse.WebView.News_WebView;
+import chinanurse.cn.nurse.Fragment_News.activity.NewsWebViewActivity;
 import chinanurse.cn.nurse.adapter.News_Title_Adapter;
 import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.bean.MineResumeinfo;
@@ -79,11 +80,6 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     private TextView shuaxin_button, detail_loading_nonum;
     private ProgressDialog dialogpgd;
 
-//    private ViewPager news_fisr_vp;
-//    private TextView news_first_title;
-//    private CirclePageIndicator circlePageIndicator;
-//    private ViewPager news_first_vp;
-
     private TextView detail_loading;
     private PullToRefreshListView pulllist;
     private SimpleDateFormat mdata = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -95,7 +91,6 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     private boolean isStop;
     private UserBean user;
     private Banner banner;
-    private AlertDialog dialog;
     private String[] images;
     private String[] imageTitle;
     private int position;
@@ -104,9 +99,11 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     private Bundle savedInstanceState;
     private FragmentTag mCurrentTag;
     private Fragment mCurrentFragment;
-    private SecondFragment cf;
+    private EmployFragment cf;
     private SharedPreferences prefences;
     private String isopen;
+    private int pager = 1;
+    private MainActivity activity;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -121,7 +118,9 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                             if (status.equals("success")) {
                                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                                 int length = jsonArray.length();
-                                nurseEmployDataList.clear();
+                                if (pager == 1) {
+                                    nurseEmployDataList.clear();
+                                }
                                 JSONObject itemObject;
                                 for (int i = 0; i < length; i++) {
                                     itemObject = (JSONObject) jsonArray.get(i);
@@ -149,9 +148,21 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
 
                                     nurseEmployDataList.add(nurseEmployData);
                                 }
-                                nurseEmployAdapter = new NurseEmployAdapter(getActivity(), nurseEmployDataList, user.getUserid(), user.getUsertype(), handler, 1);
-                                lv_view.setAdapter(nurseEmployAdapter);
-                                dialogpgd.dismiss();
+                                if (nurseEmployAdapter==null){
+                                    nurseEmployAdapter = new NurseEmployAdapter(getActivity(), nurseEmployDataList, user.getUserid(), user.getUsertype(), handler, 1);
+                                    lv_view.setAdapter(nurseEmployAdapter);
+                                    dialogpgd.dismiss();
+                                }else {
+                                    if (pager == 1) {
+                                        nurseEmployAdapter = new NurseEmployAdapter(getActivity(), nurseEmployDataList, user.getUserid(), user.getUsertype(), handler, 1);
+                                        lv_view.setAdapter(nurseEmployAdapter);
+                                        dialogpgd.dismiss();
+                                    }else {
+                                        nurseEmployAdapter.notifyDataSetChanged();
+                                        dialogpgd.dismiss();
+                                    }
+                                }
+                                stopRefresh();
                             } else {
                                 dialogpgd.dismiss();
                                 detail_loading_nonum.setVisibility(View.VISIBLE);
@@ -164,6 +175,7 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                                 });
                             }
                         } catch (JSONException e) {
+                            dialogpgd.dismiss();
                             e.printStackTrace();
                         }
                     } else {
@@ -205,6 +217,9 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                 case 5:
                     position = (int) msg.obj;
                     if (HttpConnect.isConnnected(getActivity())) {
+                        dialogpgd.setMessage("正在投递...");
+                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        dialogpgd.show();
                         new StudyRequest(getActivity(), handler).getResumeInfo(user.getUserid(), GETRESUMEINFO);
                     } else {
                         Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
@@ -216,22 +231,8 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                         try {
                             JSONObject json = new JSONObject(result);
                             String data = json.getString("data");
-                            if ("success".endsWith(json.optString("status"))) {
-                                if ("".equals(data)) {
-                                    new AlertDialog.Builder(getActivity()).setTitle("系统提示").setMessage("请填写简历")
-                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(getActivity(), Add_EmployWork_Fragment.class);
-                                                    getActivity().startActivity(intent);
-                                                }
-                                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if ("success".equals(json.optString("status"))) {
 
-                                        }
-                                    });
-                                } else {
                                     JSONObject obj = new JSONObject(data);
                                     mrinfo = new MineResumeinfo.DataBean();
                                     mrinfo.setId(obj.getString("id"));
@@ -254,17 +255,34 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                                     mrinfo.setHiredate(obj.getString("hiredate"));
                                     mrinfo.setWantcity(obj.getString("wantcity"));
                                     if (HttpConnect.isConnnected(getActivity())) {
-//                     new StudyRequest(mcontext, handler).send_ApplyJob(companyid, jobid, userid);
                                         new StudyRequest(getActivity(), handler).ApplyJob_judge(user.getUserid(), nurseEmployDataList.get(position).getCompanyid(), nurseEmployDataList.get(position).getId(), APPLYjOB);
                                     } else {
                                         Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                                     }
-                                }
+                            }else{
+                                dialogpgd.dismiss();
+                                new AlertDialog.Builder(getActivity()).setTitle("系统提示").setMessage("请填写简历")
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(getActivity(), Add_EmployWork_Fragment.class);
+                                                getActivity().startActivity(intent);
+                                            }
+                                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
                             }
                         } catch (JSONException e) {
+                            dialogpgd.dismiss();
                             e.printStackTrace();
                         }
 
+                    }else{
+                        dialogpgd.dismiss();
+                        Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case APPLYjOB:
@@ -275,6 +293,7 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                             if ("success".endsWith(json.optString("status"))) {
                                 String data = json.getString("data");
                                 if ("1".equals(data)) {
+                                    dialogpgd.dismiss();
                                     Toast.makeText(getActivity(), "您已经投递过该公司", Toast.LENGTH_SHORT).show();
                                 } else if ("0".equals(data)) {
                                     if (HttpConnect.isConnnected(getActivity())) {
@@ -283,30 +302,43 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                                         Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                                     }
                                 }
+                            }else{
+                                dialogpgd.dismiss();
                             }
                         } catch (JSONException e) {
+                            dialogpgd.dismiss();
                             e.printStackTrace();
                         }
+                    }else{
+                        dialogpgd.dismiss();
+                        Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case CommunalInterfaces.APPLYJOB:
                     JSONObject json = (JSONObject) msg.obj;
-                    try {
-                        String status = json.getString("status");
-                        Log.e("data", status);
-                        if (status.equals("success")) {
-                            JSONObject obj = new JSONObject(json.getString("data"));
-                            Log.e("data", "666666");
-                            Toast.makeText(getActivity(), "投递成功", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "投递失败", Toast.LENGTH_SHORT).show();
-                            Log.e("data", "77777");
+                    if (json != null) {
+                        try {
+                            String status = json.getString("status");
+                            Log.e("data", status);
+                            if (status.equals("success")) {
+                                JSONObject obj = new JSONObject(json.getString("data"));
+                                Log.e("data", "666666");
+                                Toast.makeText(getActivity(), "投递成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "投递失败", Toast.LENGTH_SHORT).show();
+                                Log.e("data", "77777");
+                            }
+                            dialogpgd.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    }else{
+                        dialogpgd.dismiss();
+                        Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
+
         }
     };
 
@@ -374,7 +406,7 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                 Log.e("obj_id", "---------->" + fnd);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fndinfo", fnd);
-                Intent intent = new Intent(getActivity(), News_WebView.class);
+                Intent intent = new Intent(getActivity(), NewsWebViewActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -385,8 +417,6 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
-
-
         user = new UserBean(getActivity());
         workviewpager();
 
@@ -394,8 +424,6 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     }
 
     private void workviewpager() {
-//        news_first_vp = (ViewPager) viewH.findViewById(R.id.news_first_vp);
-//        circlePageIndicator = (CirclePageIndicator) viewH.findViewById(R.id.news_first_indicator);
         banner = (Banner) viewH.findViewById(R.id.banner1);//新 图片轮播
 
     }
@@ -409,24 +437,15 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
                 NurseEmployBean.DataBean nurseEmployData = nurseEmployDataList.get(position - 1);
                 Bean_list.Bean_ist.clear();
                 Bean_list.Bean_ist.add(nurseEmployData);
-                try{
-                    cf = (SecondFragment) ((MainActivity) getActivity())
-                            .getSupportFragmentManager().findFragmentByTag(
-                                    FragmentTag.TAG_NURSE.getTag());
-                    cf.switchFragmentone(FragmentTag.TAG_DETAILWORK);
-                    cf.visible();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
+                activity = (MainActivity) getActivity();
+                activity.switchFragmentAddHide(FragmentTag.TAG_DETAILWORK);
             }
         });
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = View.inflate(getActivity(), R.layout.employ_work_fragment, null);
-
+        user = new UserBean(getActivity());
         workiniview();
         setOnItemClick();
         return mView;
@@ -453,8 +472,19 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                stopRefresh();
+                if (nurseEmployDataList.size()%20 != 0){
+                    stopRefresh();
+                    return;
+                }
+                pager = pager+1;
+                try{
+                    getnewslistother();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+
+
         });
         setLastData();
 //        pulllist.doPullRefreshing(true, 500);
@@ -463,6 +493,26 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
         viewH = LayoutInflater.from(getActivity()).inflate(R.layout.firstpagenew, null);
         lv_view.addHeaderView(viewH);
         initData();
+    }
+
+    private void getnewslistother() {
+        if (NetUtil.isConnnected(getActivity())) {
+            dialogpgd.setMessage("正在加载...");
+            dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialogpgd.show();
+            new StudyRequest(getActivity(), handler).employList(String.valueOf(pager));
+        } else {
+            Log.i("onResume", "initData2");
+            Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
+            ril_shibai.setVisibility(View.VISIBLE);
+            ril_list.setVisibility(View.GONE);
+            shuaxin_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getnewslistother();
+                }
+            });
+        }
     }
 
     @Override
@@ -499,10 +549,16 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
+        StatService.onPageStart(getActivity(), "公司招聘列表");
         Log.i("onResume", "---------->onResume");
         initData();
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "公司招聘列表");
+    }
     public void initData() {
 
 //        if (user.getUserid() == null || user.getUserid().length() <= 0) {
@@ -521,8 +577,9 @@ public class EmployWorkFragment extends Fragment implements View.OnClickListener
             dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialogpgd.show();
             //暂时用新闻的接口测试一下
+            pager = 1;
 //                new StudyRequest(getActivity(), handler).getResumeInfo(user.getUserid(), GETRESUMEINFO);
-            new StudyRequest(getActivity(), handler).employList();
+            new StudyRequest(getActivity(), handler).employList(String.valueOf(pager));
             //暂时用新闻的接口测试一下
 //            }
             new StudyRequest(getActivity(), handler).getNewsList("121", FIRSTPAGEIMAGE);

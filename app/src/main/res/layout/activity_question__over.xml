@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment_Nurse_mine.my_collect_study.Question_Over">
+    tools:context=".Fragment_Mine.my_collect_study.Question_Over">
 
 
     <RelativeLayout

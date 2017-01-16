@@ -30,7 +30,7 @@ import java.util.Map;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import chinanurse.cn.nurse.Fragment_Nurse_mine.My_personal_recruit;
+import chinanurse.cn.nurse.Fragment_Mine.My_personal_recruit;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.WheelView.OnWheelChangedListener;
 import chinanurse.cn.nurse.WheelView.WheelView;

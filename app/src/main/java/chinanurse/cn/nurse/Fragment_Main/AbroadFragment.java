@@ -14,9 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import chinanurse.cn.nurse.Fragment_Nurse_Abroad.AbroadFirstPage;
-import chinanurse.cn.nurse.Fragment_Nurse_Abroad.AbroadSecondPage;
-import chinanurse.cn.nurse.Fragment_Nurse_Abroad.AbroadThirdPage;
+import com.baidu.mobstat.StatService;
+
+import chinanurse.cn.nurse.Fragment_Abroad.AbroadFirstPage;
+import chinanurse.cn.nurse.Fragment_Abroad.AbroadSecondPage;
+import chinanurse.cn.nurse.Fragment_Abroad.AbroadThirdPage;
 import chinanurse.cn.nurse.R;
 
 /**
@@ -185,5 +187,17 @@ public class AbroadFragment extends Fragment implements View.OnClickListener{
             fragmentTransaction.commit();
         }
         currentIndex = index;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatService.onPageStart(getActivity(), "出国");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "出国");
     }
 }

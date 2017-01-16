@@ -1,10 +1,8 @@
 package chinanurse.cn.nurse.popWindow;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -37,7 +35,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
-import chinanurse.cn.nurse.Fragment_Nurse_mine.Myinfo;
+import chinanurse.cn.nurse.Fragment_Mine.Myinfo;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.WheelView.OnWheelChangedListener;
 import chinanurse.cn.nurse.WheelView.WheelView;
@@ -121,9 +119,7 @@ public class Pop_mine_location implements PopupWindow.OnDismissListener, View.On
                             if (status.equals("success")) {
                                 Toast.makeText(mactivity, R.string.update_content, Toast.LENGTH_SHORT).show();
                                 user.setName(et_content);
-                                Intent intent = new Intent();
-                                intent.putExtra("LOCATION", et_content);
-                                mactivity.setResult(Activity.RESULT_OK, intent);
+                                mactivity.getPersoanl();
                                 dissmiss();
                                 if (json.getString("score") != null &&json.getString("score").length() > 0){
                                     View layout = LayoutInflater.from(mactivity).inflate(R.layout.dialog_score, null);

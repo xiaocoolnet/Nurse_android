@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import chinanurse.cn.nurse.Fragment_Nurse_mine.mine_collext.Mine_Collect_First_Adapter;
+import chinanurse.cn.nurse.Fragment_Mine.mine_collext.Mine_Collect_First_Adapter;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;

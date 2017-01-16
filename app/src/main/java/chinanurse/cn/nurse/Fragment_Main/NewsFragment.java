@@ -1,33 +1,19 @@
 package chinanurse.cn.nurse.Fragment_Main;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import chinanurse.cn.nurse.HttpConn.HttpConnect;
-import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
-import chinanurse.cn.nurse.Fragment_Nurse_News.NewsFirstPager;
-import chinanurse.cn.nurse.Fragment_Nurse_News.NewsFourthPager;
-import chinanurse.cn.nurse.Fragment_Nurse_News.NewsSecondPager;
-import chinanurse.cn.nurse.Fragment_Nurse_News.NewsThirdPager;
+import com.baidu.mobstat.StatService;
+import chinanurse.cn.nurse.Fragment_News.NewsFirstPager;
+import chinanurse.cn.nurse.Fragment_News.NewsFourthPager;
+import chinanurse.cn.nurse.Fragment_News.NewsSecondPager;
+import chinanurse.cn.nurse.Fragment_News.NewsThirdPager;
 import chinanurse.cn.nurse.R;
 
 /**
@@ -45,9 +31,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private NewsFourthPager fourthPager;
     private final static int FIRSTTitlrLIST = 1;
     private FragmentTransaction fragmentTransaction;
-
-
-
 
 
     @Override
@@ -72,23 +55,18 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.commit();
 
         topline = (TextView) getView().findViewById(R.id.news_first_topline);//头条咨询
-//        topline.setOnClickListener(this);
         toplinewire = (ImageView) getView().findViewById(R.id.news_first_topline_wire);//第一个标题下面的横线
         nurseing = (TextView) getView().findViewById(R.id.news_second_nursing);//护理界
-//        nurseing.setOnClickListener(this);
         nurseingwire = (ImageView) getView().findViewById(R.id.news_second_nursing_wire);//护理界下面横线
         heaith = (TextView) getView().findViewById(R.id.news_third_health);//健康
-//        heaith.setOnClickListener(this);
         heaithwire = (ImageView) getView().findViewById(R.id.news_third_health_wire);//健康下面横线
         meeting = (TextView) getView().findViewById(R.id.news_four_meeting);//学术会议
-//        meeting.setOnClickListener(this);
         meetingwire = (ImageView) getView().findViewById(R.id.news_four_meeting_wire);//学术会议下面横线
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = View.inflate(getContext(), R.layout.newfragment, null);
-
         return mView;
     }
 
@@ -152,5 +130,16 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         }
         currentIndex = index;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatService.onPageStart(getActivity(), "新闻");
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "新闻");
+    }
 }

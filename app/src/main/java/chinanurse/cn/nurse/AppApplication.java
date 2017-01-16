@@ -1,29 +1,29 @@
 package chinanurse.cn.nurse;
 
-import android.app.AlertDialog;
 import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-
 import android.util.Log;
-import android.view.WindowManager;
-
 import com.alibaba.sdk.android.AlibabaSDK;
 import com.alibaba.sdk.android.callback.InitResultCallback;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.sdk.android.push.register.HuaWeiRegister;
-import com.alibaba.sdk.android.push.register.MiPushRegister;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.tauth.Tencent;
 
-import chinanurse.cn.nurse.Fragment_Nurse_mine.mine_news.MyMessageReceiver;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import chinanurse.cn.nurse.Fragment_Nurse.constant.CommunityNetConstant;
+import chinanurse.cn.nurse.Fragment_Nurse.net.NurseAsyncHttpClient;
+import chinanurse.cn.nurse.utils.LogUtils;
+import chinanurse.cn.nurse.bean.UserBean;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Administrator on 2016/6/22.
@@ -33,25 +33,59 @@ public class AppApplication extends Application {
     public static Tencent mTencent;
     private static final String TAG = "AliyunApplication";
     private Context applicationContext;
+    public  static String TagId="";
+    public  static String TagName="";
+    public  static String photo="";
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-
         applicationContext = this;
-
-
         initImageLoader();
-        // 注册方法会自动判断是否支持小米系统推送，如不支持会跳过注册。
-//        MiPushRegister.register(applicationContext, "小米AppID", "小米AppKey");
-// 注册方法会自动判断是否支持华为系统推送，如不支持会跳过注册。
-        HuaWeiRegister.register(applicationContext);
+        // 注册方法会
         mTencent=Tencent.createInstance("1105552541",this.getApplicationContext());
         initOneSDK(this);
+        getHomePage();
 
 
     }
+
+    private void getHomePage() {
+        UserBean user=new UserBean(this);
+        //        入参：userid
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("userid", user.getUserid());
+        NurseAsyncHttpClient.get(CommunityNetConstant.GET_HOME_PAGE, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (response != null) {
+                    LogUtils.e(TAG, "--getHomePage->" + response);
+//                    {
+//                    "status":"success",
+//                        "data":{
+//                            "id": "1",
+//                                "photo": "20170103/586b72532acca.png",
+//                                "create_time": "1483436630",
+//                                "title": "aaa",
+//                                "description": "aaa"
+//                    }
+//                }
+                    try {
+                        String status = response.getString("status");
+                        if (status.equals("success")) {
+                            JSONObject data=response.getJSONObject("data");
+                            photo=data.getString("photo");
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
 
     private void initImageLoader() {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
@@ -96,11 +130,11 @@ public class AppApplication extends Application {
         pushService.register(applicationContext, new CommonCallback() {
             @Override
             public void onSuccess(String response) {
-                Log.d("TAG", "init cloudchannel success");
+                LogUtils.d("TAG", "init cloudchannel success");
             }
             @Override
             public void onFailed(String errorCode, String errorMessage) {
-                Log.d("TAG", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
+                LogUtils.d("TAG", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
             }
         });
     }

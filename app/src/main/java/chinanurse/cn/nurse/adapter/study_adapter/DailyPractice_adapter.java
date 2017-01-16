@@ -95,7 +95,11 @@ public class DailyPractice_adapter extends BaseExpandableListAdapter {
             holder.study_daily_titleone.setText(dailylist.get(groupPosition).getName());
             holder.study_daily_numone.setText(dailylist.get(groupPosition).getCount());
             holder.start_answer_one.setVisibility(View.VISIBLE);
-
+            if ("1".equals(type)){
+                holder.tv_anser_one.setText("开始练习");
+            }else if ("11".equals(type)){
+                holder.tv_anser_one.setText("开始考试");
+            }
             holder.start_answer_one.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -172,6 +176,11 @@ public class DailyPractice_adapter extends BaseExpandableListAdapter {
 //            } else {
 //                holdermine.study_daily_iamgetitle.setImageResource(imagetitle[0]);
 //            }
+            if ("1".equals(type)){
+                holdermine.tv_anser_one_one.setText("开始练习");
+            }else if ("11".equals(type)){
+                holdermine.tv_anser_one_one.setText("开始考试");
+            }
             holdermine.study_daily_titleone.setText(dailylist.get(groupPosition).getChildlist().get(childPosition).getName());
             holdermine.study_daily_numone.setText(dailylist.get(groupPosition).getChildlist().get(childPosition).getCount());
             holdermine.start_answer_one.setOnClickListener(new View.OnClickListener() {

@@ -41,8 +41,6 @@ import chinanurse.cn.nurse.model.DistrictModel;
 import chinanurse.cn.nurse.model.ProvinceModel;
 import chinanurse.cn.nurse.service.XmlParserHandler;
 
-//import com.mrwujay.cascade.service.XmlParserHandler;
-
 /**
  * Created by Administrator on 2016/7/21.
  */

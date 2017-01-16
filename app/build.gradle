@@ -5,20 +5,23 @@ android {
         config {
             keyAlias 'config'
             keyPassword '320306'
-//            E:/MyWork/nurse_android_2016/20161031Night/nurse_android0817All/debug.jks
-            storeFile file('C:/Users/Administrator.RL-20160728ECVY/Desktop/nurse_android0817All/debug.jks')
+            storeFile file('/Users/hemingyang/Desktop/project/nurse_android0817All 2/debug.jks')
             storePassword '320306'
         }
     }
-
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "chinanurse.cn.nurse"
         minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 26
-        versionName "5.1.6"
+        targetSdkVersion 22
+        versionCode 43
+        versionName "6.0.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -42,7 +45,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':ViewPagerIndicator')
-    //    compile files('libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile files('libs/org.apache.http.legacy.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
@@ -53,10 +55,23 @@ dependencies {
     compile project(':banner')
     compile files('libs/open_sdk_r5756_lite.jar')
     compile files('libs/okhttp-3.2.0.jar')
-    compile files('libs/alicloud-android-push-sdk-2.3.2.jar')
     compile files('libs/huawei-xiaomi-push-support-2.3.0.jar')
+    // 指定下载编译百度移动统计JAR
+    compile 'com.baidu.mobstat:mtj-sdk:latest.integration'
+    compile files('libs/alicloud-android-push-sdk-2.3.2.jar')
+    compile files('libs/org.apache.http.legacy.jar')
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('libs/BaiduLBS_Android.jar')
 }
 tasks.withType(org.gradle.api.tasks.compile.JavaCompile){
     options.encoding="UTF-8"
 }
 
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
+}

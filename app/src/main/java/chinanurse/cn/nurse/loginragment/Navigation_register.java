@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.UrlPath.RegexUtil;
+import chinanurse.cn.nurse.utils.RegexUtil;
 
 /**
  * Created by Administrator on 2016/8/18 0018.

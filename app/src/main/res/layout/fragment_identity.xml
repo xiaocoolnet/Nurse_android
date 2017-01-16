@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Fragment_Nurse_mine.work.GetresumeFragment">
+    tools:context=".Fragment_Mine.work.GetresumeFragment">
 
     <!--<include layout="@layout/title_top" />-->
 

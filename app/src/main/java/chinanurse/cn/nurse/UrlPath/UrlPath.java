@@ -6,7 +6,7 @@ package chinanurse.cn.nurse.UrlPath;
 public interface UrlPath extends NetBaseConstant {
     String news_firstpage = NetBaseConstant.NET_BASE_PREFIX + "&a=getChannellist&";
     //获取资讯文章列表
-    String news_list = NetBaseConstant.NET_BASE_PREFIX + "&a=getNewslist&";
+    String news_list = NetBaseConstant.NET_BASE_PREFIX + "&a=getNewslist_new&";
     //获取新闻界面相关文章列表
     String news_list_about = NetBaseConstant.NET_BASE_PREFIX + "&a=getRelatedNewslist";
     //获取首页幻灯片列表
@@ -52,9 +52,9 @@ public interface UrlPath extends NetBaseConstant {
     //上传个人头像
     String uploadavatar = NetBaseConstant.NET_BASE_PREFIX + "a=uploadavatar";
     //获取招聘信息列表
-    String EMPLOY_LIST = NetBaseConstant.NET_BASE_PREFIX + "a=getjoblist_android&userid=1";
+    String EMPLOY_LIST = NetBaseConstant.NET_BASE_PREFIX + "a=getjoblist&userid=1";
     //获取找人才建立列表
-    String TALENT_LIST = NetBaseConstant.NET_BASE_PREFIX + "a=getResumeList_android&companyid=1";
+    String TALENT_LIST = NetBaseConstant.NET_BASE_PREFIX + "a=getResumeList&companyid=1";
     //获取每日一练考试题列表
     String TEXTLIST = NetBaseConstant.NET_BASE_PREFIX + "a=getDaliyExamList";
     //点击收藏
@@ -64,9 +64,9 @@ public interface UrlPath extends NetBaseConstant {
     //判断是否收藏
     String ISCOLLECT = NetBaseConstant.NET_BASE_PREFIX + "a=CheckHadFavorite";
     //获取粉丝列表
-    String GETFANSLIST = NetBaseConstant.NET_BASE_PREFIX + "a=getMyFansList";
+    String GETFANSLIST = NetBaseConstant.NET_BASE_PREFIX + "a=getFansList";
     //获取关注列表
-    String GETATTIONLIST = NetBaseConstant.NET_BASE_PREFIX + "a=getMyFollowList";
+    String GETATTIONLIST = NetBaseConstant.NET_BASE_PREFIX + "a=getFollowList";
     //发布招聘岗位
     String PUBLISHJOB = NetBaseConstant.NET_BASE_PREFIX + "a=publishjob";
     //发布简历
@@ -156,4 +156,9 @@ public interface UrlPath extends NetBaseConstant {
     String delMySystemMessag = NetBaseConstant.NET_BASE_PREFIX + "a=delMySystemMessag";
     //护理部数据
     String getNewslist_count = NetBaseConstant.NET_BASE_PREFIX + "a=getNewslist_count";
+    //获取反馈列表
+    String getfeedbackList = NetBaseConstant.NET_BASE_PREFIX + "a=getfeedbackList";
+    //获取版本号
+    String CHECKVERSON = NetBaseConstant.NET_BASE_PREFIX + "a=CheckVersion";
+    String SETVIEW = "http://a.app.qq.com/o/simple.jsp?pkgname=chinanurse.cn.nurse";
 }

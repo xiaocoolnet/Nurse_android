@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
@@ -30,18 +31,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import chinanurse.cn.nurse.Fragment_Study.Example_Canon;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.Clinic_Nurse;
+import chinanurse.cn.nurse.Fragment_Study.Clinic_Nurse;
 import chinanurse.cn.nurse.Syudyfragment.DailyPractice;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.Exam_Canon;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.gobroad.GoAbroad_main;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.goman.Goman_Topic_Bank;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.Nursing_Operation;
-import chinanurse.cn.nurse.Fragment_Nurse_Study_News.Paper_Protect;
+import chinanurse.cn.nurse.Fragment_Study.gobroad.GoAbroad_main;
+import chinanurse.cn.nurse.Fragment_Study.goman.Goman_Topic_Bank;
+import chinanurse.cn.nurse.Fragment_Study.Nursing_Operation;
+import chinanurse.cn.nurse.Fragment_Study.Paper_Protect;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
-import chinanurse.cn.nurse.WebView.News_WebView;
+import chinanurse.cn.nurse.Fragment_News.activity.NewsWebViewActivity;
 import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.list.WaveSwipeRefreshLayout;
@@ -50,7 +51,7 @@ import chinanurse.cn.nurse.list.WaveSwipeRefreshLayout;
  * 学习界面
  * Created by Administrator on 2016/6/2.
  */
-public class StudyFragment extends Fragment implements View.OnClickListener ,WaveSwipeRefreshLayout.OnRefreshListener{
+public class StudyFragment extends Fragment implements View.OnClickListener, WaveSwipeRefreshLayout.OnRefreshListener {
     private static final int STUDYPAGETITLE = 1;
     private static final int FOURTHPAGELIST = 2;
     private static final int FIRSTPAGELIST = 3;
@@ -60,7 +61,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
     private RelativeLayout stu_every, stu_Goman, stu_online, stu_goabroad, stu_clinic, stu_fifty, stu_book, stu_paper;
     private Context mcontext;
     private Activity mactivity;
-    private String title_slide = "6",result;
+    private String title_slide = "6", result;
     private Intent intent;
     //  新建的容器 但是容器的内容暂时延用新闻页的
     private ArrayList<FirstPageNews.DataBean> fndlistlist = new ArrayList<>();
@@ -70,8 +71,8 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
     private FirstPageNews fndbean;
     private FirstPageNews.DataBean fnd;
     private Gson gson;
-    private String[] images,imageTitle;
-    private TextView stu_paper_num,tv_jiaziashibai;
+    private String[] images, imageTitle;
+    private TextView stu_paper_num, tv_jiaziashibai;
     private SharedPreferences preferences;
     private ProgressDialog dialogpgd;
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
@@ -88,7 +89,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
             switch (msg.what) {
                 case FOURTHPAGELIST:
                     result = (String) msg.obj;
-                    if (result != null){
+                    if (result != null) {
                         tv_jiaziashibai.setVisibility(View.GONE);
                         banner.setVisibility(View.VISIBLE);
                         fndlistlist.clear();
@@ -96,24 +97,24 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
                         fndbean = gson.fromJson(result, FirstPageNews.class);
                         fndlistlist.addAll(fndbean.getData());
                         showImage();
-                    }else{
+                    } else {
                         tv_jiaziashibai.setVisibility(View.VISIBLE);
                         banner.setVisibility(View.GONE);
                     }
                     break;
                 case FIRSTPAGELIST:
                     result = (String) msg.obj;
-                    if (result != null){
+                    if (result != null) {
                         fndlist.clear();
                         try {
                             JSONObject jsonObject = new JSONObject(result);
-                            if ("success".equals(jsonObject.optString("status"))){
+                            if ("success".equals(jsonObject.optString("status"))) {
                                 gson = new Gson();
                                 fndbean = gson.fromJson(result, FirstPageNews.class);
                                 fndlist.addAll(fndbean.getData());
-                                if (fndlist != null&&fndlist.size()>0){
-                                    preferences=mactivity.getSharedPreferences("nursenum", Context.MODE_PRIVATE);
-                                    String num=preferences.getString("fndlist",null);
+                                if (fndlist != null && fndlist.size() > 0) {
+                                    preferences = mactivity.getSharedPreferences("nursenum", Context.MODE_PRIVATE);
+                                    String num = preferences.getString("fndlist", null);
                                     if (num != null) {
                                         if (fndlist.size() > Integer.valueOf(num)) {
                                             stu_paper_num.setVisibility(View.VISIBLE);
@@ -121,35 +122,35 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
                                         } else {
                                             stu_paper_num.setVisibility(View.GONE);
                                         }
-                                    }else{
+                                    } else {
                                         stu_paper_num.setVisibility(View.VISIBLE);
-                                        stu_paper_num.setText(String.valueOf(fndlist.size())+"");
+                                        stu_paper_num.setText(String.valueOf(fndlist.size()) + "");
                                     }
-                                }else{
+                                } else {
                                     stu_paper_num.setVisibility(View.GONE);
                                 }
-                            }else{
+                            } else {
                                 stu_paper_num.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    }else{
+                    } else {
                         stu_paper_num.setVisibility(View.GONE);
                         Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case GETNUM:
-                    if (msg.obj != null){
+                    if (msg.obj != null) {
                         String result = (String) msg.obj;
                         try {
                             JSONObject json = new JSONObject(result);
-                            if ("success".equals(json.optString("status"))){
+                            if ("success".equals(json.optString("status"))) {
                                 String data = json.optString("data");
-                                if (data != null &&!"0".equals(data)){
+                                if (data != null && !"0".equals(data)) {
                                     stu_paper_num.setVisibility(View.VISIBLE);
-                                    stu_paper_num.setText(String.valueOf(data)+"");
-                                }else{
+                                    stu_paper_num.setText(String.valueOf(data) + "");
+                                } else {
                                     stu_paper_num.setVisibility(View.GONE);
                                 }
                             }
@@ -163,14 +164,14 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
     };
 
     //新写的图片轮播
-    private void showImage(){
+    private void showImage() {
 
         if (fndlistlist.size() > 0 && fndlistlist.size() <= 5) {
             images = new String[fndlistlist.size()];
             imageTitle = new String[fndlistlist.size()];
             for (int i = 0; i < fndlistlist.size(); i++) {
                 Log.e("hello-----", fndlistlist.get(i).getThumb().get(0).getUrl());
-                images[i] = NetBaseConstant.NET_PIC_PREFIX_THUMB+fndlistlist.get(i).getThumb().get(0).getUrl();
+                images[i] = NetBaseConstant.NET_PIC_PREFIX_THUMB + fndlistlist.get(i).getThumb().get(0).getUrl();
             }
             for (int i = 0; i < fndlistlist.size(); i++) {
                 imageTitle[i] = fndlistlist.get(i).getPost_title();
@@ -180,13 +181,13 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
             imageTitle = new String[5];
             for (int i = 0; i < 5; i++) {
                 Log.e("hello-----", fndlistlist.get(i).getThumb().get(0).getUrl());
-                images[i] = NetBaseConstant.NET_PIC_PREFIX_THUMB+fndlistlist.get(i).getThumb().get(0).getUrl();
+                images[i] = NetBaseConstant.NET_PIC_PREFIX_THUMB + fndlistlist.get(i).getThumb().get(0).getUrl();
             }
             for (int i = 0; i < 5; i++) {
                 imageTitle[i] = fndlistlist.get(i).getPost_title();
             }
         }
-        switch (4){
+        switch (4) {
             case 0:
                 break;
             case 1:
@@ -216,15 +217,15 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
                 break;
         }
 
-        isopen=prefences.getString("isopen",null);
-        banner.setImages(images,isopen);//可以选择设置图片网址，或者资源文件，默认用Glide加载
+        isopen = prefences.getString("isopen", null);
+        banner.setImages(images, isopen);//可以选择设置图片网址，或者资源文件，默认用Glide加载
         banner.setOnBannerClickListener(new Banner.OnBannerClickListener() {
             @Override
             public void OnBannerClick(View view, int position) {
-                fnd = fndlistlist.get(position-1);
+                fnd = fndlistlist.get(position - 1);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fndinfo", fnd);
-                Intent intent = new Intent(getActivity(), News_WebView.class);
+                Intent intent = new Intent(getActivity(), NewsWebViewActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -243,7 +244,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
         mactivity = getActivity();
         user = new UserBean(mactivity);
         banner = (Banner) mView.findViewById(R.id.banner1);
-        prefences=getActivity().getSharedPreferences("nursenum", Context.MODE_PRIVATE);
+        prefences = getActivity().getSharedPreferences("nursenum", Context.MODE_PRIVATE);
         stu_every = (RelativeLayout) mView.findViewById(R.id.stu_every_relation_title);
         stu_every.setOnClickListener(this);
         stu_Goman = (RelativeLayout) mView.findViewById(R.id.stu_Goman_topic_bank);
@@ -273,36 +274,36 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
     public void onResume() {
         super.onResume();
         //获取数据，网络获取数据并保存
+        StatService.onPageStart(getActivity(), "学习");
         Log.i("UserData", "------------->+onResume");
         getData();
         //数据显示
         displayData();
         gettime();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "学习");
+    }
+
     private void gettime() {
-//        if (user.getUserid() != null&&user.getUserid().length()>0){
-//            timecurrentTimeMillis = System.currentTimeMillis()/1000;
-//            Log.e("time","-=---------->"+timecurrentTimeMillis);
-//            if (HttpConnect.isConnnected(mactivity)){
-//                new StudyRequest(mactivity, handler).getNewslist_count(user.getUserid(),String.valueOf(timecurrentTimeMillis),GETNUM);
-//            }else{
-//                Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
-//            }
-//        }else{
-            if (HttpConnect.isConnnected(mactivity)) {
-                new StudyRequest(mactivity, handler).getNewsList("95", FIRSTPAGELIST);
-            } else {
-                Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
-//            }
+        if (HttpConnect.isConnnected(mactivity)) {
+            new StudyRequest(mactivity, handler).getNewsList("95", FIRSTPAGELIST);
+        } else {
+            Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
         }
     }
+
     private void displayData() {
 
     }
 
     private void getData() {
         if (HttpConnect.isConnnected(mactivity)) {
-            new StudyRequest(mactivity,handler).getNewsList("111",FOURTHPAGELIST);
+            new StudyRequest(mactivity, handler).getNewsList("111", FOURTHPAGELIST);
         } else {
             Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
         }
@@ -315,19 +316,19 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
             //每日一练
             case R.id.stu_every_relation_title:
                 intent = new Intent(mactivity, DailyPractice.class);
-                intent.putExtra("type","1");
+                intent.putExtra("type", "1");
                 startActivity(intent);
                 break;
             //五万道题库
             case R.id.stu_Goman_topic_bank:
                 intent = new Intent(mactivity, Goman_Topic_Bank.class);
-                intent.putExtra("top_title", "5万道题库");
+                intent.putExtra("top_title", "8万道题库");
                 startActivity(intent);
                 break;
             //在线考试
             case R.id.stu_online_test:
                 intent = new Intent(mactivity, DailyPractice.class);
-                intent.putExtra("type","11");
+                intent.putExtra("type", "11");
                 startActivity(intent);
 
                 break;
@@ -351,7 +352,8 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
                 break;
             //考试宝典
             case R.id.stu_test_book:
-                intent = new Intent(mactivity, Exam_Canon.class);
+//                intent = new Intent(mactivity, Exam_Canon.class);
+                intent = new Intent(mactivity, Example_Canon.class);
                 intent.putExtra("top_title", "考试宝典");
                 startActivity(intent);
                 break;
@@ -370,14 +372,11 @@ public class StudyFragment extends Fragment implements View.OnClickListener ,Wav
         gettime();
         refresh();
     }
+
     private void refresh() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // 更新が終了したらインジケータ非表示
-//                dailylist.clear();
-//                dailyadapter.notifyDataSetChanged();
-
                 mWaveSwipeRefreshLayout.setRefreshing(false);
             }
         }, 3000);

@@ -1,6 +1,7 @@
 package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +37,7 @@ import chinanurse.cn.nurse.NursePage.sheng_shi_qu.City;
 import chinanurse.cn.nurse.NursePage.sheng_shi_qu.District;
 import chinanurse.cn.nurse.NursePage.sheng_shi_qu.Provence;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.UrlPath.RegexUtil;
+import chinanurse.cn.nurse.utils.RegexUtil;
 import chinanurse.cn.nurse.WebView.News_WebView_url;
 import chinanurse.cn.nurse.adapter.Spinner_Adapter;
 import chinanurse.cn.nurse.bean.News_list_type;
@@ -61,6 +64,8 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
     ArrayAdapter<City> adapter02;
     ArrayAdapter<District> adapter03;
     private String main_name, sheng_name, shi_name, qu_name;
+    private ProgressDialog dialog;
+
     /**
      * 推送消息发送广播
      */
@@ -73,17 +78,17 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
     private RelativeLayout re_tijiao;
     private UserBean user;
 
-    private Spinner tv_work_02, tv_work_tiaojian_02, tv_fuli_02, tv_person_num_02, tv_meney_daiyu_02;
+    private Spinner tv_work_02, tv_work_tiaojian_02, tv_fuli_02, tv_person_num_02, tv_meney_daiyu_02,tv_work_jobtime;
 
-    private List<Spinner_Bean.DataBean> data_list_07, data_list_08, data_list_09, data_list_10, data_list_11;
+    private List<Spinner_Bean.DataBean> data_list_07, data_list_08, data_list_09, data_list_10, data_list_11,data_list_15;
     private Spinner_Adapter spinner_adapter;
-    public static final int typeid_7 = 7, typeid_8 = 8, typeid_9 = 9, typeid_10 = 10, typeid_11 = 11;
+    public static final int typeid_7 = 7, typeid_8 = 8, typeid_9 = 9, typeid_10 = 10, typeid_11 = 11,typeid_15 = 15;
     private Activity mactivity;
     private RelativeLayout btn_back;
     private TextView top_title, sheng_spinner, shi_spinner, qu_spinner, textview, tv;
     private LinearLayout layout_spinner;
-    private ArrayAdapter<String> tv_work02, tv_work_tiaojian02, tv_fuli02, person_num, money_daiyu;
-    private List<String> jobnamelist, tiaojian02list, fulilist, personnumlist, moneydaiyulist;
+    private ArrayAdapter<String> tv_work02, tv_work_tiaojian02, tv_fuli02, person_num, money_daiyu,jobtimeadapter;
+    private List<String> jobnamelist, tiaojian02list, fulilist, personnumlist, moneydaiyulist,jobtimelist;
     private Pop_position_location popositon;
     private Company_news_beans.DataBean combean;
     private Boolean isname = true;
@@ -95,17 +100,20 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
        (String userid, String companyname, String companyinfo, String phone, String email, String title, String jobtype,
                String education, String welfare, String address, String count, String salary, String description)
        * */
-    private String userid, companyname, qiye_name, work_tiaojian, companyinfo, phone, email, position_name, jobtype, education, welfare, address, count, salary, description,linkman;
+    private String userid, companyname, qiye_name, work_tiaojian, companyinfo, phone, email, position_name, jobtype, education, welfare, address, count, salary,jobtime, description,linkman;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case CommunalInterfaces.PUBLISHJOB:
                     Log.e("data", "-----------------------------5555");
                     JSONObject jsonObject = (JSONObject) msg.obj;
+                    if(jsonObject != null){
                     try {
                         String status = jsonObject.getString("status");
                         if (status.equals("success")) {
                             Toast.makeText(mactivity, "提交成功", Toast.LENGTH_SHORT).show();
+                            re_tijiao.setClickable(true);
+                            dialog.dismiss();
                             mactivity.finish();
                             //清空数据
 //                            ed_position_name.setText("");
@@ -116,9 +124,19 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
 //                            ed_work_address.setText("");
 //                            tv_zhiwei_02.setText("");
 
+                        }else{
+                            re_tijiao.setClickable(true);
+                            dialog.dismiss();
                         }
                     } catch (JSONException e) {
+                        re_tijiao.setClickable(true);
+                        dialog.dismiss();
                         e.printStackTrace();
+                    }
+                    }else{
+                        Toast.makeText(mactivity,R.string.net_erroy,Toast.LENGTH_SHORT).show();
+                        re_tijiao.setClickable(true);
+                        dialog.dismiss();
                     }
                     break;
                 case typeid_7:
@@ -176,6 +194,63 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
 //                            spinner_adapter.notifyDataSetChanged();
                         tv_work_02.setSelection(0);
                         companyname = jobnamelist.get(0);
+                    }
+                    break;
+                case typeid_15:
+
+                    JSONObject jsonObject15 = (JSONObject) msg.obj;
+                    if (jsonObject15 != null){
+                        try {
+                            String status = jsonObject15.getString("status");
+                            if (status.equals("success")) {
+                                JSONArray jsonArray = jsonObject15.getJSONArray("data");
+                                data_list_15 = new ArrayList<Spinner_Bean.DataBean>();
+                                jobtimelist = new ArrayList<String>();
+                                jobtimelist.add("请选择");
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jo = jsonArray.getJSONObject(i);
+                                    Spinner_Bean.DataBean dataBean = new Spinner_Bean.DataBean();
+                                    dataBean.setId(jo.getString("id"));
+                                    dataBean.setName(jo.getString("name"));
+                                    data_list_15.add(dataBean);
+                                    jobtimelist.add(jo.getString("name"));
+                                }
+                                jobtimeadapter = new ArrayAdapter<String>(mactivity, R.layout.spinner_layout_ymd, jobtimelist);
+                                jobtimeadapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+                                tv_work_jobtime.setAdapter(jobtimeadapter);
+                                jobtimeadapter.notifyDataSetChanged();
+//                            spinner_adapter = new Spinner_Adapter(mactivity, data_list_07);
+//                            tv_work_02.setAdapter(spinner_adapter);
+//                            spinner_adapter.notifyDataSetChanged();
+                                tv_work_jobtime.setSelection(0);
+                                companyname = jobtimelist.get(0);
+                            }else{
+                                jobtimelist = new ArrayList<String>();
+                                jobtimelist.add("请选择");
+                                jobtimeadapter = new ArrayAdapter<String>(mactivity, R.layout.spinner_layout_ymd, jobtimelist);
+                                jobtimeadapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+                                tv_work_jobtime.setAdapter(jobtimeadapter);
+                                jobtimeadapter.notifyDataSetChanged();
+//                            spinner_adapter = new Spinner_Adapter(mactivity, data_list_07);
+//                            tv_work_02.setAdapter(spinner_adapter);
+//                            spinner_adapter.notifyDataSetChanged();
+                                tv_work_jobtime.setSelection(0);
+                                companyname = jobtimelist.get(0);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }}else{
+                        jobtimelist = new ArrayList<String>();
+                        jobtimelist.add("请选择");
+                        jobtimeadapter = new ArrayAdapter<String>(mactivity, R.layout.spinner_layout_ymd, jobtimelist);
+                        jobtimeadapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+                        tv_work_jobtime.setAdapter(tv_work02);
+                        jobtimeadapter.notifyDataSetChanged();
+//                            spinner_adapter = new Spinner_Adapter(mactivity, data_list_07);
+//                            tv_work_02.setAdapter(spinner_adapter);
+//                            spinner_adapter.notifyDataSetChanged();
+                        tv_work_jobtime.setSelection(0);
+                        companyname = jobtimelist.get(0);
                     }
                     break;
                 case typeid_8:
@@ -488,6 +563,7 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
     }
 
     private void initData() {
+        dialog = new ProgressDialog(mactivity, android.app.AlertDialog.THEME_HOLO_LIGHT);
         btn_back = (RelativeLayout) findViewById(R.id.btn_back);//返回
         btn_back.setOnClickListener(this);
         top_title = (TextView) findViewById(R.id.top_title);//标题
@@ -530,6 +606,11 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
         tv_meney_daiyu_02.setDropDownWidth(400);
         tv_meney_daiyu_02.setOnItemSelectedListener(this);
 
+        tv_work_jobtime = (Spinner) findViewById(R.id.tv_work_jobtime);//工作年限
+        tv_work_jobtime.setDropDownVerticalOffset(140);
+        tv_work_jobtime.setDropDownWidth(400);
+        tv_work_jobtime.setOnItemSelectedListener(this);
+
 
         tv_zhiwei_02 = (EditText) findViewById(R.id.tv_zhiwei_02);
 
@@ -559,6 +640,7 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
                 popositon.showAsDropDown(textview);
                 break;
             case R.id.re_tijiao://提交
+                re_tijiao.setClickable(false);
                 submit();
                 break;
         }
@@ -586,10 +668,7 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
         } else if ("请选择".equals(salary)) {
             salary = "";
         }
-//                jobtype = "1";
-        jobtype = "";
 //                education = "本科及以上";
-        education = "";
         if (position_name == null || "".equals(position_name)) {
             Toast.makeText(mactivity, "请输入职位名称", Toast.LENGTH_SHORT).show();
         } else if (qiye_name == null || "".equals(qiye_name)) {
@@ -598,14 +677,14 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
             Toast.makeText(mactivity, "请输入企业简介", Toast.LENGTH_SHORT).show();
         } else if (linkman == null || "".equals(linkman)) {
             Toast.makeText(mactivity, "请输入联系人", Toast.LENGTH_SHORT).show();
-        } else if (phone == null || "".equals(phone)) {
-            Toast.makeText(mactivity, "请输入联系电话", Toast.LENGTH_SHORT).show();
-        } else if (!isCanGetCode()) {
-            Toast.makeText(mactivity, "请填写正确的手机号", Toast.LENGTH_SHORT).show();//电话
-        } else if (!isCanGetCodeemile()) {
-            Toast.makeText(mactivity, "请填写正确的邮箱", Toast.LENGTH_SHORT).show();//电话
         } else if (email == null || "".equals(email)) {
-            Toast.makeText(mactivity, "请输入联系邮箱", Toast.LENGTH_SHORT).show();
+            email = "";
+        }else if (phone == null || "".equals(phone)) {
+            Toast.makeText(mactivity, "请输入电话号码", Toast.LENGTH_SHORT).show();
+        }else if (!isCanGetCodeemile() ) {
+            Toast.makeText(mactivity, "请输入正确的邮箱", Toast.LENGTH_SHORT).show();
+        }else if (!ispHONE() ) {
+            Toast.makeText(mactivity, "请输入正确的联系电话", Toast.LENGTH_SHORT).show();
         } else if (address == null || "".equals(address)) {
             Toast.makeText(mactivity, "请输入详细地址", Toast.LENGTH_SHORT).show();
         } else if (description == null || "".equals(description)) {
@@ -614,24 +693,43 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
             Toast.makeText(mactivity, "请选择招聘职位", Toast.LENGTH_SHORT).show();
         } else if (salary == null || "".equals(salary)) {
             Toast.makeText(mactivity, "请选择薪资待遇", Toast.LENGTH_SHORT).show();
+        }else if (jobtime == null || "".equals(jobtime)) {
+            Toast.makeText(mactivity, "请选择工作年限", Toast.LENGTH_SHORT).show();
         } else {
             if (NetUtil.isConnnected(mactivity)) {
-                new StudyRequest(mactivity, handler).send_PublishJob(userid, companyname, companyinfo, phone, email,
-                        position_name, jobtype, education, welfare, address, count, salary, description,linkman);
+                dialog.setMessage("正在提交...");
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.show();
+                new StudyRequest(mactivity, handler).send_PublishJob(userid, qiye_name,companyinfo, phone, email,
+                        position_name, companyname, work_tiaojian, welfare, address, count, salary, description,linkman,jobtime);
+                re_tijiao.setClickable(true);
+            }else{
+                re_tijiao.setClickable(true);
             }
         }
         Log.e("companyname", companyname);
         Log.e("userid", userid);
+        re_tijiao.setClickable(true);
     }
-    private Boolean isCanGetCode() {
-        if (!RegexUtil.checkMobile(phone)){
-            return false;
-        }
+//    private Boolean isCanGetCode() {
+//        if (!RegexUtil.checkMobile(phone)){
+//            return false;
+//        }
+//        return true;
+//    }
+    private Boolean ispHONE() {
+            if (!RegexUtil.checkPhone(phone)) {
+                return false;
+    }
         return true;
     }
     private Boolean isCanGetCodeemile() {
-        if (!RegexUtil.checkEmail(email)){
-            return false;
+        if (email == null || "".equals(email)) {
+            email = "";
+        }else {
+            if (!RegexUtil.checkEmail(email)) {
+                return false;
+            }
         }
         return true;
     }
@@ -653,6 +751,10 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
             case R.id.tv_meney_daiyu_02://薪资待遇
                 salary = moneydaiyulist.get(position);
                 break;
+            case R.id.tv_work_jobtime://工作年限
+                jobtime = jobtimelist.get(position);
+                break;
+
         }
     }
 
@@ -664,6 +766,7 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         Log.i("onResume", "=========>onResume");
+        StatService.onPageStart(this, "公司招聘信息编辑");
         spinnershownew();
     }
 
@@ -687,16 +790,18 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
             new StudyRequest(mactivity, handler).get_DictionaryList(typeid_10);
             //字典  薪资待遇
             new StudyRequest(mactivity, handler).get_DictionaryList(typeid_11);
+            //工作年限
+            new StudyRequest(mactivity, handler).get_DictionaryList(typeid_15);
         }
     }
     public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, Intent intent) {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
-
+            String title = intent.getStringExtra("title");
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
+                    .setMessage(title)
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -718,5 +823,13 @@ public class Add_EmployTalent_Fragment extends Activity implements View.OnClickL
 //            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //            alert.show();
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "公司招聘信息编辑");
     }
 }

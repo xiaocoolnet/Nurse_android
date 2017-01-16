@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import chinanurse.cn.nurse.Fragment_Nurse_mine.MyPost.Mine_Post_Detail;
+import chinanurse.cn.nurse.Fragment_Mine.MyPost.Mine_Post_Detail;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.bean.mine_main_bean.Mine_Post_bean;
 

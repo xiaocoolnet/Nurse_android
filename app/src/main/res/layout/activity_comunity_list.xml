@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_48">
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_community_list_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_fragment_community_list_back"
+                android:layout_width="@dimen/activity_size_9"
+                android:layout_height="@dimen/activity_size_17"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_7"
+                android:layout_toRightOf="@id/iv_fragment_community_list_back"
+                android:text="@string/web_back_text"
+                android:textColor="@color/indicator"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_fragment_community_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="圈子列表"
+            android:textColor="@color/indicator"
+            android:textSize="@dimen/text_size_18" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/indicator"></View>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_one"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+
+        </Spinner>
+
+        <View
+            android:layout_width="@dimen/activity_size_1"
+            android:layout_height="match_parent"
+            android:background="@color/gray" />
+
+        <Spinner
+            android:id="@+id/spinner_two"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0">
+        </Spinner>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ril_list"
+        >
+        <TextView
+            android:id="@+id/detail_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/view_color"
+            android:text="护士网"
+            android:textColor="@color/title_color"
+            android:textSize="30sp" />
+        <chinanurse.cn.nurse.pnlllist.PullToRefreshListView
+            android:id="@+id/lv_comprehensive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/title_color"
+            android:drawSelectorOnTop="false"
+            android:scrollbars="none"
+            android:divider="@null"
+            android:footerDividersEnabled = "false"
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/jiazaishibai"/>
+
+
+</LinearLayout>

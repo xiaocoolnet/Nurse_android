@@ -17,6 +17,7 @@ import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.NetUtil;
 import chinanurse.cn.nurse.UrlPath.UrlPath;
 import chinanurse.cn.nurse.dao.CommunalInterfaces;
+import chinanurse.cn.nurse.utils.LogUtils;
 
 /**
  * Created by wzh on 2016/6/19.
@@ -56,32 +57,6 @@ public class StudyRequest {
         }.start();
     }
     /**
-     * 获取首页轮播图片
-     *
-     * @param typeid
-     * @param KEY
-     */
-    public void getHttpImage(final String typeid, final int KEY) {
-        new Thread() {
-            Message msg = Message.obtain();
-
-            public void run() {
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("g", "apps"));
-                params.add(new BasicNameValuePair("m", "index"));
-                params.add(new BasicNameValuePair("typeid", typeid));
-                String result = HttpConnect.getResponseForPost(UrlPath.news_title_list, params, mContext);
-                Log.i("result", "------------->" + result);
-                msg.what = KEY;
-                msg.obj = result;
-                handler.sendMessage(msg);
-            }
-
-            ;
-        }.start();
-    }
-
-    /**
      * 获取资讯文章列表
      *
      * @param channelid
@@ -99,7 +74,32 @@ public class StudyRequest {
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
-                Log.i("resultlist", "------------->" + result);
+                LogUtils.e("getNewsList", "------------->" + result);
+            }
+        }.start();
+    }
+    /**
+     * 获取资讯文章列表
+     *
+     * @param channelid
+     * @param KEY
+     */
+    public void getNewsListtwo(final String channelid,final String pager,final String userid,final String show_fav,final int KEY) {
+        new Thread() {
+            Message msg = Message.obtain();
+
+            @Override
+            public void run() {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("channelid", channelid));
+                params.add(new BasicNameValuePair("pager", pager));
+                params.add(new BasicNameValuePair("userid", userid));
+                params.add(new BasicNameValuePair("show_fav", show_fav));
+                String result = HttpConnect.getResponseForPost(UrlPath.news_list, params, mContext);
+                msg.what = KEY;
+                msg.obj = result;
+                handler.sendMessage(msg);
+                LogUtils.e("getNewsListtwo", "------------->" + result);
             }
         }.start();
     }
@@ -122,29 +122,7 @@ public class StudyRequest {
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
-                Log.i("resultlist", "------------->" + result);
-            }
-        }.start();
-    }
-    /**
-     * 获取新闻相关文章列表
-     *
-     * @param refid
-     * @param KEY
-     */
-    public void getNewsListAbout(final String refid, final int KEY) {
-        new Thread() {
-            Message msg = Message.obtain();
-
-            @Override
-            public void run() {
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("refid", refid));
-                String result = HttpConnect.getResponseForPost(UrlPath.news_list_about, params, mContext);
-                msg.what = KEY;
-                msg.obj = result;
-                handler.sendMessage(msg);
-                Log.i("resultlistabout", "------------->" + result);
+                LogUtils.e("getNewsListother", "------------->" + result);
             }
         }.start();
     }
@@ -779,12 +757,12 @@ public class StudyRequest {
     }
 
 
-    public void employList() {
+    public void employList(final String pager) {
         new Thread() {
             Message msg = Message.obtain();
 
             public void run() {
-                String data = "";
+                String data = "pager= "+pager;
                 String result_data = NetUtil.getResponse(UrlPath.EMPLOY_LIST, data);
                 Log.i("result","=====================>"+result_data);
                 try {
@@ -803,7 +781,7 @@ public class StudyRequest {
     public void send_PublishJob(final String userid, final String companyname, final String companyinfo, final String phone,
                                 final String email, final String title, final String jobtype,
                                 final String education, final String welfare, final String address,
-                                final String count, final String salary, final String description,final String linkman) {
+                                final String count, final String salary, final String description,final String linkman,final String experience) {
         new Thread() {
             Message msg = Message.obtain();
 
@@ -811,7 +789,7 @@ public class StudyRequest {
             public void run() {
                 String data = "&userid=" + userid + "&companyname=" + companyname + "&companyinfo=" + companyinfo + "&phone=" + phone
                         + "&email=" + email + "&title=" + title + "&jobtype=" + jobtype + "&education=" + education
-                        + "&welfare=" + welfare + "&address=" + address + "&count=" + count + "&salary=" + salary + "&description=" + description+"&linkman="+linkman;
+                        + "&welfare=" + welfare + "&address=" + address + "&count=" + count + "&salary=" + salary + "&description=" + description+"&linkman="+linkman+"&experience="+experience;
                 String result_data = NetUtil.getResponse(UrlPath.PUBLISHJOB, data);
                 try {
                     Log.e("data", data);
@@ -939,12 +917,12 @@ public class StudyRequest {
     }
 
 
-    public void talentList() {
+    public void talentList(final String pager) {
         new Thread() {
             Message msg = Message.obtain();
 
             public void run() {
-                String data = "";
+                String data = "pager=" + pager;
                 String result_data = NetUtil.getResponse(UrlPath.TALENT_LIST, data);
                 Log.i("result","=====================>"+result_data);
                 try {
@@ -1335,7 +1313,7 @@ public class StudyRequest {
 //                params.add(new BasicNameValuePair("beginid", beginid));
                 params.add(new BasicNameValuePair("userid", userid));
                 String result = HttpConnect.getResponseForPost(UrlPath.GETSYSTEMMESSAGE, params, mContext);
-                Log.i("YAG", "我的数据分类--->" + result);
+                Log.i("YAG", "我的信息--->" + result);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
@@ -1492,13 +1470,11 @@ public class StudyRequest {
                 params.add(new BasicNameValuePair("userid", userid));
 
                 String result = HttpConnect.getResponseForPost(UrlPath.getCompanyCertify, params, mContext);
-                Log.i("YAG", "邀请面试--->" + result);
+                Log.i("YAG", "企业认证--->" + result);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
-            }
-
-            ;
+            };
         }.start();
     }
     /**
@@ -1583,7 +1559,7 @@ public class StudyRequest {
                 params.add(new BasicNameValuePair("companyid", companyid));
                 params.add(new BasicNameValuePair("jobid", jobid));
                 String result = HttpConnect.getResponseForPost(UrlPath.InviteJob_judge, params, mContext);
-                Log.i("YAG", "投递简历--->" + result);
+                Log.i("YAG", "投递简历shifou--->" + result);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
@@ -1605,7 +1581,7 @@ public class StudyRequest {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("userid", userid));
                 String result = HttpConnect.getResponseForPost(UrlPath.getMyPublishJobList, params, mContext);
-                Log.i("YAG", "投递简历--->" + result);
+                Log.i("YAG", "投递简历huoqu--->" + result);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
@@ -1698,8 +1674,6 @@ public class StudyRequest {
                 handler.sendMessage(msg);
                 Log.i("result", "------------->" + result);
             }
-
-            ;
         }.start();
     }
     /**
@@ -1747,24 +1721,24 @@ public class StudyRequest {
     }
     /**
      *获取评论
-     *@param refid
-     * @param KEY
-     */
-    public void GETrefcomments(final String refid,final int KEY) {
+     *
+     * @param refid
+     * @param pager
+     * @param KEY */
+    public void GETrefcomments(final String refid, final int KEY, final int pager) {
         new Thread() {
             Message msg = Message.obtain();
 
             public void run() {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("refid", refid));
+                params.add(new BasicNameValuePair("pager", "" + pager));
                 String result = HttpConnect.getResponseForPost(UrlPath.GETrefcomments, params, mContext);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);
-                Log.i("resultread", "------------->" + result);
+                LogUtils.e("resultread", "------------->" + result);
             }
-
-            ;
         }.start();
     }
     /**
@@ -1908,7 +1882,7 @@ public class StudyRequest {
      *userid,companyname,companyinfo,create_time,phone,email,linkman,license（照片）
      * @param KEY
      */
-    public void addfeedback(final String userid,final String content,final int KEY) {
+    public void addfeedback(final String userid,final String content,final String devicestate,final int KEY) {
         new Thread() {
             Message msg = Message.obtain();
 
@@ -1916,6 +1890,7 @@ public class StudyRequest {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("userid", userid));
                 params.add(new BasicNameValuePair("content", content));
+                params.add(new BasicNameValuePair("devicestate", devicestate));
                 String result = HttpConnect.getResponseForPost(UrlPath.addfeedback, params, mContext);
                 Log.i("YAG", "邀请面试--->" + result);
                 msg.what = KEY;
@@ -1989,6 +1964,71 @@ public class StudyRequest {
                 params.add(new BasicNameValuePair("time", time));
                 String result = HttpConnect.getResponseForPost(UrlPath.getNewslist_count, params, mContext);
                 Log.i("YAG", "我的数据分类--->" + result);
+                msg.what = KEY;
+                msg.obj = result;
+                handler.sendMessage(msg);
+            }
+
+            ;
+        }.start();
+    }
+    /**
+     * 获取我的消息列表
+     *
+     * @param KEY
+     */
+    public void getfeedbackList(final String userid, final int KEY) {
+        new Thread() {
+            Message msg = Message.obtain();
+
+            public void run() {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+//                params.add(new BasicNameValuePair("beginid", beginid));
+                params.add(new BasicNameValuePair("userid", userid));
+                String result = HttpConnect.getResponseForPost(UrlPath.getfeedbackList, params, mContext);
+                Log.i("YAG", "我的数据分类--->" + result);
+                msg.what = KEY;
+                msg.obj = result;
+                handler.sendMessage(msg);
+            }
+
+            ;
+        }.start();
+    }
+    /**
+     * 获取我的消息列表
+     *
+     * @param KEY
+     */
+    public void CHECKVERSON(final int KEY) {
+        new Thread() {
+            Message msg = Message.obtain();
+
+            public void run() {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                String result = HttpConnect.getResponseForPost(UrlPath.CHECKVERSON, params, mContext);
+                Log.i("YAG", "我的版本--->" + result);
+                msg.what = KEY;
+                msg.obj = result;
+                handler.sendMessage(msg);
+            }
+
+            ;
+        }.start();
+    }
+    /**
+     * 获取我的消息列表
+     *
+     * @param KEY
+     */
+    public void SETVIEW(final int KEY) {
+        new Thread() {
+            Message msg = Message.obtain();
+
+            public void run() {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                String result = HttpConnect.getResponseForPost(UrlPath.SETVIEW, params, mContext);
+                Log.i("YAG", "我的版本--->" + result);
                 msg.what = KEY;
                 msg.obj = result;
                 handler.sendMessage(msg);

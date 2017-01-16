@@ -63,10 +63,14 @@ public class Score_adapter extends BaseAdapter{
         }else{
             comholder = (CommonViewHolder) convertView.getTag();
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         int timei = Integer.parseInt(scorelist.get(position).getCreate_time().toString());
         String times = sdf.format(new Date(timei*1000L));
-        comholder.score_detail_num.setText("+"+scorelist.get(position).getScore().toString()+"");
+        if ("-".equals(scorelist.get(position).getScore().substring(0,1))){
+            comholder.score_detail_num.setText(scorelist.get(position).getScore().toString()+"");
+        }else{
+            comholder.score_detail_num.setText("+"+scorelist.get(position).getScore().toString()+"");
+        }
         comholder.score_name.setText(scorelist.get(position).getEvent().toString()+"");
         comholder.score_time.setText(times+"");
         return convertView;

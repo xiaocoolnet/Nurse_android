@@ -3,8 +3,6 @@ package chinanurse.cn.nurse.HttpConn;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;

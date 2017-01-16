@@ -29,7 +29,7 @@
             android:text="护士网"
             android:textColor="@color/title_color"
             android:textSize="30sp" />
-        <chinanurse.cn.nurse.pnlllist.PullToRefreshListView_delet
+        <chinanurse.cn.nurse.pnlllist.PullToRefreshListView
             android:id="@+id/lv_comprehensive"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,6 +39,16 @@
             />
     </RelativeLayout>
     <include layout="@layout/jiazaishibai"/>
+        <ImageButton
+            android:id="@+id/imagebutton_bi"
+            android:layout_width="@dimen/activity_size_50"
+            android:layout_height="@dimen/activity_size_50"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_size_20"
+            android:layout_marginRight="@dimen/activity_size_20"
+            android:background="@mipmap/ic_edit" />
     </RelativeLayout>
 
 </LinearLayout>

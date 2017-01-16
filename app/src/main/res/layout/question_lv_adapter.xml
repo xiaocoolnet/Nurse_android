@@ -29,11 +29,12 @@
         <TextView
             android:id="@+id/tv_answer_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="消化道症状"
             android:layout_marginTop="@dimen/activity_size_5"
             android:layout_marginBottom="@dimen/activity_size_5"
+            android:paddingRight="@dimen/activity_size_10"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size_16" />
     </LinearLayout>

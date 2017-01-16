@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@color/whilte">
+    android:background="@color/whilte"
+    android:weightSum="1">
     <LinearLayout
         android:id="@+id/all_voerical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        >
+        android:layout_weight="1.7">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +29,7 @@
                 android:layout_width="@dimen/activity_size_60"
                 android:layout_height="@dimen/activity_size_60"
                 android:layout_gravity="center_horizontal"
-                android:background="@mipmap/nurse_ex_logo" />
+                android:background="@mipmap/headlogo" />
 
             <TextView
                 android:id="@+id/nurse_employ_company_name"
@@ -46,7 +47,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/activity_size_10"
         android:layout_marginBottom="@dimen/activity_size_10"
-        android:layout_weight="1"
+        android:layout_weight="1.0"
         android:orientation="vertical">
 
         <LinearLayout

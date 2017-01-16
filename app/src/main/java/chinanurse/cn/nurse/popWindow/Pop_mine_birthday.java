@@ -1,11 +1,7 @@
 package chinanurse.cn.nurse.popWindow;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
@@ -25,17 +21,12 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import chinanurse.cn.nurse.Fragment_Nurse_mine.Myinfo;
+import chinanurse.cn.nurse.Fragment_Mine.Myinfo;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
@@ -43,12 +34,6 @@ import chinanurse.cn.nurse.WheelView.OnWheelChangedListener;
 import chinanurse.cn.nurse.WheelView.WheelView;
 import chinanurse.cn.nurse.WheelView.adapters.ArrayWheelAdapter;
 import chinanurse.cn.nurse.bean.UserBean;
-import chinanurse.cn.nurse.model.CityModel;
-import chinanurse.cn.nurse.model.DistrictModel;
-import chinanurse.cn.nurse.model.ProvinceModel;
-import chinanurse.cn.nurse.service.XmlParserHandler;
-
-//import com.mrwujay.cascade.service.XmlParserHandler;
 
 /**
  * Created by Administrator on 2016/7/21.

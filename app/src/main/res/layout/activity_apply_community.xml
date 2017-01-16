@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whilte"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_48">
+
+        <RelativeLayout
+            android:id="@+id/rl_fragment_apply_community_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_fragment_apply_community_back"
+                android:layout_width="@dimen/activity_size_9"
+                android:layout_height="@dimen/activity_size_17"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_7"
+                android:layout_toRightOf="@id/iv_fragment_apply_community_back"
+                android:text="@string/web_back_text"
+                android:textColor="@color/indicator"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/apply_circle_master_title"
+            android:textColor="@color/indicator"
+            android:textSize="@dimen/text_size_18" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/indicator"></View>
+    </RelativeLayout>
+
+    <chinanurse.cn.nurse.ui.ReboundScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/layout_boder"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_45">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_real_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="20dp"
+                        android:text="真实姓名"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_real_name"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_real_name"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_real_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_real_name"
+                        android:background="@color/white"
+                        android:hint="请输入您的真实姓名"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_45">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_ID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="20dp"
+                        android:text="身份证号"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_ID"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_ID"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_ID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_ID"
+                        android:background="@null"
+                        android:hint="请输入您的身份证号"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_45">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="20dp"
+                        android:text="联系地址"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_address"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_address"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_address"
+                        android:background="@null"
+                        android:hint="请输入您的联系地址"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_45">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="20dp"
+                        android:text="手机号码"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_phone"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_phone"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_phone"
+                        android:background="@null"
+                        android:hint="请输入您的手机号码"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_size_45"
+                    android:layout_marginRight="@dimen/activity_size_50">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_qq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="@dimen/activity_size_20"
+                        android:text=" Q Q号码"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_qq"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_qq"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_qq"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_qq"
+                        android:background="@null"
+                        android:hint="请输入您的QQ号码"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_size_50"
+                    android:minHeight="@dimen/activity_size_45">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_community_words"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/activity_size_15"
+                        android:layout_marginRight="20dp"
+                        android:text="申请感言"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <View
+                        android:id="@+id/line_words"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fragment_apply_community_words"
+                        android:background="@color/gray2" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_community_words"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/line_words"
+                        android:background="@null"
+                        android:hint="请输入您的申请感言，每天的上网时间"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="@dimen/text_size_16" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:text="证件验证"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+
+                android:background="@color/purple" />
+
+            <ImageView
+                android:id="@+id/iv_fragment_apply_community_live_photo"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_live_photo"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="个人日常生活照"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_16" />
+            <ImageView
+                android:id="@+id/iv_fragment_apply_community_hand_photo"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_hand_photo"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="手持身份证照"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_16" />
+            <LinearLayout
+                android:id="@+id/ll_fragment_apply_community_submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_boder"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/tv_submit"
+                    android:src="@mipmap/ic_gou_nor" />
+
+                <TextView
+                    android:id="@+id/tv_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="提交申请"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/activity_size_20" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </chinanurse.cn.nurse.ui.ReboundScrollView>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1" />
+</LinearLayout>

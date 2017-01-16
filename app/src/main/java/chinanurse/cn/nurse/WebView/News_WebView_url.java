@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.sina.weibo.sdk.api.WebpageObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
@@ -65,25 +67,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import chinanurse.cn.nurse.Fragment_Nurse.constant.CommunityNetConstant;
+import chinanurse.cn.nurse.Fragment_Nurse.net.NurseAsyncHttpClient;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.LoginActivity;
-import chinanurse.cn.nurse.MainActivity;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
 import chinanurse.cn.nurse.WebView.webview_comments_bean.Webview_comments_bean;
 import chinanurse.cn.nurse.adapter.Pop_Adapter_Choice;
-import chinanurse.cn.nurse.bean.FirstPageNews;
 import chinanurse.cn.nurse.bean.News_list_type;
 import chinanurse.cn.nurse.bean.UserBean;
-import chinanurse.cn.nurse.popWindow.Pop_EditText;
 import chinanurse.cn.nurse.popWindow.Pop_EditText_url;
 import chinanurse.cn.nurse.popWindow.Pop_shared_Activity;
 import chinanurse.cn.nurse.publicall.SecondPage;
 import chinanurse.cn.nurse.weibo.AccessTokenKeeper;
 import chinanurse.cn.nurse.weibo.Constants;
-
-//import chinanurse.cn.nurse.bean.FirstPageNews.FirstNewsData;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * 新闻界面列表详情
@@ -143,6 +143,10 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
     private Dialog dialog;
     private int positionlist;
     private Bitmap thumbBmp;
+    private Bitmap bitmap;
+    private Long commentCount = 0L;
+    private int pager = 1;
+    private TextView tv_more;
     /**
      * 推送消息发送广播
      */
@@ -175,14 +179,14 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
                                     dialog.show();
                                     dialog.getWindow().setContentView(layout);
                                     TextView tv_score = (TextView) layout.findViewById(R.id.dialog_score);
-                                    tv_score.setText("积分\t\t+"+json.getString("score"));
+                                    tv_score.setText("+"+json.getString("score"));
                                     TextView tv_score_name = (TextView) layout.findViewById(R.id.dialog_score_text);
                                     tv_score_name.setText(json.getString("event"));
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
                                             try {
-                                                Thread.sleep(1000);
+                                                Thread.sleep(3000);
                                                 dialog.dismiss();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
@@ -385,7 +389,7 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
                                         @Override
                                         public void run() {
                                             try {
-                                                Thread.sleep(1000);
+                                                Thread.sleep(3000);
                                                 dialog.dismiss();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
@@ -407,17 +411,25 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
                         comments = gson.fromJson(result, Webview_comments_bean.class);
                         commentslist.addAll(comments.getData());
                         if (commentslist != null && commentslist.size() > 0) {
-                            popchoice = new Pop_Adapter_Choice(commentslist, mactivity, 0,handler);
-                            web_list.setAdapter(popchoice);
+                            if (popchoice==null){
+                                popchoice = new Pop_Adapter_Choice(commentslist, mactivity, 0, handler);
+                                web_list.setAdapter(popchoice);
+                            }
+                            popchoice.setCommentCount(commentCount);
                             popchoice.notifyDataSetChanged();
                             setListViewHeightBasedOnChildren(web_list);
-                            tv_choice_num.setText(commentslist.size() + "");
+                            tv_choice_num.setText(commentCount + "");
                             linear_list.setVisibility(View.GONE);
                             web_list.setVisibility(View.VISIBLE);
                         } else {
                             tv_choice_num.setText("0");
                             linear_list.setVisibility(View.VISIBLE);
                             web_list.setVisibility(View.GONE);
+                        }
+                        if (commentslist != null&&commentslist.size() >= commentCount) {
+                            tv_more.setVisibility(View.GONE);
+                        } else {
+                            tv_more.setVisibility(View.VISIBLE);//TODO
                         }
                     }else{
                         tv_choice_num.setText("0");
@@ -630,24 +642,13 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
 //        });
         adbout_read_view = (TextView) findViewById(R.id.adbout_read_view);
         about_read = (TextView) findViewById(R.id.about_read);
-//        getscoreread();
+        tv_more = (TextView) findViewById(R.id.tv_forum_details_comment_more);
+        tv_more.setOnClickListener(this);
+        tv_more.setVisibility(View.GONE);
         gotoweb();
 
     }
 
-    private void getscoreread() {
-        if (user.getUserid().length() > 0) {
-            if (HttpConnect.isConnnected(mactivity)) {
-                Log.i("onResume", "initData1");
-                new StudyRequest(mactivity, handler).ADDSCORE_read(user.getUserid(),webId, ADDSCORE);
-            } else {
-                Log.i("onResume", "initData2");
-                Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-    }
     private void getscore() {
         if (user.getUserid().length() > 0) {
             if (HttpConnect.isConnnected(mactivity)) {
@@ -659,6 +660,47 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
             }
         }
     }
+    private void getCommentsCount() {
+//      id(文章id/帖子id),type(1文章，2帖子)
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("id", webId);
+        requestParams.put("type", "1");
+        NurseAsyncHttpClient.get(CommunityNetConstant.GET_COMMENTS_COUNT, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (response != null) {
+//                    {
+//                        "status":"success",
+//                            "data":"1"
+//                    }
+                    try {
+                        String status = response.getString("status");
+                        if (status.equals("success")) {
+                            String data = response.getString("data");
+                            if (data != null && !data.equals("")) {
+                                commentCount = Long.valueOf(data);
+                                if(popchoice!=null){
+                                    popchoice.setCommentCount(commentCount);
+                                    popchoice.notifyDataSetChanged();
+                                    setListViewHeightBasedOnChildren(web_list);
+                                    tv_choice_num.setText(""+commentCount);
+                                }
+                                if (commentslist != null&&commentslist.size() >= commentCount) {
+                                    tv_more.setVisibility(View.GONE);
+                                } else {
+                                    tv_more.setVisibility(View.VISIBLE);//TODO
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
     /*
     开启子线程，获取网络数据
      */
@@ -698,9 +740,13 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
         if (compressBitmapToData(checkImageSize(thumbBmp),32) != null &&compressBitmapToData(checkImageSize(thumbBmp),32).length > 0){
             mediaObject.thumbData = compressBitmapToData(checkImageSize(thumbBmp),32);
         }else{
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
+            try {
+            bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
             // 设置 Bitmap 类型的图片到视频对象里         设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
             mediaObject.setThumbImage(bitmap);
+            }catch (OutOfMemoryError e){
+                e.printStackTrace();
+            }
         }
         mediaObject.actionUrl = NetBaseConstant.NET_WEB_VIEW +fndData.getObject_id().toString()+"&type=1";
         // 1. 初始化微博的分享消息
@@ -750,9 +796,13 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
         if (compressBitmapToData(checkImageSize(thumbBmp),32) != null &&compressBitmapToData(checkImageSize(thumbBmp),32).length > 0){
             msg.thumbData = compressBitmapToData(checkImageSize(thumbBmp),32);
         }else{
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
+            try{
+            bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
             // 设置 Bitmap 类型的图片到视频对象里         设置缩略图。 注意：最终压缩过的缩略图大小不得超过 32kb。
             msg.setThumbImage(bitmap);
+            }catch (OutOfMemoryError e){
+                e.printStackTrace();
+            }
         }
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
@@ -771,16 +821,16 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
             //点击返回按钮,finish()掉本页面，显示上一页
             case R.id.web_back:
                 Log.i("choicetype","================>"+choicetype);
-//                if ("1".equals(choicetype)){
-                unregisterReceiver(receiver);
-                    News_WebView_url.this.finish();
-//                }else if("2".equals(choicetype)){
-//                    onKeyDown(4,null);
-//                }
-//                if (!ClientAPI.getInstance().isDocInited()) {
-//                    Intent intentGCM = new Intent(News_WebView_url.this,MainActivity.class);
-//                    startActivity(intentGCM);
-//                }
+                if(bitmap != null && !bitmap.isRecycled()){
+                    // 回收并且置为null
+                    bitmap.recycle();
+                    bitmap = null;
+                }
+                finish();
+                break;
+            case R.id.tv_forum_details_comment_more:
+                pager = pager + 1;
+                new StudyRequest(mactivity, handler).GETrefcomments(webId, GETREFCOMMENTS,pager);
                 break;
             case R.id.wechat:
                 if (user.getUserid().length() <= 0) {
@@ -901,8 +951,28 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         Log.e("onResume", "==============>+onResume");
+        StatService.onPageStart(this, "通知网页");
+        getCommentsCount();
         collect();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPageEnd(this, "通知网页");
+        if(bitmap != null && !bitmap.isRecycled()){
+            // 回收并且置为null
+            bitmap.recycle();
+            bitmap = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
     public void collect() {
         if (null != user.getUserid() && user.getUserid().length() > 0) {
             if (HttpConnect.isConnnected(mactivity)) {
@@ -915,7 +985,7 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
             webview_sc.setBackgroundResource(R.mipmap.btn_collect_sel);
             webview_like.setBackgroundResource(R.mipmap.img_like_nol);
         }
-        new StudyRequest(mactivity, handler).GETrefcomments(webId,GETREFCOMMENTS);
+        new StudyRequest(mactivity, handler).GETrefcomments(webId, GETREFCOMMENTS, pager);
     }
     private void showPopupMenu() {
         View layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_share_popupmenu, null);
@@ -995,7 +1065,8 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
             newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("是否点击查看")
+            builder.setTitle("新通知")
+                    .setMessage(newstypebean.getPost_title())
                     .setCancelable(false)
                     .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -1012,28 +1083,8 @@ public class News_WebView_url extends Activity implements View.OnClickListener {
                             dialog.cancel();
                         }
                     }).create().show();
-            context.unregisterReceiver(this);
-//            AlertDialog alert = builder.create();
-//            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-//            alert.show();
         }
     }
-//    //退出设置
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            long secondTime = System.currentTimeMillis();
-//            if (secondTime - firstTime > 2000) { //如果两次按键时间间隔大于2秒，则不退出
-//                Toast.makeText(getApplicationContext(), "再按一次退出程序",
-//                        Toast.LENGTH_LONG).show();  //提示消息
-//                firstTime = secondTime;// 更新firstTime
-//                return true;
-//            } else {
-//                System.exit(0);
-//            }
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
 //网络下载图片
 private void getBitmap(final int num){
     path = NetBaseConstant.NET_PIC_PREFIX_THUMB + fndData.getThumb().get(0).getUrl().toString();

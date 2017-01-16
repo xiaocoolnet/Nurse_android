@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment_Nurse_mine.MyPost.Mypost">
+    tools:context=".Fragment_Mine.MyPost.Mypost">
     <!-- 标题栏-->
     <RelativeLayout
         style="@style/back_title_RelativeLayout">

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eff2f7"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_48">
+
+        <RelativeLayout
+            android:id="@+id/rl_activity_publish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_activity_publish_back"
+                android:layout_width="@dimen/activity_size_9"
+                android:layout_height="@dimen/activity_size_17"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_10"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_size_7"
+                android:layout_toRightOf="@id/iv_activity_publish_back"
+                android:text="@string/web_back_text"
+                android:textColor="@color/indicator"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="发布帖子"
+            android:textColor="@color/indicator"
+            android:textSize="@dimen/text_size_18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/indicator"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_activity_publish_submit"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/iv_activity_publish_submit"
+                android:layout_width="@dimen/activity_size_17"
+                android:layout_height="@dimen/activity_size_17"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_size_10"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_publish" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_size_5"
+                android:layout_toLeftOf="@id/iv_activity_publish_submit"
+                android:text="发送"
+                android:textColor="@color/indicator"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_activity_publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/rl_activity_publish_title"
+        android:background="@color/title_color"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="请填写标题"
+        android:padding="10dip"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null"
+        android:textSize="18dp" />
+
+    <View
+        android:id="@+id/line_activity_publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/et_activity_publish_title"
+        android:background="#eff2f7" />
+
+    <EditText
+        android:id="@+id/et_activity_publish_content"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/title_color"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="对圈子的朋友说点什么吧"
+        android:padding="10dip"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null"
+        android:layout_below="@+id/line_activity_publish_title"/>
+
+
+    <GridView
+        android:id="@+id/gridview_publish_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/title_color"
+        android:horizontalSpacing="5dp"
+        android:minHeight="@dimen/activity_size_70"
+        android:numColumns="4"
+        android:padding="10dp"
+        android:scrollbars="none"
+        android:verticalSpacing="5dp"
+        android:layout_below="@+id/et_activity_publish_content"/>
+
+    <View
+        android:id="@+id/line_activity_publish_publish_img"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#eff2f7"
+        android:layout_below="@+id/gridview_publish_img"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/title_color"
+        android:layout_below="@+id/line_activity_publish_publish_img"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_choice_community"
+            style="@style/study_RelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/activity_size_22"
+                android:layout_height="@dimen/activity_size_22"
+                android:layout_margin="@dimen/activity_size_13"
+                android:src="@mipmap/ic_publish_choice_community" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="选择圈子"
+                android:textSize="@dimen/activity_size_18" />
+
+            <TextView
+                android:id="@+id/tv_choice_community"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/activity_size_5"
+                android:text="儿科"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/activity_size_18" />
+
+            <ImageView
+                android:id="@+id/iv_item_fragment_me_ito"
+                android:layout_width="@dimen/activity_size_7"
+                android:layout_height="@dimen/activity_size_13"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/activity_size_18"
+                android:src="@mipmap/ic_arrow_right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="@dimen/activity_size_40"
+            android:background="@color/gray2" />
+
+        <LinearLayout
+            android:id="@+id/ll_location"
+            style="@style/study_RelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/activity_size_22"
+                android:layout_height="@dimen/activity_size_22"
+                android:layout_margin="@dimen/activity_size_13"
+                android:src="@mipmap/ic_location" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="发在位置"
+                android:textSize="@dimen/activity_size_18" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/activity_size_5"
+                android:text="北京国贸SOHO大厦"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/activity_size_18" />
+
+            <ImageView
+                android:id="@+id/iv_item_fragment_me_into"
+                android:layout_width="@dimen/activity_size_7"
+                android:layout_height="@dimen/activity_size_13"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/activity_size_18"
+                android:src="@mipmap/ic_arrow_right" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

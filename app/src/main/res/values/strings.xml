@@ -3,8 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <integer name="versioncode">26</integer>
-    <string name="versionname">5.1.6</string>
+    <integer name="versioncode">43</integer>
+    <string name="versionname">6.0.0</string>
     <string name="nurse_text1">社区</string>
     <string name="nurse_text2">招聘</string>
     <string name="abroad_btn0">在线翻译</string>
@@ -39,13 +39,13 @@
     <string name="main_mine">我</string>
     <!--StuduFragment-->
     <string name="stu_every_relation_title_text">每日一练</string>
-    <string name="stu_Goman_topic_bank_text">5万道题库</string>
+    <string name="stu_Goman_topic_bank_text">8万道题库</string>
     <string name="stu_online_test_text">模拟考场</string>
     <string name="stu_goabroad_test_text">出国考试</string>
     <string name="stu_clinic_nurse_text">临床护理</string>
     <string name="stu_fifty_nurse_operation_text">50项护理操作</string>
     <string name="stu_test_book_text">考试宝典</string>
-    <string name="stu_paper_nurse_text">护理部</string>
+    <string name="stu_paper_nurse_text">护理部智库</string>
     <!--WXAPI-->
     <string name="wxapi">这里替换第一次申请的app_id</string>
     <!--DailyPracticeActivity-->
@@ -150,6 +150,8 @@
     <string name="main_my_news">我的消息</string>
     <string name="action_refresh">Refresh</string>
 
+    <!--ApplyCircleMasterActivity-->
+    <string name="apply_circle_master_title">申请圈主</string>
     <!-- 下拉刷新和上拉加载更多的文本 -->
     <string name="pushmsg_center_no_more_msg">已经到底啦</string>
     <string name="pushmsg_center_pull_up_text">松开加载更多</string>
@@ -171,4 +173,28 @@
     <string name="time_error">时间有问题</string>
     <string name="updated_just_now">刚刚更新</string>
     <string name="updated_at">上次更新于%1$s前</string>
+
+
+    <string name="action_done">完成</string>
+    <string name="folder_all">所有照片</string>
+    <string name="msg_no_camera">没有系统相机</string>
+    <string name="preview">预览</string>
+    <string name="msg_amount_limit">已经达到最高选择数量</string>
+    <string name="tip_take_photo">拍摄照片</string>
+    <string name="photo_unit">张</string>
+    <string name="desc_shrinkup">收起</string>
+    <string name="desc_spread">全文</string>
+
+    <string name="tv_report_title">请告诉我们您举报的理由</string>
+    <string name="tv_report_abusive">诽谤辱骂</string>
+    <string name="tv_report_pornographic">淫秽色情</string>
+    <string name="tv_report_advertisement">垃圾广告</string>
+    <string name="tv_report_violence">血腥暴力</string>
+    <string name="tv_report_cheat">欺诈</string>
+    <string name="tv_report_cheat_item">(酒托,话费托等行为)</string>
+    <string name="tv_report_illegal">违法行为</string>
+    <string name="tv_report_illegal_item">(涉毒,暴恐,违禁品等行为)</string>
+    <string name="tv_report_submit">确认举报</string>
+
+    <string name="tv_authentication">1、认证类型直接关系到你的认证等级，以及显示的样式哦；认证类型包含：在校生、应届生、护士、护师、主管护师、护士长、主任；\n2、如果您在职，请填写工作单位和工作科室，如果是学生可不填；\n3、上传证件：\n\t1）、在校生，请上传学生证；\n\t2）、应届生，请上传毕业证；\n\t3）、护士，请上传护士证；\n\t4）、护师，请上传护师证；\n\t5）、主管护师，请上传主管护师证；\n\t6）、护士长，请上传护士长工作证；\n\t7）、主任，请上传主任工作证；\n4、如果认证类型选择了在校生，则请上传 在校生 对应的证件即可；如上传证件和认证类型不相符，则审核不通过。</string>
 </resources>

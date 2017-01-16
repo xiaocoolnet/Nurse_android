@@ -3,13 +3,9 @@ package chinanurse.cn.nurse.Fragment_Nurse_job;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,7 +26,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -40,6 +35,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -49,7 +45,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,16 +55,15 @@ import chinanurse.cn.nurse.HttpConn.NetUtil;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
 import chinanurse.cn.nurse.UrlPath.NetBaseConstant;
-import chinanurse.cn.nurse.UrlPath.RegexUtil;
-import chinanurse.cn.nurse.WebView.News_WebView_url;
+import chinanurse.cn.nurse.utils.RegexUtil;
 import chinanurse.cn.nurse.adapter.Spinner_Adapter;
 import chinanurse.cn.nurse.bean.MineResumeinfo;
-import chinanurse.cn.nurse.bean.News_list_type;
 import chinanurse.cn.nurse.bean.Spinner_Bean;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.picture.RoudImage;
 import chinanurse.cn.nurse.popWindow.Pop_commuity_location;
 import chinanurse.cn.nurse.popWindow.Pop_commuity_location_two;
+import chinanurse.cn.nurse.popWindow.Pop_mine_birthdayone;
 
 /**
  * 添加简历
@@ -88,13 +82,6 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
 
     private UserBean user;
     private Activity mactivity;
-
-    /**
-     * 推送消息发送广播
-     */
-    private MyReceiver receiver;
-    private News_list_type.DataBean newstypebean;
-
 
     private RadioGroup rg_work_state,rg_sex_state;
     private RadioButton rb_work_state_01, rb_work_state_02, rb_work_state_03,rb_sex_state_01,rb_sex_state_02;
@@ -140,6 +127,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
     private Boolean iS = true;
     private Boolean isname = true;
     private Boolean isnameone = true;
+    private Pop_mine_birthdayone mineborthday;
 
 
     private Handler handler = new Handler(Looper.myLooper()) {
@@ -193,7 +181,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                             datalist2 = new ArrayList<String>();
                             data_list_12.clear();
                             datalist2.clear();
-                            datalist2.add("<请选择");
+                            datalist2.add("请选择");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jo = jsonArray.getJSONObject(i);
                                 Spinner_Bean.DataBean dataBean = new Spinner_Bean.DataBean();
@@ -224,6 +212,8 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                             dataadapter2.notifyDataSetChanged();
 
                         } else {
+                            datalist2 = new ArrayList<String>();
+                            datalist2.add("请选择");
                             dataadapter2 = new ArrayAdapter<String>(mactivity, R.layout.spinner_layout_ymd, datalist2);
                             dataadapter2.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
                             tv_money_want_02.setAdapter(dataadapter2);
@@ -232,7 +222,10 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }}else{
-
+                        dataadapter2 = new ArrayAdapter<String>(mactivity, R.layout.spinner_layout_ymd, datalist2);
+                        dataadapter2.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+                        tv_money_want_02.setAdapter(dataadapter2);
+                        dataadapter2.notifyDataSetChanged();
                     }
                     break;
 
@@ -468,7 +461,8 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } }else{
+                    }
+                    }else{
                         Toast.makeText(mactivity, "上传头像失败，请重试！", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -638,10 +632,9 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
         user = new UserBean(mactivity);
         popcomm = new Pop_commuity_location(Add_EmployWork_Fragment.this);
         popcomtwo = new Pop_commuity_location_two(Add_EmployWork_Fragment.this);
+        mineborthday = new Pop_mine_birthdayone(Add_EmployWork_Fragment.this);
         initDataView();
-        receiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter("com.USER_ACTION");
-        registerReceiver(receiver, filter);
+
 
     }
 
@@ -653,7 +646,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
         textview = (TextView) findViewById(R.id.textview);
         img_head = (RoudImage) findViewById(R.id.img_head);
         // 显示图片的配置
-        options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.img_head_nor).showImageOnFail(R.mipmap.img_head_nor).cacheInMemory(true).cacheOnDisc(true).build();
+        options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.headlogo).showImageOnFail(R.mipmap.headlogo).cacheInMemory(true).cacheOnDisc(true).build();
         tv_head = (TextView) findViewById(R.id.tv_head);
         //性别
         rg_sex_state = (RadioGroup) findViewById(R.id.rg_sex_state);
@@ -804,12 +797,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
 
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.i("onResume", "-------->onResume");
-//
-//    }
+
 
     private void worview() {
         if (NetUtil.isConnnected(mactivity)) {
@@ -861,27 +849,28 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                 if (mrinfo!= null){
                     isShowDialog();
                 }else{
-                //获取当前系统时间
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-                date = formatter.format(new Date());
-                calendar = Calendar.getInstance();
-                dialog = new DatePickerDialog(mactivity,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                Log.i("calender", "年-->" + year + "月-->" + monthOfYear + "日-->" + dayOfMonth);
-                                if (year > Integer.valueOf(date)) {
-                                    Toast.makeText(mactivity, "请选择正确的出生日期", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    birthady_year.setText(year + "");
-                                    birthady_month.setText(monthOfYear + 1 + "");
-                                    birthady_day.setText(dayOfMonth + "");
-                                }
-                            }
-                        }, calendar.get(Calendar.YEAR), calendar
-                        .get(Calendar.MONTH), calendar
-                        .get(Calendar.DAY_OF_MONTH));
-                dialog.show();
+//                //获取当前系统时间
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+//                date = formatter.format(new Date());
+//                calendar = Calendar.getInstance();
+//                dialog = new DatePickerDialog(mactivity,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                                Log.i("calender", "年-->" + year + "月-->" + monthOfYear + "日-->" + dayOfMonth);
+//                                if (year > Integer.valueOf(date)) {
+//                                    Toast.makeText(mactivity, "请选择正确的出生日期", Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    birthady_year.setText(year + "");
+//                                    birthady_month.setText(monthOfYear + 1 + "");
+//                                    birthady_day.setText(dayOfMonth + "");
+//                                }
+//                            }
+//                        }, calendar.get(Calendar.YEAR), calendar
+//                        .get(Calendar.MONTH), calendar
+//                        .get(Calendar.DAY_OF_MONTH));
+//                dialog.show();
+                    mineborthday.showAsDropDown(textview);
                     iS = false;
                 }
                 break;
@@ -913,7 +902,6 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                 popcomtwo.showAsDropDown(textview);
                 break;
             case R.id.btn_back:
-                unregisterReceiver(receiver);
                 finish();
                 break;
             case R.id.ed_evaluation:
@@ -993,7 +981,9 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
             Toast.makeText(mactivity, "请输入姓名", Toast.LENGTH_SHORT).show();//姓名
         } else if (3==work_num) {
             Toast.makeText(mactivity, "请选择求职状态", Toast.LENGTH_SHORT).show();//求职状态
-        } else if (phone == null || "".equals(phone)) {
+        } else if (jobstatenew == null &&jobstatenew.length() <= 0){
+            Toast.makeText(mactivity, "请选择求职状态", Toast.LENGTH_SHORT).show();//求职状态
+        }else if (phone == null || "".equals(phone)) {
             Toast.makeText(mactivity, "请完善联系电话", Toast.LENGTH_SHORT).show();//电话
         } else if (email == null || "".equals(email)) {
             Toast.makeText(mactivity, "请完善联系邮箱", Toast.LENGTH_SHORT).show();//邮箱
@@ -1350,6 +1340,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
                 jobstatenew = mrinfo.getJobstate();
             }
         } else {
+            work_num = 0;
             rb_work_state_01.setChecked(false);
             rb_work_state_02.setChecked(false);
             rb_work_state_03.setChecked(false);
@@ -1525,11 +1516,6 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
             img_head.setImageDrawable(drawable);
             picname = "avatar" + user.getUserid() + String.valueOf(new Date().getTime());
             storeImageToSDCARD(photo, picname, filepath);
-            if (HttpConnect.isConnnected(mactivity)) {
-                new StudyRequest(mactivity, handler).updateUserImg(head, KEY);
-            } else {
-                Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
@@ -1551,6 +1537,15 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
             tv_head.setVisibility(View.GONE);
             fos.flush();
             fos.close();
+            if (head != null&&head.length() > 0) {
+                if (HttpConnect.isConnnected(mactivity)) {
+                    new StudyRequest(mactivity, handler).updateUserImg(head, KEY);
+                } else {
+                    Toast.makeText(mactivity, R.string.net_erroy, Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(mactivity,"请重新拍照", Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1674,36 +1669,7 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
             return false;
         }
     }
-    public class MyReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(final Context context, Intent intent) {
-            newstypebean = (News_list_type.DataBean) intent.getSerializableExtra("fndinfo");
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("新通知")
-                    .setMessage(newstypebean.getPost_title())
-                    .setCancelable(false)
-                    .setPositiveButton("立即查看", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("fndinfo", newstypebean);
-                            Intent intent = new Intent(mactivity, News_WebView_url.class);
-                            intent.putExtras(bundle);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            mactivity.startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    }).create().show();
-            context.unregisterReceiver(this);
-//            AlertDialog alert = builder.create();
-//            alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-//            alert.show();
-        }
-    }
     //6.0申请动态权限
     private void getCheck() {
         if (ContextCompat.checkSelfPermission(mactivity, Manifest.permission.CAMERA)
@@ -1736,5 +1702,17 @@ public class Add_EmployWork_Fragment extends AppCompatActivity implements View.O
             ActivityCompat.requestPermissions(mactivity, new String[]{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS},
                     100);
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onPageStart(this, "个人简历编辑");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(this, "个人简历编辑");
     }
 }

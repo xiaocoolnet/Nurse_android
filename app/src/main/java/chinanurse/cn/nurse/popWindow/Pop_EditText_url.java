@@ -29,7 +29,6 @@ import org.json.JSONObject;
 import chinanurse.cn.nurse.HttpConn.HttpConnect;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.R;
-import chinanurse.cn.nurse.WebView.News_WebView;
 import chinanurse.cn.nurse.WebView.News_WebView_url;
 import chinanurse.cn.nurse.bean.UserBean;
 

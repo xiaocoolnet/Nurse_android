@@ -40,6 +40,7 @@
                 android:id="@+id/score_detail_num"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_16"
+                android:layout_gravity="right"
                 android:layout_width="wrap_content"
                 android:textColor="@color/purple"
                 />

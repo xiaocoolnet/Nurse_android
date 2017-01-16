@@ -1,13 +1,13 @@
 package chinanurse.cn.nurse.Fragment_Nurse_job;
 
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -30,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 import chinanurse.cn.nurse.FragmentTag;
-import chinanurse.cn.nurse.Fragment_Main.SecondFragment;
+import chinanurse.cn.nurse.Fragment_Nurse.EmployFragment;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.Bean_list;
 import chinanurse.cn.nurse.Fragment_Nurse_job.adapter.NurseEmployTalentAdapter;
 import chinanurse.cn.nurse.Fragment_Nurse_job.bean.Talent_work_bean;
@@ -39,6 +40,7 @@ import chinanurse.cn.nurse.HttpConn.NetUtil;
 import chinanurse.cn.nurse.HttpConn.request.StudyRequest;
 import chinanurse.cn.nurse.MainActivity;
 import chinanurse.cn.nurse.R;
+import chinanurse.cn.nurse.bean.NurseEmployBean;
 import chinanurse.cn.nurse.bean.NurseEmployTalentBean;
 import chinanurse.cn.nurse.bean.TalentAdapter_bean;
 import chinanurse.cn.nurse.bean.UserBean;
@@ -77,14 +79,18 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
     private RelativeLayout ril_shibai,ril_list;
     private TextView shuaxin_button,detail_loading_nonum;
     private ProgressDialog dialogpgd;
-    private SecondFragment cf;
+    private EmployFragment cf;
+    private int pager = 1;
+    private MainActivity activity;
 
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case CommunalInterfaces.TALENT_LIST:
-                    talentDataList.clear();
+                    if (pager == 1) {
+                        talentDataList.clear();
+                    }
                     JSONObject jsonObject = (JSONObject) msg.obj;
                     if (jsonObject != null){
                     try {
@@ -125,9 +131,21 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                                 }
                                 talentDataList.add(talentDataBean);
                             }
-                            nurseEmployTalentAdapter = new NurseEmployTalentAdapter(getActivity(), talentDataList, handler);
-                            lv_view.setAdapter(nurseEmployTalentAdapter);
-                            dialogpgd.dismiss();
+                            if (nurseEmployTalentAdapter==null){
+                                nurseEmployTalentAdapter = new NurseEmployTalentAdapter(getActivity(), talentDataList, handler);
+                                lv_view.setAdapter(nurseEmployTalentAdapter);
+                                dialogpgd.dismiss();
+                            }else {
+                                if (pager == 1) {
+                                    nurseEmployTalentAdapter = new NurseEmployTalentAdapter(getActivity(), talentDataList, handler);
+                                    lv_view.setAdapter(nurseEmployTalentAdapter);
+                                    dialogpgd.dismiss();
+                                }else {
+                                    nurseEmployTalentAdapter.notifyDataSetChanged();
+                                    dialogpgd.dismiss();
+                                }
+                            }
+                            stopRefresh();
                         }else{
                             dialogpgd.dismiss();
                             detail_loading_nonum.setVisibility(View.VISIBLE);
@@ -158,6 +176,9 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                 case 5:
                     position = (int) msg.obj;
                     if (HttpConnect.isConnnected(getActivity())) {
+                        dialogpgd.setMessage("正在邀请...");
+                        dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        dialogpgd.show();
                         new StudyRequest(getActivity(), handler).getMyPublishJobList(user.getUserid(), GETMYPUBLISHJOB);
 //                            new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
                         //userid个人  companyid企业   jobid招聘信息
@@ -176,6 +197,7 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                     for (int i = 0; i < talentlist.size(); i++) {
                         ralent[i] = talentlist.get(i).getJobtype();
                     }
+                        dialogpgd.dismiss();
 //                    final String[] sexchoose = new String[]{"女", "男"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(EmployTalentFragment.this.getActivity());
                     builder.setTitle("请选择");
@@ -185,18 +207,37 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
 
                         public void onClick(DialogInterface dialog, int which) {
                             jobid = talentlist.get(which).getId();
-                            if (HttpConnect.isConnnected(getActivity())) {
-                                new StudyRequest(getActivity(), handler).InviteJob_judge(talentDataList.get(position).getUserid(), user.getUserid(), jobid, INDERVIEWAPPLY);
+                        }
+                    });
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (HttpConnect.isConnnected(getActivity())) {
+                                    dialogpgd.setMessage("正在邀请...");
+                                    dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                    dialogpgd.show();
+                                    Log.e("user.getUserid","\\\\\\\\\\\\\\\\\""+user.getUserid());
+                                    Log.e("jobid","\\\\\\\\\\\\\\\\\""+jobid);
+                                    Log.e("talentDataList","\\\\\\\\\\\\\\\\\""+talentDataList.get(position).getUserid());
+                                    if (jobid == null||jobid.length() <= 0){
+                                        jobid = talentlist.get(0).getId();
+                                        Log.e("jobid","\\\\\\\\\\\\\\\\\""+jobid);
+                                    }
+                                    new StudyRequest(getActivity(), handler).InviteJob_judge(talentDataList.get(position).getUserid(), user.getUserid(), jobid, INDERVIEWAPPLY);
 //                            new StudyRequest(mcontext, handler).getMyPublishJobList(userid, INDERVIEW);
-                                //userid个人  companyid企业   jobid招聘信息
-                            } else {
-                                Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
+                                    //userid个人  companyid企业   jobid招聘信息
+                                } else {
+                                    Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
                             }
-
+                        });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
                     });
-                    builder.setNegativeButton("取消", null);
                     builder.show();
                     }else{
                         Toast.makeText(getActivity(), "暂无招聘信息", Toast.LENGTH_SHORT).show();
@@ -210,6 +251,7 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                             if ("success".endsWith(json.optString("status"))) {
                                 String data = json.getString("data");
                                 if ("1".equals(data)) {
+                                    dialogpgd.dismiss();
                                     Toast.makeText(getActivity(), "您已经邀请过该用户", Toast.LENGTH_SHORT).show();
                                 } else if ("0".equals(data)) {
                                     if (HttpConnect.isConnnected(getActivity())) {
@@ -218,11 +260,15 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                                         Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
                                     }
                                 }
+                            }else{
+                                dialogpgd.dismiss();
                             }
                         } catch (JSONException e) {
+                            dialogpgd.dismiss();
                             e.printStackTrace();
                         }
                     }else{
+                        dialogpgd.dismiss();
                         Toast.makeText(getActivity(), "邀请失败，重新邀请...", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -232,15 +278,17 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                         try {
                             JSONObject obj = new JSONObject(result);
                             if ("success".equals(obj.optString("status"))) {
-                                JSONObject json = new JSONObject(obj.getString("data"));
                                 Toast.makeText(getActivity(), "邀请成功", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getActivity(), "邀请失败", Toast.LENGTH_SHORT).show();
                             }
+                            dialogpgd.dismiss();
                         } catch (JSONException e) {
+                            dialogpgd.dismiss();
                             e.printStackTrace();
                         }
                     }else{
+                        dialogpgd.dismiss();
                         Toast.makeText(getActivity(), "邀请失败，重新邀请...", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -250,16 +298,17 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
                     Bean_list.Beantanle_ist.clear();
                     NurseEmployTalentBean.DataBean employlist = talentDataList.get(position);
                     Bean_list.Beantanle_ist.add(employlist);
-
-                    try{
-                        cf = (SecondFragment) ((MainActivity) getActivity())
-                                .getSupportFragmentManager().findFragmentByTag(
-                                        FragmentTag.TAG_NURSE.getTag());
-                        cf.switchFragmentone(FragmentTag.TAG_DETAILTALENT);
-                        cf.visible();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    activity = (MainActivity) getActivity();
+                    activity.switchFragmentAddHide(FragmentTag.TAG_DETAILTALENT);
+//                    try{
+//                        cf = (EmployFragment) ((MainActivity) getActivity())
+//                                .getSupportFragmentManager().findFragmentByTag(
+//                                        FragmentTag.TAG_EMPLOY.getTag());
+//                        cf.switchFragmentone(FragmentTag.TAG_DETAILTALENT);
+//                        cf.visible();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
 
                     break;
             }
@@ -294,7 +343,7 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate( R.layout.employ_talent_fragment_switch,container, false);
-
+        user = new UserBean(getActivity());
         employiniview();
         setOnItemClick();
         return mView;
@@ -306,12 +355,11 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
         shuaxin_button = (TextView) mView.findViewById(R.id.shuaxin_button);
         ril_shibai = (RelativeLayout) mView.findViewById(R.id.ril_shibai);
         ril_list = (RelativeLayout) mView.findViewById(R.id.ril_list);
-        dialogpgd=new ProgressDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
+        dialogpgd=new ProgressDialog(getActivity(), android.app.AlertDialog.THEME_HOLO_LIGHT);
         dialogpgd.setCancelable(false);
         shuaxin_button = (TextView) mView.findViewById(R.id.shuaxin_button);
         ril_shibai = (RelativeLayout) mView.findViewById(R.id.ril_shibai);
         ril_list = (RelativeLayout) mView.findViewById(R.id.ril_list);
-        dialogpgd=new ProgressDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
         detail_loading = (TextView) mView.findViewById(R.id.detail_loading);
         pulllist = (PullToRefreshListView) mView.findViewById(R.id.lv_comprehensive);
         pulllist.setPullLoadEnabled(true);
@@ -324,14 +372,41 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
             }
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                stopRefresh();
+                if (talentDataList.size()%20 != 0){
+                    stopRefresh();
+                    return;
+                }
+                pager = pager+1;
+                try{
+                    getnewslistother();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         setLastData();
         lv_view = pulllist.getRefreshableView();
         lv_view.setDivider(null);
     }
-
+    private void getnewslistother() {
+        if (NetUtil.isConnnected(getActivity())) {
+            dialogpgd.setMessage("正在加载...");
+            dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialogpgd.show();
+            new StudyRequest(getActivity(), handler).talentList(String.valueOf(pager));
+        }else {
+            Log.i("onResume", "initData2");
+            Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();
+            ril_shibai.setVisibility(View.VISIBLE);
+            ril_list.setVisibility(View.GONE);
+            shuaxin_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getnewslistother();
+                }
+            });
+        }
+    }
     @Override
     public void onClick(View v) {
 
@@ -366,18 +441,25 @@ public class EmployTalentFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+        StatService.onPageStart(getActivity(), "个人简历列表");
         Log.i("onResume", "---------->onResume");
         initData();
 
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 配对页面埋点，与start的页面名称要一致
+        StatService.onPageEnd(getActivity(), "个人简历列表");
+    }
     public void initData() {
 //        网络请求
         if (NetUtil.isConnnected(getActivity())) {
             dialogpgd.setMessage("正在加载...");
             dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialogpgd.show();
-            new StudyRequest(getActivity(), handler).talentList();
+            pager = 1;
+            new StudyRequest(getActivity(), handler).talentList(String.valueOf(pager));
         }else {
             Log.i("onResume", "initData2");
             Toast.makeText(getActivity(), R.string.net_erroy, Toast.LENGTH_SHORT).show();

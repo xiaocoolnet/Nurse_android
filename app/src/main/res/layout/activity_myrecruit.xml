@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".Fragment_Nurse_mine.Myrecruit">
+    tools:context=".Fragment_Mine.Myrecruit">
     <RelativeLayout
         style="@style/back_title_RelativeLayout">
         <!-- 返回按钮，扩大点击面，所以用一个布局包裹住-->

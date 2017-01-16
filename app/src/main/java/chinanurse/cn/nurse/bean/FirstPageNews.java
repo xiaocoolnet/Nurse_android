@@ -57,7 +57,7 @@ public class FirstPageNews implements Serializable{
         private String term_name;
         private String post_title;
         private String post_excerpt;
-        private String post_date;
+//        private String post_date;
         private String post_modified;
         private String post_source;
         private String post_like;
@@ -65,7 +65,43 @@ public class FirstPageNews implements Serializable{
         private String recommended;
         private String smeta;
         private String createtime;
+        private String favorites_count;
+        private String favorites_add;
+        //=====
+        private String likes_count;
+        private String likes_add;
 
+        public String getLikes_count() {
+            return likes_count;
+        }
+
+        public void setLikes_count(String likes_count) {
+            this.likes_count = likes_count;
+        }
+
+        public String getLikes_add() {
+            return likes_add;
+        }
+
+        public void setLikes_add(String likes_add) {
+            this.likes_add = likes_add;
+        }
+
+        public String getFavorites_count() {
+            return favorites_count;
+        }
+
+        public void setFavorites_count(String favorites_count) {
+            this.favorites_count = favorites_count;
+        }
+
+        public String getFavorites_add() {
+            return favorites_add;
+        }
+
+        public void setFavorites_add(String favorites_add) {
+            this.favorites_add = favorites_add;
+        }
 
         /**
          * url : 20160902/57c9253c510cc.jpg
@@ -73,13 +109,13 @@ public class FirstPageNews implements Serializable{
          */
 
         private List<ThumbBean> thumb;
-        /**
-         * userid : 619
-         * avatar : avatar20160818131237619.png
-         * username : 中国护士网
-         */
-
-        private List<LikesBean> likes;
+//        /**
+//         * userid : 619
+//         * avatar : avatar20160818131237619.png
+//         * username : 中国护士网
+//         */
+//
+//        private List<LikesBean> likes;
         /**
          * userid : 608
          */
@@ -138,13 +174,13 @@ public class FirstPageNews implements Serializable{
             this.post_excerpt = post_excerpt;
         }
 
-        public String getPost_date() {
-            return post_date;
-        }
-
-        public void setPost_date(String post_date) {
-            this.post_date = post_date;
-        }
+//        public String getPost_date() {
+//            return post_date;
+//        }
+//
+//        public void setPost_date(String post_date) {
+//            this.post_date = post_date;
+//        }
 
         public String getPost_modified() {
             return post_modified;
@@ -202,13 +238,13 @@ public class FirstPageNews implements Serializable{
             this.thumb = thumb;
         }
 
-        public List<LikesBean> getLikes() {
-            return likes;
-        }
-
-        public void setLikes(List<LikesBean> likes) {
-            this.likes = likes;
-        }
+//        public List<LikesBean> getLikes() {
+//            return likes;
+//        }
+//
+//        public void setLikes(List<LikesBean> likes) {
+//            this.likes = likes;
+//        }
 
         public List<FavoritesBean> getFavorites() {
             return favorites;

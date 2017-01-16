@@ -56,7 +56,7 @@ public class SwipeItemLayout extends FrameLayout {
 		contentView.setLayoutParams(contentParams);
 
 		menuView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT));
+				LayoutParams.MATCH_PARENT));
 
 		addView(contentView);
 		addView(menuView);
@@ -176,7 +176,7 @@ public class SwipeItemLayout extends FrameLayout {
 		menuView.layout(getMeasuredWidth(), 0,
 				getMeasuredWidth() + menuView.getMeasuredWidth(),
 				contentView.getMeasuredHeight());
-		// setMenuHeight(mContentView.getMeasuredHeight());
-		// bringChildToFront(mContentView);
+//		 setMenuHeight(mContentView.getMeasuredHeight());
+//		 bringChildToFront(mContentView);
 	}
 }

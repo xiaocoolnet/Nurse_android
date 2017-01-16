@@ -120,12 +120,12 @@
         android:layout_height="1dp"
         android:background="@color/gray2" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/rela_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </RelativeLayout>
+    </FrameLayout>
 
 
 </LinearLayout>

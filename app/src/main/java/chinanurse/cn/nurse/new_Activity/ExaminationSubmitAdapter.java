@@ -37,6 +37,7 @@ import chinanurse.cn.nurse.bean.Question_hashmap_data;
 import chinanurse.cn.nurse.bean.UserBean;
 import chinanurse.cn.nurse.popWindow.Pop_Answer_Sheet;
 import chinanurse.cn.nurse.popWindow.Pop_Aswer;
+import chinanurse.cn.nurse.publicall.ListViewForScrollView;
 
 public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickListener {
 
@@ -219,7 +220,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
             currentNumber = gradview_position;
             convertView = viewItems.get(gradview_position);
             //显示选项列表
-            holder.listview = (ListView) convertView.findViewById(R.id.question_answer_list);
+            holder.listview = (ListViewForScrollView) convertView.findViewById(R.id.question_answer_list);
             //显示单选还是多选
             holder.question_title = (TextView) convertView.findViewById(R.id.question_title_score_text);
             //显示当前页面和总页面
@@ -227,6 +228,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
 //            holder.question_test = (TextView) convertView.findViewById(R.id.quedtion_at_present_topic_page);
             //考试时间
             holder.question_time = (TextView) convertView.findViewById(R.id.question_time);
+
             if ("1".equals(type)){
                 holder.question_time.setText(position + 1 + "/" + answerItems.size());
             }else if ("11".equals(type)){
@@ -267,6 +269,8 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
             holder.adapter = new Study_question_answer_anapdter(mContext, answerItems, position);
 
             holder.listview.setAdapter(holder.adapter);
+            holder.listview.setDivider(null);
+            mContext.setListViewHeightBasedOnChildren(holder.listview);
             //我把这几个点击事件拿到里面来，因为，这些viewpager是同时创建的，currentNumber会从0加到9，
             // currentNumber=9之后不会在变化，传输currentNumber的值无意义
             holder.rbtn_collect.setOnClickListener(new OnClickListener() {
@@ -303,11 +307,19 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                         }
                     }
                     View v = parent.getChildAt(RightPosition);
-                    v.findViewById(R.id.ril_choose_option).setBackgroundResource(R.drawable.button_boder_green);
+                    if(v!=null) {
+                        v.findViewById(R.id.ril_choose_option).setBackgroundResource(R.drawable.button_boder_green);
+                        holder.answer_list = (TextView) v.findViewById(R.id.tv_answer_list);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                    }
                     //我选择的答案
                     holder.answer_mine = holder.option[lv_position];
                     holder.answer_score = holder.question_score.getText().toString();
                     holder.answer_history = (LinearLayout) view.findViewById(R.id.ril_choose_option);
+                    holder.question_option = (TextView) view.findViewById(R.id.question_option);
+                    holder.answer_list = (TextView) view.findViewById(R.id.tv_answer_list);
+
                     //画外框
                     if (((ListView) parent).getTag() != null) {
                         ((View) ((ListView) parent).getTag()).findViewById(R.id.ril_choose_option).setBackgroundResource(R.drawable.button_boder);
@@ -317,14 +329,18 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                     if ("1".equals(answerItems.get(position).getAnswerlist().get(lv_position).getIsanswer())) {
                         holder.answer_mine = ((TextView) view.findViewById(R.id.question_option)).getText().toString();
                         holder.answer_history.setBackgroundResource(R.drawable.button_boder_green);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
                         //正确的时候将当前自定义页面添加到第一页的viewpager中
-//                    mContext.setCurrentView(position + 1);
+//                      mContext.setCurrentView(position + 1);
                         //正确
                         isCorrect = ConstantUtil.isCorrect;
                         //答案正确的状态
                         holder.answer_type = "1";
                     } else if ("0".equals(answerItems.get(gradview_position).getAnswerlist().get(lv_position).getIsanswer().toString())) {
                         holder.answer_history.setBackgroundResource(R.drawable.button_boder_red);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
                         //错误
                         isCorrect = ConstantUtil.isError;
                         //错误状态
@@ -339,7 +355,6 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                         answer_list.setAnswer_title(answerItems.get(gradview_position).getAnswerlist().get(lv_position).getAnswer_title() + "");
                         answer_list.setIsanswer(answerItems.get(gradview_position).getAnswerlist().get(lv_position).getIsanswer() + "");
                     }
-
                     //传值到答案中；
                     mapMultiSelect.put("historyanswer", lv_position + "");
                     mapMultiSelect.put("currentanswer", RightPosition + "");
@@ -416,7 +431,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
             currentNumber = position;
             convertView = viewItems.get(position);
             //显示选项列表
-            holder.listview = (ListView) convertView.findViewById(R.id.question_answer_list);
+            holder.listview = (ListViewForScrollView) convertView.findViewById(R.id.question_answer_list);
             //显示单选还是多选
             holder.question_title = (TextView) convertView.findViewById(R.id.question_title_score_text);
             //显示当前页面和总页面
@@ -467,7 +482,8 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                 holder.present_topic.setVisibility(View.VISIBLE);
             }
             holder.listview.setAdapter(holder.adapter);
-            setListViewHeightBasedOnChildren(holder.listview);
+            holder.listview.setDivider(null);
+            mContext.setListViewHeightBasedOnChildren(holder.listview);
             //我把这几个点击事件拿到里面来，因为，这些viewpager是同时创建的，currentNumber会从0加到9，
             // currentNumber=9之后不会在变化，传输currentNumber的值无意义
 
@@ -517,6 +533,11 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                     View v = parent.getChildAt(RightPosition);
                     if(v!=null) {
                         v.findViewById(R.id.ril_choose_option).setBackgroundResource(R.drawable.button_boder_green);
+                        holder.question_option = (TextView) v.findViewById(R.id.question_option);
+                        holder.answer_list = (TextView) v.findViewById(R.id.tv_answer_list);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
+
                     }
                     //我选择的答案
                     holder.answer_mine = holder.option[lv_position];
@@ -524,6 +545,8 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                     Question_hashmap_data.questionList.add(answerItems.get(position).getId()+"");
                     holder.answer_score = holder.question_score.getText().toString();
                     holder.answer_history = (LinearLayout) view.findViewById(R.id.ril_choose_option);
+                    holder.question_option = (TextView) view.findViewById(R.id.question_option);
+                    holder.answer_list = (TextView) view.findViewById(R.id.tv_answer_list);
                     //画外框
                     if (((ListView) parent).getTag() != null) {
                         ((View) ((ListView) parent).getTag()).findViewById(R.id.ril_choose_option).setBackgroundResource(R.drawable.button_boder);
@@ -533,8 +556,11 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                     if ("1".equals(answerItems.get(position).getAnswerlist().get(lv_position).getIsanswer())) {
                         holder.answer_mine = ((TextView) view.findViewById(R.id.question_option)).getText().toString();
                         holder.answer_history.setBackgroundResource(R.drawable.button_boder_green);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
+
                         //正确的时候将当前自定义页面添加到第一页的viewpager中
-//                    mContext.setCurrentView(position + 1);
+//                      mContext.setCurrentView(position + 1);
                         //正确
                         isCorrect = ConstantUtil.isCorrect;
                         //答案正确的状态
@@ -546,6 +572,8 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
                         }
                     } else if ("0".equals(answerItems.get(position).getAnswerlist().get(lv_position).getIsanswer().toString())) {
                         holder.answer_history.setBackgroundResource(R.drawable.button_boder_red);
+                        holder.question_option.setTextColor(mContext.getResources().getColor(R.color.whilte));
+                        holder.answer_list.setTextColor(mContext.getResources().getColor(R.color.whilte));
                         //错误
                         isCorrect = ConstantUtil.isError;
                         //错误状态
@@ -638,29 +666,29 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
     /*
 解决scrollview下listview显示不全
 */
-    public void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
-            // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            // 计算子项View 的宽高
-            listItem.measure(0, 0);
-            // 统计所有子项的总高度
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
-    }
+//    public void setListViewHeightBasedOnChildren(ListView listView) {
+//        // 获取ListView对应的Adapter
+//        ListAdapter listAdapter = listView.getAdapter();
+//        if (listAdapter == null) {
+//            return;
+//        }
+//
+//        int totalHeight = 0;
+//        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+//            // listAdapter.getCount()返回数据项的数目
+//            View listItem = listAdapter.getView(i, null, listView);
+//            // 计算子项View 的宽高
+//            listItem.measure(0, 0);
+//            // 统计所有子项的总高度
+//            totalHeight += listItem.getMeasuredHeight();
+//        }
+//
+//        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+//        // listView.getDividerHeight()获取子项间分隔符占用的高度
+//        // params.height最后得到整个ListView完整显示需要的高度
+//        listView.setLayoutParams(params);
+//    }
     //    /**
 //     * @author 设置上一步和下一步按钮监听
 //     */
@@ -753,9 +781,9 @@ public class ExaminationSubmitAdapter extends PagerAdapter implements OnClickLis
 
 
     public class ViewHolder {
-        private ListView listview;
+        private ListViewForScrollView listview;
         private Study_question_answer_anapdter adapter;
-        private TextView present_topic, question_title, question_score,question_test,question_time;
+        private TextView present_topic, question_title, question_score,question_test,question_time,question_option,answer_list;
         private RelativeLayout ril_last_question, ril_next_question;
         private Button rbtn_collect, btn_answer_sheet, btn_answer;
         private String answer_mine, correct_answer, answer_type, answer_score;

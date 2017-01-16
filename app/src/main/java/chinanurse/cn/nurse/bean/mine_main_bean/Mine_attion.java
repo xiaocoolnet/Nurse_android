@@ -1,5 +1,7 @@
 package chinanurse.cn.nurse.bean.mine_main_bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -66,6 +68,7 @@ public class Mine_attion {
         private String description;
         private String title;
         private String type;
+        @SerializedName("fid")
         private String userid;
         private String score;
         private String password;
