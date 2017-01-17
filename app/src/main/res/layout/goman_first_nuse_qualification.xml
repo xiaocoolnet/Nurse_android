@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_size_25"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/goman_simulation_test"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:background="@drawable/btn_goman_gray"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/simulation_test" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:textColor="@color/black"
+                    android:text="模拟考试"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/goman_old_exam"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:background="@drawable/btn_goman_gray"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/old_exam" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:text="历年真题"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/goman_sprint_test"
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:background="@drawable/btn_goman_gray"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/sprint_test" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:text="考试冲刺"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_size_35"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/goman_tutorial_essence"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_goman_gray"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:background="@mipmap/tutorial_essence" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:text="辅导精华"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/goman_core_point"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_goman_gray"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:background="@mipmap/core_point" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:text="核心考点"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/goman_yati_book"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/activity_size_60"
+                    android:layout_height="@dimen/activity_size_60"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_goman_gray"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/activity_size_30"
+                        android:layout_height="@dimen/activity_size_30"
+                        android:background="@mipmap/yati_book" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_size_10"
+                    android:text="押题密卷"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+</LinearLayout>

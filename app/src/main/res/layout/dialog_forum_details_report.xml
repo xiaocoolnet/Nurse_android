@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_dialog_forum_details_report"
+    android:layout_width="450dp"
+    android:layout_height="300dp"
+    android:background="@drawable/bg_dialog_forum_details"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_size_10"
+    android:paddingRight="@dimen/activity_size_10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:gravity="center"
+        android:text="@string/tv_report_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/activity_size_20" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_report_abusive"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_abusive"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/activity_size_3"
+            android:textSize="@dimen/activity_size_16"
+            android:background="@drawable/bt_dialog_forum_details_report"/>
+
+        <TextView
+            android:id="@+id/tv_report_pornographic"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_pornographic"
+            android:textColor="#999999"
+            android:textSize="@dimen/activity_size_16"
+            android:layout_margin="@dimen/activity_size_3"
+            android:background="@drawable/bt_dialog_forum_details_normal"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_report_advertisement"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_advertisement"
+            android:textColor="#999999"
+            android:textSize="@dimen/activity_size_16"
+            android:layout_margin="@dimen/activity_size_3"
+            android:background="@drawable/bt_dialog_forum_details_normal"/>
+
+        <TextView
+            android:id="@+id/tv_report_violence"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_violence"
+            android:textColor="#999999"
+            android:textSize="@dimen/activity_size_16"
+            android:layout_margin="@dimen/activity_size_3"
+            android:background="@drawable/bt_dialog_forum_details_normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_report_cheat"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bt_dialog_forum_details_normal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_size_5"
+        android:layout_marginLeft="@dimen/activity_size_3"
+        android:layout_marginRight="@dimen/activity_size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_report_cheat"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_cheat"
+            android:textColor="#999999"
+            android:textSize="@dimen/activity_size_16" />
+
+        <TextView
+            android:id="@+id/tv_report_cheat_item"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_cheat_item"
+            android:textColor="#999999" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_report_illegal"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bt_dialog_forum_details_normal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_size_8"
+        android:layout_marginLeft="@dimen/activity_size_3"
+        android:layout_marginRight="@dimen/activity_size_3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_report_illegal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_illegal"
+            android:textColor="#999999"
+            android:textSize="@dimen/activity_size_16" />
+
+        <TextView
+            android:id="@+id/tv_report_illegal_item"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/tv_report_illegal_item"
+            android:textColor="#999999" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bt_dialog_forum_details_reward"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/activity_size_30"
+        android:layout_marginTop="@dimen/activity_size_20"
+        android:background="@drawable/bt_dialog_forum_details"
+        android:text="@string/tv_report_submit"
+        android:textColor="@color/whilte"
+        android:textSize="@dimen/activity_size_20" />
+
+</LinearLayout>

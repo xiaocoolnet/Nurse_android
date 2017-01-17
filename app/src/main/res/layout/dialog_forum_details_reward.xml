@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_dialog_forum_details_reward"
+    android:layout_width="380dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_dialog_forum_details"
+    android:paddingLeft="@dimen/activity_size_10"
+    android:paddingRight="@dimen/activity_size_10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_size_10"
+        android:text="好的文章，就要打赏"
+        android:textColor="@color/black"
+        android:textSize="@dimen/activity_size_18" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="可用护士币:"
+            android:textColor="#999999"
+            />
+
+        <TextView
+            android:id="@+id/tv_dialog_forum_reward_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/activity_size_5"
+            android:text="1234"
+            android:textColor="@color/purple" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_dialog_forum_reward_money_one"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_dialog_forum_reward_press"
+            android:layout_margin="10dp"
+            android:text="1"
+            android:textSize="@dimen/activity_size_20"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_dialog_forum_reward_money_two"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_dialog_forum_reward_defult"
+            android:layout_margin="10dp"
+            android:text="2"
+            android:textSize="@dimen/activity_size_20"
+            android:textColor="#999999"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_forum_reward_money_five"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_dialog_forum_reward_defult"
+            android:layout_margin="10dp"
+            android:text="5"
+            android:textSize="@dimen/activity_size_20"
+            android:textColor="#999999"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_forum_reward_money_ten"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_dialog_forum_reward_defult"
+            android:layout_margin="10dp"
+            android:text="10"
+            android:textSize="@dimen/activity_size_20"
+            android:textColor="#999999"
+            android:gravity="center"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/bt_dialog_forum_details_reward"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_size_20"
+        android:layout_marginBottom="@dimen/activity_size_30"
+        android:text="打赏"
+        android:textSize="@dimen/activity_size_18"
+        android:textColor="@color/whilte"
+        android:background="@drawable/bt_dialog_forum_details"
+        />
+
+</LinearLayout>

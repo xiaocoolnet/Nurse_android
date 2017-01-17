@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_dialog_forum_details_recommend"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="推荐"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        android:background="@color/gray2" />
+
+    <TextView
+        android:id="@+id/tv_dialog_best"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="加精"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        android:background="@color/gray2" />
+
+    <TextView
+        android:id="@+id/tv_dialog_top"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="置顶"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        android:background="@color/gray2" />
+
+    <TextView
+        android:id="@+id/tv_dialog_delete"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        android:background="@color/gray2" />
+
+    <TextView
+        android:id="@+id/tv_dialog_report"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="举报"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        android:background="@color/gray2" />
+
+    <TextView
+        android:id="@+id/tv_dialog_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#999999"
+        android:textSize="@dimen/activity_size_16" />
+
+</LinearLayout>

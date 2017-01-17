@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@color/title_color"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:layout_margin="10dip">
+
+    <LinearLayout
+        android:id="@+id/ll_community_details_head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/title_color"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="10dip">
+
+        <ImageView
+            android:id="@+id/iv_community_details_head_photo"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_map" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="10dip">
+
+            <TextView
+                android:id="@+id/tv_community_details_head_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dip"
+                android:padding="5dp"
+                android:text="急诊科"
+                android:textColor="@color/purple"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_community_details_head_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3dip"
+                    android:text="113万人"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tv_community_details_head_forum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3dip"
+                    android:text="113帖子"
+                    android:textColor="@color/gray" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <chinanurse.cn.nurse.Fragment_Nurse.view.MyTextViewButton
+                android:id="@+id/tv_community_details_head_join"
+                android:layout_width="80dip"
+                android:layout_height="40dip"
+                android:background="@drawable/bg_join"
+                android:drawableLeft="@mipmap/ic_join"
+                android:drawablePadding="1dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="加入"
+                android:textColor="@color/purple"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray2" />
+    <LinearLayout
+        android:id="@+id/ll_community_details_head_recommend"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/space_height">
+
+        <chinanurse.cn.nurse.ui.MyListview
+            android:id="@+id/lv_forum_recommend"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:descendantFocusability="blocksDescendants"
+            android:paddingLeft="@dimen/activity_size_10"
+            android:paddingRight="@dimen/activity_size_10" />
+    </LinearLayout>
+</LinearLayout>

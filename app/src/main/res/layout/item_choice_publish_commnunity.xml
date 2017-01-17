@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <TextView
+        android:id="@+id/tv_item_publish_community"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <chinanurse.cn.nurse.Fragment_Nurse.view.tag.TagListView
+        android:id="@+id/lv_item_publish_community_tag"
+        xmlns:f="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_size_10"
+        f:horizontalSpacing="@dimen/activity_size_4"
+        f:orientation="horizontal"
+        f:verticalSpacing="@dimen/activity_size_3"
+        />
+
+</LinearLayout>

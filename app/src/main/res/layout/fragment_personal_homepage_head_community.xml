@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/title_color"
+    android:layout_height="150dp">
+    <TextView
+        android:id="@+id/tv_fragment_personal_homepage_head_community"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="热门圈子推荐"
+        android:background="@color/white"
+        android:textColor="@color/gray"
+        android:paddingTop="@dimen/activity_size_10"
+        android:paddingBottom="@dimen/activity_size_10"
+        android:paddingLeft="@dimen/activity_size_10"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_fragment_personal_homepage_head_community"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/activity_size_5"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray2"
+        android:layout_marginLeft="@dimen/activity_size_10"
+        android:layout_marginRight="@dimen/activity_size_10"
+        />
+
+</LinearLayout>

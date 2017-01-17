@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_ground_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rl_search_forum_back"
+            android:layout_width="50dip"
+            android:layout_height="fill_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/btn_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
+            android:layout_toRightOf="@+id/rl_search_forum_back"
+            android:gravity="center_vertical">
+
+            <chinanurse.cn.nurse.Fragment_Nurse.view.ClearEditText
+                android:id="@+id/clearEditText_search_forum"
+                android:layout_width="fill_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/fragment_me_search"
+                android:drawableLeft="@mipmap/search_bar_icon_normal"
+                android:hint="大家都在搜：护士那些事"
+                android:paddingLeft="5dip"
+                android:singleLine="true"
+                android:textSize="15.0dip">
+
+                <requestFocus />
+            </chinanurse.cn.nurse.Fragment_Nurse.view.ClearEditText>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_size_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/indicator" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ril_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/detail_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/view_color"
+            android:text="护士网"
+            android:textColor="@color/title_color"
+            android:textSize="30sp" />
+
+        <chinanurse.cn.nurse.pnlllist.PullToRefreshListView
+            android:id="@+id/lv_comprehensive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/title_color"
+            android:divider="@null"
+            android:drawSelectorOnTop="false"
+            android:footerDividersEnabled="false"
+            android:scrollbars="none" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_forum_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_size_20"
+        android:layout_marginTop="@dimen/activity_size_20"
+        android:text="暂无搜索结果"
+        android:textSize="@dimen/text_size_20"
+        android:visibility="gone" />
+
+    <include layout="@layout/jiazaishibai" />
+
+
+</LinearLayout>

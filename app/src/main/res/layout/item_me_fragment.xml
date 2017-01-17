@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/activity_size_40"
+        android:background="@color/gray2" />
+
+    <LinearLayout
+        style="@style/study_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_item_fragment_me_community_photo"
+            android:layout_width="@dimen/activity_size_22"
+            android:layout_height="@dimen/activity_size_22"
+            android:layout_margin="@dimen/activity_size_13"
+            android:src="@mipmap/ic_authentication" />
+
+        <TextView
+            android:id="@+id/tv_item_fragment_me_community_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/activity_size_18"
+            android:text="认证" />
+        <TextView
+            android:id="@+id/tv_item_fragment_me_community_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/activity_size_5"
+            android:text="1234人参与，4345个帖子"
+            android:textColor="@color/gray"/>
+
+        <ImageView
+            android:layout_width="@dimen/activity_size_7"
+            android:layout_height="@dimen/activity_size_13"
+            android:layout_marginRight="@dimen/activity_size_18"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_arrow_right"
+            android:id="@+id/iv_item_fragment_me_into"/>
+    </LinearLayout>
+</LinearLayout>

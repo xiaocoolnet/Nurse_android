@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--头布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/community_first_find"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="发现"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/community_first_find_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/purple" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/community_second_follow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="关注"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/community_second_follow_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/community_third_me"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/whilte"
+                android:gravity="center"
+                android:text="我"
+                android:textColor="@color/gray4"
+                android:textSize="@dimen/activity_size_16" />
+
+            <ImageView
+                android:id="@+id/community_third_me_wire"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_size_2"
+                android:background="@color/whilte" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/community_replace_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_size_1"
+        android:background="@color/gray2" />
+
+</LinearLayout>
