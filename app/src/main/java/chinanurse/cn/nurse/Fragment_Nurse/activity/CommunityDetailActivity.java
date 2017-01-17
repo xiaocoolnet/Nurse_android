@@ -72,7 +72,8 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
     private CommunityDetailsAdapter adapter;
     private Context mContext;
     private View viewH;
-    private LinearLayout ll_head,ll_recommend;;
+    private LinearLayout ll_head, ll_recommend;
+    ;
     private TextView tv_community_name, tv_people, tv_forum;
     private ImageView iv_community_photo;
     private MyTextViewButton tv_join;
@@ -97,10 +98,14 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
         setContentView(R.layout.activity_community_details);
         mContext = this;
         user = new UserBean(mContext);
-        from = getIntent().getStringExtra("from");
-        LogUtils.e(TAG, "from-->" + from);
-        LogUtils.e(TAG, "community-->" + getIntent().getSerializableExtra("community").toString());
-        communityBean = (CommunityBean) getIntent().getSerializableExtra("community");
+        Intent intent = getIntent();
+        from = intent.getStringExtra("from");
+        if (from.equals("MeFragment")) {
+            Bundle bundle = intent.getBundleExtra("bundle");
+            communityBean = (CommunityBean) bundle.getSerializable("community");
+        } else {
+            communityBean = (CommunityBean) getIntent().getSerializableExtra("community");
+        }
         initView();
     }
 
@@ -149,10 +154,10 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
         tv_forum = (TextView) viewH.findViewById(R.id.tv_community_details_head_forum);
         tv_join = (MyTextViewButton) viewH.findViewById(R.id.tv_community_details_head_join);
         tv_join.setOnClickListener(this);
-        lv_recommend= (ListView) viewH.findViewById(R.id.lv_forum_recommend);
-        ll_recommend= (LinearLayout) viewH.findViewById(R.id.ll_community_details_head_recommend);
-        forumRecommendList=new ArrayList<ForumDataBean>();
-        recommendAdapter=new CommunityDetailRecommendAdapter(mContext,forumRecommendList);
+        lv_recommend = (ListView) viewH.findViewById(R.id.lv_forum_recommend);
+        ll_recommend = (LinearLayout) viewH.findViewById(R.id.ll_community_details_head_recommend);
+        forumRecommendList = new ArrayList<ForumDataBean>();
+        recommendAdapter = new CommunityDetailRecommendAdapter(mContext, forumRecommendList);
         lv_recommend.setAdapter(recommendAdapter);
         lv_view.addHeaderView(viewH);
         tv_community_name.setText(communityBean.getName());
@@ -283,11 +288,11 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
             dialogpgd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             dialogpgd.show();
             getForumListByPager(page);
-            if (page==1){
+            if (page == 1) {
                 getRecommendForumListByPager();
             }
         } else {
-            ToastUtils.ToastShort(mContext,getResources().getString(R.string.net_erroy));
+            ToastUtils.ToastShort(mContext, getResources().getString(R.string.net_erroy));
             ril_shibai.setVisibility(View.VISIBLE);
             ril_list.setVisibility(View.GONE);
             shuaxin_button.setOnClickListener(new View.OnClickListener() {
@@ -326,9 +331,9 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
                             lv_recommend.setAdapter(adapter);
                         }
                         recommendAdapter.notifyDataSetChanged();
-                        if (forumRecommendList.size()==0){
+                        if (forumRecommendList.size() == 0) {
                             ll_recommend.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             ll_recommend.setVisibility(View.VISIBLE);
                         }
                         stopRefresh();
@@ -354,7 +359,7 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
                 super.onFailure(statusCode, headers, responseString, throwable);
                 LogUtils.e(TAG, "--getRecommendForumListByPager-onFailure>" + responseString);
                 dialogpgd.dismiss();
-                ToastUtils.ToastShort(mContext,getString(R.string.net_erroy));
+                ToastUtils.ToastShort(mContext, getString(R.string.net_erroy));
                 ril_shibai.setVisibility(View.VISIBLE);
                 ril_list.setVisibility(View.GONE);
                 shuaxin_button.setOnClickListener(new View.OnClickListener() {
@@ -420,7 +425,7 @@ public class CommunityDetailActivity extends Activity implements View.OnClickLis
                 super.onFailure(statusCode, headers, responseString, throwable);
                 LogUtils.e(TAG, "--getForumListByPager-onFailure>" + responseString);
                 dialogpgd.dismiss();
-                ToastUtils.ToastShort(mContext,getResources().getString(R.string.net_erroy));
+                ToastUtils.ToastShort(mContext, getResources().getString(R.string.net_erroy));
                 ril_shibai.setVisibility(View.VISIBLE);
                 ril_list.setVisibility(View.GONE);
                 shuaxin_button.setOnClickListener(new View.OnClickListener() {

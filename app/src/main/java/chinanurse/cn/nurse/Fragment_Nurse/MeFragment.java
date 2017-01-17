@@ -3,6 +3,7 @@ package chinanurse.cn.nurse.Fragment_Nurse;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -78,7 +79,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private boolean isCommunityMaster=false;
     private  String auth_status="";
     private AlertDialog auth;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -199,6 +199,9 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    /**
+     * 获取我管理的圈子id
+     */
     private void getCommunityId() {
         //        入参：userid
         RequestParams requestParams = new RequestParams();
@@ -209,31 +212,57 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 super.onSuccess(statusCode, headers, response);
                 if (response != null) {
                     LogUtils.e(TAG, "--getCommunityId->" + response);
-//                    {
-//                        "status": "success",
-//                            "data": "0"
-//                    }
-//                    try {
-//                        String status = response.getString("status");
-//                        if (status.equals("success")) {
-//                            String data = response.getString("data");
-//                            if (data.equals("yes")) {//1是，0不是
-//                                isCommunityMaster=true;
-//                                rl_manager_community.setVisibility(View.VISIBLE);
-//                                getCommunityId();
-//                            } else if (data.equals("no")) {
-//                                if (!isCommunityMaster){
-//                                    rl_manager_community.setVisibility(View.GONE);
-//                                }
-//                            }
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        String status = response.getString("status");
+                        if (status.equals("success")) {
+                            String myCommunityId = response.getString("data");
+                            getCommunityInfo(myCommunityId);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
     }
+
+    CommunityBean myCommunityBean;
+    /**
+     * 获取我管理的圈子详情
+     */
+    private void getCommunityInfo(String id) {
+//        入参：userid,cid 圈子id
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("userid", user.getUserid());
+        requestParams.put("cid", id);
+        NurseAsyncHttpClient.get(CommunityNetConstant.GET_COMMUNITY_INFO, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (response != null) {
+                    try {
+                        if ("success".equals(response.optString("status"))) {
+                            JSONObject data = response.getJSONObject("data");
+                            gson = new Gson();
+                            myCommunityBean = gson.fromJson(data.toString(), CommunityBean.class);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                LogUtils.e(TAG, "--getCommunityInfo-onFailure>" + responseString);
+            }
+        });
+    }
+
 
 
     /**
@@ -540,11 +569,13 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.rl_fragment_me_head_manager_community:
-                CommunityBean communityBean=new CommunityBean();
                 Intent intentMyAuthentication = new Intent();
                 intentMyAuthentication.setClass(getActivity(), CommunityDetailActivity.class);
                 intentMyAuthentication.putExtra("from", "MeFragment");
-                intentMyAuthentication.putExtra("community", "communityBean");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("community",myCommunityBean);
+                intentMyAuthentication.putExtra("bundle",bundle);
+//                intentMyAuthentication.putExtra("community", myCommunityBean);
                 startActivityForResult(intentMyAuthentication, INTENT_MY_AUTHENTICATION);
                 break;
         }
